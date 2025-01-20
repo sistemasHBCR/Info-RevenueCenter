@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     //----- Funcion para cambiar idioma -----//
     $('.change_lang').click(function () {
-        var change_lang = $(this).attr('value');
+        var change_lang = $(this).text();
         console.log('Cambiar Idioma: ' + change_lang);
+
     });
 });
