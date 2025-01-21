@@ -3,28 +3,24 @@
 
 <head>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>1HOMES - MENUS</title>
-   <meta name="robots" content="noodp" />
-   <!-- Google Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link
-       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
-       rel="stylesheet">
-   <!-- Bootstrap CSS -->
-   <link rel='stylesheet' id='dina-bootstrap-css-css' href='{{ asset('assets/css/bootstrap/cssbootstrap.min.css') }}'
-       type='text/css' media='all' />
-   <!-- Font Awesome Icons CSS -->
-   <link rel='stylesheet' id='dina-font-awesome-css'
-       href='{{ asset('assets/css/fontawesome/css/font-awesome.min.css') }}' type='text/css' media='all' />
-   <!-- Main CSS File -->
-   <link rel='stylesheet' id='dina-style-css-css' href='{{ asset('assets/style.css') }}' type='text/css'
-       media='all' />
-   <!-- favicons -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1HOMES - MENUS</title>
+	<meta name="robots" content="noodp"/>
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link rel='stylesheet' id='dina-bootstrap-css-css'  href='{{ asset('assets/css/bootstrap/css/bootstrap.min.css')}}' type='text/css' media='all' />
+	<!-- Font Awesome Icons CSS -->
+	<link rel='stylesheet' id='dina-font-awesome-css'  href='{{ asset('assets/css/fontawesome/css/font-awesome.min.css')}}' type='text/css' media='all' />
+	<!-- Main CSS File -->
+	<link rel='stylesheet' id='dina-style-css-css'  href='{{ asset('assets/style.css')}}' type='text/css' media='all' />
+	<!-- favicons -->
    <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="32x32" />
    <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="192x192" />
    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/1HClogo.ico') }}" />
+
    <style>
       @media (max-width: 0px) {
          .select-lang li a {
@@ -377,7 +373,7 @@
                                                 {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}
                                             </h5>
                                             <p class="English">{{ $site->description }}</p>
-                                            <p class="Spanish" hidden>{{ $site->description }}</p>
+                                            <p class="Spanish" hidden>{{ $site->description_es }}</p>
                                         </div>
                                     @endif
                                 @endforeach
@@ -386,7 +382,7 @@
                                     @foreach ($buttons as $button)
                                         @if ($button->rc_id == $rc->id)
                                             <a class="view-more English" href="{{ asset('assets/')}}">{{ $button->name }}</a>
-                                            <a class="view-more Spanish" href="{{ asset('assets/')}}" hidden>{{ $button->name }}</a>
+                                            <a class="view-more Spanish" href="{{ asset('assets/')}}" hidden>{{ $button->name_es }}</a>
                                         @endif
                                     @endforeach
                                 </div>
