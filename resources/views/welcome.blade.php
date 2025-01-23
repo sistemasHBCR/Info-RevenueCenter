@@ -352,10 +352,10 @@
                             </ul>--}}
                             <!-- CONTENEDOR DE IMAGEN -->
                             <div class="post-image">
-                                <a href="#">
+                                <a>
                                     <img width="900" height="500"
                                         src="{{ asset('assets/images/revenuecenters/' . $rc->image) }}"
-                                        class="img-fluid img-featured" alt="Epic Egg Salad" title="Epic Egg Salad" />
+                                        class="img-fluid img-featured" alt="{{ $rc->name }}" title="{{ $rc->name }}" />
                                 </a>
                             </div>
                             <!-- CONTENEDOR PARA LA INFORMACION DE LOS SITES Y BOTONES CORRESPONDIENTES AL REVENUE CENTER-->
@@ -390,7 +390,7 @@
                             <!--post holder-->
                         </article>
                     @endforeach
-                    {{--
+                  {{--
                   <article class="blog-item blog-item-1col" >
                      <div class="post-category"><a href="#" rel="category tag">Food</a></div>
                      <!--post-category-->
@@ -531,7 +531,7 @@
                      </div>
                      <!--post holder-->
                   </article>
-               --}}
+                  --}}
                 </div>
                 <!--col-md-10-->
             </div>

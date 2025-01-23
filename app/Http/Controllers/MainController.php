@@ -22,6 +22,17 @@ class MainController extends Controller
         return view('welcome', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
     }
 
+    public function home2(Request $request){
+        $sites = site::get();
+        $buttons = button::get();
+        $properties = property::get();
+        $revenue_centers = revenue_center::get();
+        $languages = languages::get();
+
+        //dd($sites, $buttons, $properties, $revenue_centers, $languages);
+        return view('home2', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
+    }
+
     public function change_language(Request $request){
         //
     }

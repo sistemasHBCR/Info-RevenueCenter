@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/', [MainController::class, 'home2'])->name('home2');
+Route::get('/home2', [MainController::class, 'home2'])->name('home2');
 
 Route::get('change_language', [MainController::class, 'change_language'])->name('change_language');
