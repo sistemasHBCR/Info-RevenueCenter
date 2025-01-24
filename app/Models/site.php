@@ -12,7 +12,9 @@ class site extends Model
     protected $fillable = [
         'name',
         'schedule_day',
+        'schedule_day_es',
         'schedule_hour',
+        'schedule_hour_es',
         'description',
         'description_es',
         'rc_id'

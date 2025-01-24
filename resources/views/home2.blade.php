@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage 9 - Dina</title>
+    <title>1HOMES - MENUS</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,15 @@
     <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="32x32" />
     <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/1HClogo.ico') }}" />
+
+    <style>
+        /*.logo-4 {
+            position: absolute;
+        }*/
+		html {
+			scroll-behavior: smooth;
+		}
+    </style>
 </head>
 
 <body class="body-header1">
@@ -33,8 +42,7 @@
         <!-- MENU -->
         <nav class="navbar navbar-2 nav-mobile">
             <div class="nav-holder nav-holder-2">
-
-                <ul id="menu-menu-2" class="menu-nav-2">
+                {{-- <ul id="menu-menu-2" class="menu-nav-2">
                     <li class="menu-item menu-item-has-children">
                         <a href="index.html">Home</a>
                         <ul class="sub-menu">
@@ -132,13 +140,46 @@
                             <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
                         </ul>
                     </li>
+                </ul> --}}
+                <ul id="menu-menu-2" class="menu-nav-2">
+                    @foreach ($revenue_centers as $rc)
+                        <li class="menu-item">
+                            <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
+                        </li>
+                    @endforeach
+					<li class="menu-item menu-item-has-children">
+                        <a href="">Language</a>
+                        <ul class="sub-menu">
+							@foreach($languages as $language)
+								<li class="menu-item"><a href="">{{ $language->name }}</a></li>
+							@endforeach
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
         <!-- /MENU -->
-
-        <!-- RIGHT SIDE -->
         {{--<div class="rightside-nav-2">
+            <ul class="right-side-contact">
+                <li class="menu-item menu-item-has-children">
+                    <a href="">Language</a>
+                    <ul class="sub-menu">
+                        @foreach ($languages as $i => $language)
+                            @if ($i == 0)
+                                <li class="menu-item change_lang current-menu-item this_change"
+                                    value="{{ $language->id }}"><a class="white"
+                                        style="cursor: pointer">{{ $language->name }}</a></li>
+                            @else
+                                <li class="menu-item change_lang" value="{{ $language->id }}"><a class="white"
+                                        style="cursor: pointer">{{ $language->name }}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
+            </ul>
+        </div>--}}
+        <!-- RIGHT SIDE -->
+        {{-- <div class="rightside-nav-2">
 
             <h3>Book Now</h3>
             <ul class="right-side-contact">
@@ -160,9 +201,8 @@
                 </li>
             </ul>
             <!-- /SOCIAL ICONS -->
-        </div>--}}
+        </div> --}}
         <!-- /RIGHT SIDE -->
-
     </div>
     <!-- /MOBILE MENU -->
     <!-- HEADER -->
@@ -170,10 +210,10 @@
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            {{--<div class="logo-4"><a href="index.html"><img class="img-fluid" src="{{ asset('assets/images/logo-dina-white.png') }}" alt="" /></a></div>--}}
+            <div class="logo-4 alignc"><a href="index.html"><img class="img-fluid" src="{{ asset('assets/images/icons/1homeslogo.png') }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
-                {{--<ul id="menu-menu-1" class="menu-nav menu-nav-1">
+                {{-- <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
                         <a href="index.html">Home</a>
                         <ul class="sub-menu">
@@ -274,25 +314,40 @@
                             <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
                         </ul>
                     </li>
-                </ul>--}}
-				<ul id="menu-menu-1" class="menu-nav menu-nav-1">
-					@foreach($revenue_centers as $rc)
-						<li class="menu-item">
-							<a href="">{{ $rc->name}}</a>
-						</li>
-					@endforeach
-				</ul>
+                </ul> --}}
+                <ul id="menu-menu-1" class="menu-nav menu-nav-1">
+                    @foreach ($revenue_centers as $rc)
+                        <li class="menu-item">
+                            <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
+                        </li>
+                    @endforeach
+                    <li class="menu-item"><a href="">|</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="">Language</a>
+                        <ul class="sub-menu">
+                            @foreach ($languages as $i => $language)
+                                @if ($i == 0)
+                                    <li class="menu-item change_lang current-menu-item this_change"
+                                        value="{{ $language->id }}"><a class="white"
+                                            style="cursor: pointer">{{ $language->name }}</a></li>
+                                @else
+                                    <li class="menu-item change_lang" value="{{ $language->id }}"><a class="white"
+                                            style="cursor: pointer">{{ $language->name }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <!-- /MENU -->
-
             <!-- MOBILE BUTTON NAV  -->
             <div class="nav-button-holder nav-btn-mobile inactive">
-                {{--<span class="menu-txt">MENU</span>--}}
+                {{-- <span class="menu-txt">MENU</span> --}}
                 <button type="button" class="nav-button">
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="btn-header btn-header4"><a href="#" class="view-more more-white">Book a Table</a></div>
+            <div class="btn-header btn-header4">{{--<a href="#" class="view-more more-white">Book a Table</a>--}}</div>
         </div>
         <!--headerWrap-->
     </header>
@@ -301,17 +356,18 @@
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
         style="background-image:url('{{ asset('assets/images/backgrounds/fondo1hcOTHER2.jpg') }}');">
         <div class="item-content-bkg">
-			<div class="inner-desc">
-			   <img id="logoHeader" src="{{ asset('assets/images/icons/1HClogo.ico') }}" class="img-fluid" alt="Logo" style="width: 50px; height: auto;">
-			   <h1 id="propertyName" class="post-title single-post-title">HOMES CABO</h1>
-			   <span class="post-subtitle">TASTE</span>
-			</div>
-		 </div>
+            <div class="inner-desc">
+                <img id="logoHeader" src="{{ asset('assets/images/icons/1HClogo.ico') }}" class="img-fluid"
+                    alt="Logo" style="width: 55px; height: auto;">
+                <h1 id="propertyName" class="post-title single-post-title">HOMES CABO</h1>
+                {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
+            </div>
+        </div>
         <!-- /container-->
     </section>
     <!-- /HOME HERO IMAGE -->
     @foreach ($revenue_centers as $i => $rc)
-        <section>
+        <section  id="{{ $rc->id }}{{ $rc->name }}" style="padding-top: 90px;">
             <div class="container">
                 @if ($i % 2 == 0)
                     <div class="row margin-b72">
@@ -324,18 +380,13 @@
                         </div>
                         <!-- /col-md-6 -->
                         <div class="col-md-6">
-                            <h3 class="home-subtitle">Experience</h3>
-                            <h2 class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
+                            {{--<h3 class="home-subtitle">Experience</h3>--}}
+                            <h2 id="{{ $rc->id }}{{ $rc->name }}" class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
                             @foreach ($sites as $site)
                                 @if ($site->rc_id == $rc->id)
-                                    <h6 class="English">{{ $site->name }}
-                                        {{ $site->schedule_day != '' ? '| ' . $site->schedule_day : '' }}
-                                        {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}
-                                    </h6>
-                                    <h6 class="Spanish" hidden>{{ $site->name }}
-                                        {{ $site->schedule_day != '' ? '| ' . $site->schedule_day : '' }}
-                                        {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}
-                                    </h6>
+                                    <h6>{{ $site->name }}</h6>
+									<span class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
+									<span class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
                                     <p class="English">{{ $site->description }}</p>
                                     <p class="Spanish" hidden>{{ $site->description_es }}</p>
                                 @endif
@@ -343,8 +394,8 @@
                             <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English" href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish" href="{{ asset('assets/files/' . $button->file) }}" hidden>{{ $button->name_es }}</a>
+                                        <a class="view-more English"  href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
+                                        <a class="view-more Spanish"  href="{{ asset('assets/files/' . $button->file) }}" hidden>{{ $button->name_es }}</a>
                                     @endif
                                 @endforeach
                             </div>
@@ -353,19 +404,14 @@
                     </div>
                 @else
                     <div class="row">
-                        <div class="col-md-6 alignr order2">
-                            <h3 class="home-subtitle">Discover</h3>
+                        <div class="col-md-6 alignl order2">
+                            {{--<h3 class="home-subtitle">Discover</h3>--}}
                             <h2 class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
                             @foreach ($sites as $site)
                                 @if ($site->rc_id == $rc->id)
-                                    <h6 class="English">{{ $site->name }}
-                                        {{ $site->schedule_day != '' ? '| ' . $site->schedule_day : '' }}
-                                        {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}
-                                    </h6>
-                                    <h6 class="Spanish" hidden>{{ $site->name }}
-                                        {{ $site->schedule_day != '' ? '| ' . $site->schedule_day : '' }}
-                                        {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}
-                                    </h6>
+                                    <h6>{{ $site->name }}</h6>
+									<span class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
+									<span class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
                                     <p class="English">{{ $site->description }}</p>
                                     <p class="Spanish" hidden>{{ $site->description_es }}</p>
                                 @endif
@@ -373,10 +419,8 @@
                             <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English"
-                                            href="{{ asset('assets/') }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish" href="{{ asset('assets/') }}"
-                                            hidden>{{ $button->name_es }}</a>
+                                        <a class="view-more English"  href="{{ asset('assets/') }}">{{ $button->name }}</a>
+                                        <a class="view-more Spanish"  href="{{ asset('assets/') }}"  hidden>{{ $button->name_es }}</a>
                                     @endif
                                 @endforeach
                             </div>
@@ -391,7 +435,6 @@
                         </div>
                         <!-- /col-md-6 -->
                     </div>
-                    <br><br>
                 @endif
             </div>
         </section>
@@ -437,7 +480,7 @@
     <!-- /SECTION 1 -->
     <!-- SECTION 2 -->
     <!-- Add parallax class to a section and a background image to create the parallax effect -->
-    {{--<section id="home-content-9-2" class="home-section parallax margin-b72"
+    {{-- <section id="home-content-9-2" class="home-section parallax margin-b72"
         style="background-image:url('{{ asset('assets/images/home/about-4.jpg') }}');">
         <div class="parallax-content">
             <div class="container">
@@ -480,10 +523,10 @@
             <!--.container-->
         </div>
         <!-- /parallax-content -->
-    </section>--}}
+    </section> --}}
     <!-- /SECTION 2 -->
     <!-- SECTION 3 -->
-    {{--<section id="home-content-9-3" class="margin-b72">
+    {{-- <section id="home-content-9-3" class="margin-b72">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
@@ -752,10 +795,10 @@
             <div class="alignc"><a href="#" class="view-more">View All Menu</a></div>
         </div>
         <!-- /container-->
-    </section>--}}
+    </section> --}}
     <!-- /SECTION 3 -->
     <!-- SECTION 4 -->
-    {{--<section id="home-content-9-4" class="home-section parallax margin-b72"
+    {{-- <section id="home-content-9-4" class="home-section parallax margin-b72"
         style="background-image:url('{{ asset('assets/images/top-headers/reservation-image.jpg') }}');">
         <div class="parallax-content">
             <div class="container">
@@ -802,10 +845,10 @@
             <!-- /container-->
         </div>
         <!-- /parallax-content-->
-    </section>--}}
+    </section> --}}
     <!-- /SECTION 4 -->
     <!-- SECTION 5 -->
-    {{--<section id="home-content-9-5" class="home-section margin-b72">
+    {{-- <section id="home-content-9-5" class="home-section margin-b72">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -844,10 +887,10 @@
             <!-- /row-->
         </div>
         <!-- /container-->
-    </section>--}}
+    </section> --}}
     <!-- /SECTION 5-->
     <!-- SECTION 6 -->
-    {{--<section id="home-content-9-6">
+    {{-- <section id="home-content-9-6">
         <div class="gmaps">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.9762977047603!2d-73.96009086693977!3d40.69651965846399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bc1f922373f%3A0x398427d98fba822e!2sPark+Ave%2C+Brooklyn%2C+NY%2C+USA!5e0!3m2!1sen!2sro!4v1471514814808"
@@ -855,40 +898,26 @@
             </iframe>
         </div>
         <!--/gmaps-->
-    </section>--}}
+    </section> --}}
     <!-- /SECTION 6 -->
     <!-- FOOTER -->
     <footer>
         <div class="container">
             <!-- ROW -->
-            <div class="row alignc">
+            <div class="row alignc" style="align-items: center">
                 <!-- FOOTER COLUMN 1 -->
-                <div class="col-md-4">
-                    <div class="footer-content">
-                        <h5>ADDRESS:</h5>
-                        <p>Dina Restaurant <br />
-                            40 Park Ave, Brooklyn, New York 70250
-                        </p>
-                    </div>
-                </div>
                 <!-- FOOTER COLUMN 2 -->
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="footer-content">
-                        <h5>RESERVATION:</h5>
-                        <p>000-111-222 <br />
-                            contact@dina.com
+                        <h5>1 Homes Cabo Preview:</h5>
+                        <p>Paseo de La Marina 4732, Col.
+                            El Médano 
+							23453 Cabo San Lucas, B.C.S.
+							Mexico 
                         </p>
                     </div>
                 </div>
                 <!-- FOOTER COLUMN 3 -->
-                <div class="col-md-4">
-                    <div class="footer-content">
-                        <h5>OPEN HOURS:</h5>
-                        <p>Monday - Friday: 10 AM - 11 PM <br />
-                            Saturday - Sunday: 9 AM - 1 PM
-                        </p>
-                    </div>
-                </div>
             </div>
             <!-- /ROW -->
             <!-- FOOTER SOCIAL -->
@@ -905,9 +934,9 @@
             </ul>
             <!-- /FOOTER SOCIAL -->
             <!-- FOOTER COPYRIGHT -->
-            <div class="copyright">
+            {{--<div class="copyright">
                 Copyright &copy; 2021, Dina . Designed by MatchThemes.com
-            </div>
+            </div>--}}
             <!-- /FOOTER COPYRIGHT -->
             <!-- FOOTER SCROLL UP -->
             <div class="scrollup">
@@ -934,6 +963,9 @@
     <!-- CONTACT FORM JS -->
     <script src='{{ asset('assets/js/jquery.form.min.js') }}'></script>
     <script src='{{ asset('assets/js/contactform.js') }}'></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets/js/module-rc-basics.js') }}"></script>
 </body>
 
 </html>

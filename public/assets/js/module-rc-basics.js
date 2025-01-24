@@ -4,16 +4,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //----- Funcion para cambiar idioma -----//
     $('.change_lang').click(function () {
-        var change_lang = $(this).text();
-        var actual_lang = $('.current-menu-item').text();
+        if($(this).hasClass('current-menu-item')){
+        }
+        else{
+            var change_lang = $(this).text();
+            var actual_lang = $('.this_change').text();
 
-        console.log('Cambiar Idioma de ' + actual_lang + ', a ' + change_lang);
+            console.log($('.this_change').text());
+            
+            console.log('Cambiar Idioma de ' + actual_lang + ', a ' + change_lang);
 
-        $('.current-menu-item').removeClass('current-menu-item');
-        $(this).addClass('current-menu-item');
+            $('.this_change').removeClass('current-menu-item');
+            $('.this_change').removeClass('this_change');
+            $(this).addClass('current-menu-item');
+            $(this).addClass('this_change');
 
-        $('.' + change_lang).prop('hidden', false);
-        $('.' + actual_lang).prop('hidden', true);
-
+            $('.' + change_lang).prop('hidden', false);
+            $('.' + actual_lang).prop('hidden', true);
+        }
     });
 });
