@@ -13,6 +13,7 @@ class button extends Model
         'name',
         'name_es',
         'file',
+        'file_es',
         'description',
         'description_es',
         'rc_id'

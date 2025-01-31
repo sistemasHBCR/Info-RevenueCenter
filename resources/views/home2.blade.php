@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1HOMES - MENUS</title>
+    <title>{{ $properties->title }} - MENUS</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,9 +22,9 @@
     <link rel='stylesheet' id='dina-style-css-css' href='{{ asset('assets/style.css') }}' type='text/css'
         media='all' />
     <!-- favicons -->
-    <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="32x32" />
-    <link rel="icon" href="{{ asset('assets/images/icons/1HClogo.ico') }}" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/1HClogo.ico') }}" />
+    <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="32x32" />
+    <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/' . $properties->logo) }}" />
 
     <style>
         /*.logo-4 {
@@ -142,6 +142,13 @@
                     </li>
                 </ul> --}}
                 <ul id="menu-menu-2" class="menu-nav-2">
+                    <li class="menu-item menu-item-has-children">
+                        <a href="">Inicio</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item current-menu-item"><a href="{{ url('/') }}" class="white" style="cursor: pointer">Revenue Centers</a></li>
+                            <li class="menu-item"><a href="{{ url('spa') }}" class="white" style="cursor: pointer">SPA</a></li>
+                        </ul>
+                    </li>
                     @foreach ($revenue_centers as $rc)
                         <li class="menu-item">
                             <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
@@ -210,7 +217,7 @@
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="index.html"><img class="img-fluid" src="{{ asset('assets/images/icons/1homeslogo.png') }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
+            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/icons/' . $properties->image) }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
                 {{-- <ul id="menu-menu-1" class="menu-nav menu-nav-1">
@@ -316,6 +323,14 @@
                     </li>
                 </ul> --}}
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
+                    <li class="menu-item menu-item-has-children">
+                        <a href="">Inicio</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item current-menu-item"><a href="{{ url('/') }}" class="white" style="cursor: pointer">Revenue Centers</a></li>
+                            <li class="menu-item"><a href="{{ url('spa') }}" class="white" style="cursor: pointer">SPA</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="">|</a></li>
                     @foreach ($revenue_centers as $rc)
                         <li class="menu-item">
                             <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
@@ -354,12 +369,12 @@
     <!-- /HEADER -->
     <!-- HOME HERO IMAGE -->
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
-        style="background-image:url('{{ asset('assets/images/backgrounds/fondo1hcOTHER2.jpg') }}');">
+        style="background-image:url('{{ asset('assets/images/backgrounds/' . $properties->background) }}');">
         <div class="item-content-bkg">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/icons/1HClogo.ico') }}" class="img-fluid"
+                <img id="logoHeader" src="{{ asset('assets/images/icons/' . $properties->logo ) }}" class="img-fluid"
                     alt="Logo" style="width: 55px; height: auto;">
-                <h1 id="propertyName" class="post-title single-post-title">HOMES CABO</h1>
+                <h1 id="propertyName" class="post-title single-post-title">{{ $properties->name }}</h1>
                 {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
             </div>
         </div>
@@ -370,7 +385,7 @@
         <section  id="{{ $rc->id }}{{ $rc->name }}" style="padding-top: 90px;">
             <div class="container">
                 @if ($i % 2 == 0)
-                    <div class="row margin-b72">
+                    <div class="row" style="padding-bottom: 72px;">
                         <div class="col-md-6 mobile-margin-b54">
                             <div class="margin-r54">
                                 <img class="img-fluid"
@@ -381,21 +396,21 @@
                         <!-- /col-md-6 -->
                         <div class="col-md-6">
                             {{--<h3 class="home-subtitle">Experience</h3>--}}
-                            <h2 id="{{ $rc->id }}{{ $rc->name }}" class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
+                            <h2 id="nameRC-{{ $rc->id }}" class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
                             @foreach ($sites as $site)
                                 @if ($site->rc_id == $rc->id)
-                                    <h6>{{ $site->name }}</h6>
-									<span class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
-									<span class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
-                                    <p class="English">{{ $site->description }}</p>
-                                    <p class="Spanish" hidden>{{ $site->description_es }}</p>
+                                    <h6 id="name-{{ $site->name }}">{{ $site->name }}</h6>
+									<span id="scheduleSite-{{ $rc->id }}_{{ $site->id }}" class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
+									<span id="scheduleSite_es-{{ $rc->id }}_{{ $site->id }}" class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
+                                    <p id="descriptionSite-{{ $rc->id }}_{{ $site->id }}" class="English">{{ $site->description }}</p>
+                                    <p id="descriptionSite_es-{{ $rc->id }}_{{ $site->id }}" class="Spanish" hidden>{{ $site->description_es }}</p>
                                 @endif
                             @endforeach
                             <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English"  href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish"  href="{{ asset('assets/files/' . $button->file) }}" hidden>{{ $button->name_es }}</a>
+                                        <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more English"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                        <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more Spanish"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
                                     @endif
                                 @endforeach
                             </div>
@@ -403,7 +418,7 @@
                         <!-- /col-md-6 -->
                     </div>
                 @else
-                    <div class="row">
+                    <div class="row" style="padding-bottom: 72px;">
                         <div class="col-md-6 alignl order2">
                             {{--<h3 class="home-subtitle">Discover</h3>--}}
                             <h2 class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
@@ -419,8 +434,8 @@
                             <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English"  href="{{ asset('assets/') }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish"  href="{{ asset('assets/') }}"  hidden>{{ $button->name_es }}</a>
+                                        <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more English"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                        <a id="btnRC-es{{ $rc->id }}_{{ $button->id }}" class="view-more Spanish"  href="{{ url('pdf/' . $button->file_es) }}"  hidden>{{ $button->name_es }}</a>
                                     @endif
                                 @endforeach
                             </div>

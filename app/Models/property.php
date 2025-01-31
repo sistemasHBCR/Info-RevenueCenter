@@ -13,6 +13,7 @@ class property extends Model
         'name',
         'image',
         'logo',
+        'background',
         'title',
         'description'
     ];
