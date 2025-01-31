@@ -381,8 +381,7 @@
     </section>
     <!-- /HOME HERO IMAGE -->
     @foreach ($revenue_centers as $i => $rc)
-        <section  id="{{ $rc->id }}{{ $rc->name }}" class="section-rc" style="padding-top: 90px;">
-            <div class="alignr" style="padding-right: 5%"><a href="#" id="" data-toggle="modal" data-target="#ModalRCenter"><i class="fas fa-pen fa-lg" style="color: #e0b16f"></i></a></div>
+        <section  id="{{ $rc->id }}{{ $rc->name }}" class="row section-rc" style="padding-top: 90px;">
             <div class="container">
                 @if ($i % 2 == 0)
                     <div class="row" style="padding-bottom: 72px;">
@@ -406,6 +405,11 @@
                                     <p class="Spanish" hidden>{{ $site->description_es }}</p>
                                 @endif
                             @endforeach
+                            <div class="more-btn">
+                                <a class="view-more Spanish"><i class="fas fa-plus"></i></a>
+                            </div>
+                            <br>
+                            {{--<div class="alignc" style="background-color: #e0b16f; width: 50px; height: 50px; border-radius: 50%;"><i class="fas fa-plus" style="margin-top: 35%"></i></div>--}}
                             <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
@@ -432,6 +436,10 @@
                                 @endif
                             @endforeach
                             <div class="more-btn">
+                                <a class="view-more Spanish"><i class="fas fa-plus"></i></a>
+                            </div>
+                            <br>
+                            <div class="more-btn">
                                 @foreach ($buttons as $button)
                                     @if ($button->rc_id == $rc->id)
                                         <a class="view-more English"  href="{{ asset('assets/') }}">{{ $button->name }}</a>
@@ -451,6 +459,9 @@
                         <!-- /col-md-6 -->
                     </div>
                 @endif
+            </div>
+            <div class="alignc col-md-2">
+                <a href="#" id="" data-toggle="modal" data-target="#ModalRCenter"><i class="fas fa-pen fa-lg" style="color: #e0b16f"></i></a>
             </div>
         </section>
     @endforeach
@@ -539,6 +550,9 @@
                             </div>
                             <input type="file" name="" id="" class="reservation-fields" value="{{ $properties->background }}">
                         </div>
+                        <div class="more-btn">
+                            <a class="view-more Spanish">Guardar cambios</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -555,40 +569,103 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5>Centro de consumo</h5>
-                        <div>
-                            <h6>Nombre del centro de consumo</h6>
-                            <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Centro de consumo</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sitios</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Botones</a>
+                            </li>
+                          </ul>
+                          <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div>
+                                    <h6>Nombre del centro de consumo</h6>
+                                    <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                </div>
+                                <div>
+                                    <h6>Imagen del centro de consumo</h6>
+                                    <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
+                                        <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}" alt="{{$properties->background}}" style="max-height: 120px;">
+                                    </div>
+                                    <input type="file" name="" id="" class="reservation-fields">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div>
+                                    <h6 style="padding: 3px;">Nombre del sitio</h6>
+                                    <input type="text" name="nameSite" id="nameSite" class="reservation-fields">
+                                </div>
+                                <div>
+                                    <h6 style="padding: 3px;">Dias de apertura (Inglés)</h6>
+                                    <input type="text" name="scheduleDaySite" id="scheduleDaySite" class="reservation-fields">
+                                </div>
+                                <div>
+                                    <h6 style="padding: 3px;">Dias de apertura (Español)</h6>
+                                    <input type="text" name="scheduleDayEsSite" id="scheduleDayEsSite" class="reservation-fields">
+                                </div>
+                                <div>
+                                    <h6 style="padding: 3px;">Horario de apertura (Inglés)</h6>
+                                    <input type="text" name="scheduleHourSite" id="scheduleHourSite" class="reservation-fields">
+                                </div>
+                                <div>
+                                    <h6 style="padding: 3px;">Horario de apertura (Español)</h6>
+                                    <input type="text" name="scheduleHourEsSite" id="scheduleHourEsSite" class="reservation-fields">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="row" style="margin: 2%;">
+                                    <div class="nav flex-column nav-pills col-md-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                                    </div>
+                                    <div class="tab-content col-md-10" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div>
+                                                <h6>Nombre del boton (Inglés)</h6>
+                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                            </div>
+                                            <div>
+                                                <h6>Nombre del boton (Español)</h6>
+                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                            </div>
+                                            <div>
+                                                <h6>Archivo PDF (Inglés)</h6>
+                                                <input type="file" name="" id="" class="reservation-fields">
+                                            </div>
+                                            <div>
+                                                <h6>Archivo PDF (Español)</h6>
+                                                <input type="file" name="" id="" class="reservation-fields">
+                                            </div>
+                                            <div>
+                                                <h6>Descripción del boton (Inglés)</h6>
+                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                            </div>
+                                            <div>
+                                                <h6>Descripción del boton (Español)</h6>
+                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
+                                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3</div>
+                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h6>Imagen del centro de consumo</h6>
-                            <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}" alt="{{$properties->background}}" style="max-height: 120px;">
-                            </div>
-                            <input type="file" name="" id="" class="reservation-fields">
-                        </div>
-                        <div id="container-sites">
-                            <h5>Sitios</h5>
-                            <div>
-                                <h6 style="padding: 3px;">Nombre del sitio</h6>
-                                <input type="text" name="nameSite" id="nameSite" class="reservation-fields">
-                            </div>
-                            <div>
-                                <h6 style="padding: 3px;">Dias de apertura (Inglés)</h6>
-                                <input type="text" name="scheduleDaySite" id="scheduleDaySite" class="reservation-fields">
-                            </div>
-                            <div>
-                                <h6 style="padding: 3px;">Dias de apertura (Español)</h6>
-                                <input type="text" name="scheduleDayEsSite" id="scheduleDayEsSite" class="reservation-fields">
-                            </div>
-                            <div>
-                                <h6 style="padding: 3px;">Horario de apertura (Inglés)</h6>
-                                <input type="text" name="scheduleHourSite" id="scheduleHourSite" class="reservation-fields">
-                            </div>
-                            <div>
-                                <h6 style="padding: 3px;">Horario de apertura (Español)</h6>
-                                <input type="text" name="scheduleHourEsSite" id="scheduleHourEsSite" class="reservation-fields">
-                            </div>
+                        @foreach($buttons as $button)
+                            @if($button->rc_id == $revenue_centers[0]->id)
+                                <p>{{$button->name}}</p>
+                            @endif
+                        @endforeach
+                        <p>{{ $revenue_centers[0]->name }}</p>
+                        <div class="more-btn">
+                            <a class="view-more Spanish">Guardar cambios</a>
                         </div>
                     </div>
                 </div>
