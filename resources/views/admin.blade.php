@@ -25,16 +25,99 @@
     <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="32x32" />
     <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/' . $properties->logo) }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
     <style>
-		html {
-			scroll-behavior: smooth;
-		};
-        .section-rc:hover{
-            background: rgb(255,255,255);
-            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,241,225,1) 15%, rgba(255,241,225,1) 85%, rgba(255,255,255,1) 100%);
-            
-        };
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-rc:hover {
+            background: rgb(255, 255, 255);
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 241, 225, 1) 15%, rgba(255, 241, 225, 1) 85%, rgba(255, 255, 255, 1) 100%);
+
+        }
+
+        /*****ELEMENTOS REVENUE CENTER***/
+        .more-btn {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permite que los botones se muevan a la siguiente línea si es necesario */
+            gap: 10px;
+            /* Espacio entre los botones */
+        }
+
+        .view-more {
+            flex: 1 1 45%;
+            /* Los botones ocupan el 45% del contenedor, y se ajustan para ocupar espacio en 2 columnas */
+            box-sizing: border-box;
+            /* Para asegurarnos de que el padding y el margen no afecten el tamaño de los botones */
+            text-align: center;
+            margin-bottom: 10px;
+            /* Espacio inferior entre los botones */
+        }
+
+
+        /******ELEMENTOS MODAL*******/
+        #image-revenuecenter {
+            width: 359px;
+            /* Ancho fijo */
+            height: 269px;
+            /* Alto fijo */
+            object-fit: cover;
+            /* Ajusta la imagen para que cubra el contenedor */
+            border: 5px solid #e0b16f;
+            /* Agrega un borde de 5px de color dorado (#e0b16f) */
+            border-radius: 10px;
+            /* Opcional: agrega bordes redondeados */
+        }
+
+        .sortable-item {
+            border: 1px solid #ddd;
+            /* Borde que separa los contenedores */
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #fdfdfd;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .sortable-item h3 {
+            margin-top: 0;
+        }
+
+        .sortable-item .sortable-handle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: grab;
+            font-size: 20px;
+            color: #aaa;
+        }
+
+        .sortable-item:hover .sortable-handle {
+            color: #333;
+        }
+
+
+        /*Escala de tabla */
+        #databuttons table td,
+        #databuttons table th {
+            font-size: 0.8em;
+        }
+
+        /*Truncar/cortar url*/
+        .truncate-url {
+            display: inline-block;
+            max-width: 40ch;
+            /* Limita a 40 caracteres */
+            white-space: nowrap;
+            /* Evita el salto de línea */
+            overflow: hidden;
+            /* Oculta el texto que sobresale */
+            text-overflow: ellipsis;
+            /* Agrega "..." al final */
+        }
     </style>
 </head>
 
@@ -44,285 +127,45 @@
         <!-- MENU -->
         <nav class="navbar navbar-2 nav-mobile">
             <div class="nav-holder nav-holder-2">
-                {{-- <ul id="menu-menu-2" class="menu-nav-2">
-                    <li class="menu-item menu-item-has-children">
-                        <a href="index.html">Home</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="index.html">Home 1</a></li>
-                            <li class="menu-item"><a href="homepage-2.html">Home 2</a></li>
-                            <li class="menu-item"><a href="homepage-3.html">Home 3</a></li>
-                            <li class="menu-item"><a href="homepage-4.html">Home 4</a></li>
-                            <li class="menu-item"><a href="homepage-5.html">Home 5</a></li>
-                            <li class="menu-item"><a href="homepage-6.html">Home 6</a></li>
-                            <li class="menu-item"><a href="homepage-7.html">Home 7</a></li>
-                            <li class="menu-item"><a href="homepage-8.html">Home 8</a></li>
-                            <li class="menu-item"><a href="homepage-9.html">Home 9</a></li>
-                            <li class="menu-item"><a href="homepage-10.html">Home 10</a></li>
-                            <li class="menu-item"><a href="homepage-video.html">Home Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="menu-2-col.html">Menu</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="menu-1-col.html">Menu 1 Col</a></li>
-                            <li class="menu-item"><a href="menu-2-col.html">Menu 2 Cols</a></li>
-                            <li class="menu-item"><a href="menu-3-col.html">Menu 3 Cols</a></li>
-                            <li class="menu-item"><a href="menu-accordion.html">Menu Accordion</a></li>
-                            <li class="menu-item"><a href="menu-grid-v2.html">Menu Grid v2</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="menu-grid-v3.html">Menu Grid v3</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="menu-grid-v3-2cols.html">Menu Grid v3 2 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3.html">Menu Grid v3 3 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-4cols.html">Menu Grid v3 4 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-5cols.html">Menu Grid v3 5 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="menu-grid-image.html">Menu Grid Images</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children current-menu-item">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-has-children current-menu-item">
-                                <a href="index.html">Headers</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="index.html">Header 1</a></li>
-                                    <li class="menu-item"><a href="header-2.html">Header 2</a></li>
-                                    <li class="menu-item"><a href="header-3.html">Header 3</a></li>
-                                    <li class="menu-item"><a href="header-4.html">Header 4</a></li>
-                                    <li class="menu-item"><a href="header-5.html">Header 5</a></li>
-                                    <li class="menu-item"><a href="header-6.html">Header 6</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="about-us.html">About Us</a></li>
-                            <li class="menu-item"><a href="about-me.html">About Me</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="team.html">Team</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="team-2-cols.html">Team 2 Cols</a></li>
-                                    <li class="menu-item"><a href="team-3-cols.html">Team 3 Cols</a></li>
-                                    <li class="menu-item"><a href="team.html">Team 4 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="services.html">Services</a></li>
-                            <li class="menu-item"><a href="faq.html">FAQ</a></li>
-                            <li class="menu-item"><a href="404-error.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="reservation.html">Reservation</a></li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="gallery-3-cols.html">Gallery</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="gallery-3-cols.html">Gallery 3 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-4-cols.html">Gallery 4 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-3-cols.html">Gallery Full Screen 3
-                                    Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-4-cols.html">Gallery Full Screen 4
-                                    Cols</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="blog.html">Blog</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="blog-single-post.html">Blog Single Post</a></li>
-                            <li class="menu-item"><a href="blog.html">Blog List</a></li>
-                            <li class="menu-item"><a href="blog-classic.html">Blog Classic</a></li>
-                            <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
-                            <li class="menu-item"><a href="blog-grid-3-cols.html">Blog Grid 3 Cols</a></li>
-                            <li class="menu-item"><a href="blog-fullwidth.html">Blog FullWidth</a></li>
-                            <li class="menu-item"><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="contact.html">Contact</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
-                            <li class="menu-item"><a href="contact-2.html">Contact 2</a></li>
-                            <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
-                        </ul>
-                    </li>
-                </ul> --}}
                 <ul id="menu-menu-2" class="menu-nav-2">
                     @foreach ($revenue_centers as $rc)
                         <li class="menu-item">
                             <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
                         </li>
                     @endforeach
-					<li class="menu-item menu-item-has-children">
+                    <li class="menu-item menu-item-has-children">
                         <a href="">Language</a>
                         <ul class="sub-menu">
-							@foreach($languages as $language)
-								<li class="menu-item"><a href="">{{ $language->name }}</a></li>
-							@endforeach
+                            @foreach ($languages as $language)
+                                <li class="menu-item"><a href="">{{ $language->name }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                 </ul>
             </div>
         </nav>
-        <!-- /MENU -->
-        {{--<div class="rightside-nav-2">
-            <ul class="right-side-contact">
-                <li class="menu-item menu-item-has-children">
-                    <a href="">Language</a>
-                    <ul class="sub-menu">
-                        @foreach ($languages as $i => $language)
-                            @if ($i == 0)
-                                <li class="menu-item change_lang current-menu-item this_change"
-                                    value="{{ $language->id }}"><a class="white"
-                                        style="cursor: pointer">{{ $language->name }}</a></li>
-                            @else
-                                <li class="menu-item change_lang" value="{{ $language->id }}"><a class="white"
-                                        style="cursor: pointer">{{ $language->name }}</a></li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </li>
-            </ul>
-        </div>--}}
-        <!-- RIGHT SIDE -->
-        {{-- <div class="rightside-nav-2">
-
-            <h3>Book Now</h3>
-            <ul class="right-side-contact">
-                <li><label>Address:</label> 40 Park Ave, Brooklyn, New York 70250</li>
-                <li><label>Phone:</label> 000-111-2222</li>
-                <li><label>Email:</label> contact@dina.com </li>
-            </ul>
-
-            <!-- SOCIAL ICONS -->
-            <ul class="search-social search-social-2">
-                <li><a class="social-facebook" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li><a class="social-twitter" href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                <li><a class="social-tripadvisor" href="#" target="_blank"><i
-                            class="fab fa-tripadvisor"></i></a></li>
-                <li><a class="social-pinterest" href="#" target="_blank"><i class="fab fa-pinterest"></i></a>
-                </li>
-                <li><a class="social-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                </li>
-            </ul>
-            <!-- /SOCIAL ICONS -->
-        </div> --}}
-        <!-- /RIGHT SIDE -->
     </div>
+
     <!-- /MOBILE MENU -->
-    <!-- HEADER -->
+    <!-- START TOPBAR -->
     <header id="header-4" class="navbar-fixed-top">
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="{{ url('/') }}"><img class="img-fluid" src="{{ asset('assets/images/icons/' . $properties->image) }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
+            <div class="logo-4 alignc"><a href="{{ url('/') }}"><img class="img-fluid"
+                        src="{{ asset('assets/images/icons/' . $properties->image) }}" alt="1Homes"
+                        style="width: 120px; height: auto;" /></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
-                {{-- <ul id="menu-menu-1" class="menu-nav menu-nav-1">
-                    <li class="menu-item menu-item-has-children">
-                        <a href="index.html">Home</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="index.html">Home 1</a></li>
-                            <li class="menu-item"><a href="homepage-2.html">Home 2</a></li>
-                            <li class="menu-item"><a href="homepage-3.html">Home 3</a></li>
-                            <li class="menu-item"><a href="homepage-4.html">Home 4</a></li>
-                            <li class="menu-item"><a href="homepage-5.html">Home 5</a></li>
-                            <li class="menu-item"><a href="homepage-6.html">Home 6</a></li>
-                            <li class="menu-item"><a href="homepage-7.html">Home 7</a></li>
-                            <li class="menu-item"><a href="homepage-8.html">Home 8</a></li>
-                            <li class="menu-item"><a href="homepage-9.html">Home 9</a></li>
-                            <li class="menu-item"><a href="homepage-10.html">Home 10</a></li>
-                            <li class="menu-item"><a href="homepage-video.html">Home Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="menu-2-col.html">Menu</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="menu-1-col.html">Menu 1 Col</a></li>
-                            <li class="menu-item"><a href="menu-2-col.html">Menu 2 Cols</a></li>
-                            <li class="menu-item"><a href="menu-3-col.html">Menu 3 Cols</a></li>
-                            <li class="menu-item"><a href="menu-accordion.html">Menu Accordion</a></li>
-                            <li class="menu-item"><a href="menu-grid-v2.html">Menu Grid v2</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="menu-grid-v3.html">Menu Grid v3</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="menu-grid-v3-2cols.html">Menu Grid v3 2 Cols</a>
-                                    </li>
-                                    <li class="menu-item"><a href="menu-grid-v3.html">Menu Grid v3 3 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-4cols.html">Menu Grid v3 4 Cols</a>
-                                    </li>
-                                    <li class="menu-item"><a href="menu-grid-v3-5cols.html">Menu Grid v3 5 Cols</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="menu-grid-image.html">Menu Grid Images</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children current-menu-item">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-has-children current-menu-item">
-                                <a href="index.html">Headers</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="index.html">Header 1</a></li>
-                                    <li class="menu-item"><a href="header-2.html">Header 2</a></li>
-                                    <li class="menu-item"><a href="header-3.html">Header 3</a></li>
-                                    <li class="menu-item"><a href="header-4.html">Header 4</a></li>
-                                    <li class="menu-item"><a href="header-5.html">Header 5</a></li>
-                                    <li class="menu-item"><a href="header-6.html">Header 6</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="about-us.html">About Us</a></li>
-                            <li class="menu-item"><a href="about-me.html">About Me</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="team.html">Team</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="team-2-cols.html">Team 2 Cols</a></li>
-                                    <li class="menu-item"><a href="team-3-cols.html">Team 3 Cols</a></li>
-                                    <li class="menu-item"><a href="team.html">Team 4 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="services.html">Services</a></li>
-                            <li class="menu-item"><a href="faq.html">FAQ</a></li>
-                            <li class="menu-item"><a href="404-error.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="reservation.html">Reservation</a></li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="gallery-3-cols.html">Gallery</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="gallery-3-cols.html">Gallery 3 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-4-cols.html">Gallery 4 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-3-cols.html">Gallery Full Screen 3
-                                    Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-4-cols.html">Gallery Full Screen 4
-                                    Cols</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="blog.html">Blog</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="blog-single-post.html">Blog Single Post</a></li>
-                            <li class="menu-item"><a href="blog.html">Blog List</a></li>
-                            <li class="menu-item"><a href="blog-classic.html">Blog Classic</a></li>
-                            <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
-                            <li class="menu-item"><a href="blog-grid-3-cols.html">Blog Grid 3 Cols</a></li>
-                            <li class="menu-item"><a href="blog-fullwidth.html">Blog FullWidth</a></li>
-                            <li class="menu-item"><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="contact.html">Contact</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
-                            <li class="menu-item"><a href="contact-2.html">Contact 2</a></li>
-                            <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
-                        </ul>
-                    </li>
-                </ul> --}}
+
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
                         <a href="">Inicio</a>
                         <ul class="sub-menu">
-                            <li class="menu-item current-menu-item"><a class="white" style="cursor: pointer">Revenue Centers</a></li>
-                            <li class="menu-item"><a href="{{ url('spa') }}" class="white" style="cursor: pointer">SPA</a></li>
+                            <li class="menu-item current-menu-item"><a class="white" style="cursor: pointer">Revenue
+                                    Centers</a></li>
+                            <li class="menu-item"><a href="{{ url('spa') }}" class="white"
+                                    style="cursor: pointer">SPA</a></li>
                         </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
@@ -348,7 +191,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="" data-toggle="modal" data-target="#ModalHeader"><i class="fas fa-cogs fa-lg" style="color: #e0b16f"></i></a>
+                        <a href="" data-toggle="modal" data-target="#ModalHeader"><i class="fas fa-cogs fa-lg"
+                                style="color: #e0b16f"></i></a>
                     </li>
                 </ul>
             </div>
@@ -359,113 +203,86 @@
                 <button type="button" class="nav-button">
                     <span class="icon-bar"></span>
                 </button>
-                <div class="btn-header btn-header4"><a href="" data-toggle="modal" data-target="#ModalHeader"><i class="fas fa-cogs fa-lg"></i></a></div>
+                <div class="btn-header btn-header4"><a href="" data-toggle="modal" data-target="#ModalHeader"><i
+                            class="fas fa-cogs fa-lg"></i></a></div>
             </div>
             <div class="btn-header btn-header4"></div>
         </div>
         <!--headerWrap-->
     </header>
     <!-- /HEADER -->
-    <!-- HOME HERO IMAGE -->
+
+    <!-- START BANNER -->
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
         style="background-image:url('{{ asset('assets/images/backgrounds/' . $properties->background) }}');">
         <div class="item-content-bkg">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/icons/' . $properties->logo ) }}" class="img-fluid"
+                <img id="logoHeader" src="{{ asset('assets/images/icons/' . $properties->logo) }}" class="img-fluid"
                     alt="Logo" style="width: 55px; height: auto;">
                 <h1 id="propertyName" class="post-title single-post-title">{{ $properties->name }}</h1>
-                {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
+                {{-- <span class="post-subtitle" style="font-size: 35px">TASTE</span> --}}
             </div>
         </div>
-        <!-- /container-->
     </section>
-    <!-- /HOME HERO IMAGE -->
+    <!-- /END BANNER -->
+
+    <!--START REVENUECENTER-->
     @foreach ($revenue_centers as $i => $rc)
-        <section  id="{{ $rc->id }}{{ $rc->name }}" class="row section-rc" style="padding-top: 90px;">
+        <section id="container_{{ $rc->id }}{{ $rc->name }}" class="row section-rc" style="padding-top: 90px;">
             <div class="container">
-                @if ($i % 2 == 0)
-                    <div class="row" style="padding-bottom: 72px;">
-                        <div class="col-md-6 mobile-margin-b54">
-                            <div class="margin-r54">
-                                <img class="img-fluid"
-                                    src="{{ asset('assets/images/revenuecenters/' . $rc->image) }}"
-                                    alt="{{ $rc->name }}" />
-                            </div>
+                <div class="row" style="padding-bottom: 72px;">
+                    <!-- contenedor de Imagen -->
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b54">
+                        <div class="margin-r54">
+                            <img class="img-fluid" src="{{ asset('assets/images/revenuecenters/' . $rc->image) }}"
+                                alt="{{ $rc->name }}" />
                         </div>
-                        <!-- /col-md-6 -->
-                        <div class="col-md-6">
-                            {{--<h3 class="home-subtitle">Experience</h3>--}}
-                            <h2 id="{{ $rc->id }}{{ $rc->name }}" class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
-                            @foreach ($sites as $site)
-                                @if ($site->rc_id == $rc->id)
-                                    <h6>{{ $site->name }}</h6>
-									<span class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
-									<span class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
-                                    <p class="English">{{ $site->description }}</p>
-                                    <p class="Spanish" hidden>{{ $site->description_es }}</p>
+                    </div>
+                    <!-- /col-md-6 -->
+
+                    <!-- contenedor de Texto -->
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-2' : 'order-md-1' }}">
+                        <h2 id="RC_{{ $rc->id }}{{ $rc->name }}"
+                            class="home-title margin-b24 title-headline titlerevenuecenter">{{ $rc->name }}</h2>
+                        <!--START SITE-->
+                        @foreach ($sites as $site)
+                            @if ($site['rc_id'] == $rc->id)
+                                <h6>{{ $site['name'] }}</h6>
+                                <span class="English">{{ $site['day_range_ing'] != '' ? $site['day_range_ing'] : '' }}
+                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
+                                <span class="Spanish"
+                                    hidden>{{ $site['day_range_esp'] != '' ? $site['day_range_esp'] : '' }}
+                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
+                                <p class="English">{{ $site['description'] }}</p>
+                                <p class="Spanish" hidden>{{ $site['description_es'] }}</p>
+                            @endif
+                        @endforeach
+                        <!--START SITE-->
+                        <!--START BUTTONS-->
+                        <div class="more-btn">
+                            @foreach ($buttons as $button)
+                                @if ($button->rc_id == $rc->id)
+                                    <a class="view-more English"
+                                        href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a class="view-more Spanish" href="{{ asset('assets/files/' . $button->file) }}"
+                                        hidden>{{ $button->name_es }}</a>
                                 @endif
                             @endforeach
-                            <div class="more-btn">
-                                <a class="view-more Spanish"><i class="fas fa-plus"></i></a>
-                            </div>
-                            <br>
-                            {{--<div class="alignc" style="background-color: #e0b16f; width: 50px; height: 50px; border-radius: 50%;"><i class="fas fa-plus" style="margin-top: 35%"></i></div>--}}
-                            <div class="more-btn">
-                                @foreach ($buttons as $button)
-                                    @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English"  href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish"  href="{{ asset('assets/files/' . $button->file) }}" hidden>{{ $button->name_es }}</a>
-                                    @endif
-                                @endforeach
-                            </div>
                         </div>
-                        <!-- /col-md-6 -->
+                        <!--END SITE-->
                     </div>
-                @else
-                    <div class="row" style="padding-bottom: 72px;">
-                        <div class="col-md-6 alignl order2">
-                            {{--<h3 class="home-subtitle">Discover</h3>--}}
-                            <h2 class="home-title margin-b24 title-headline">{{ $rc->name }}</h2>
-                            @foreach ($sites as $site)
-                                @if ($site->rc_id == $rc->id)
-                                    <h6>{{ $site->name }}</h6>
-									<span class="English">{{ $site->schedule_day != '' ? $site->schedule_day : '' }} {{ $site->schedule_hour != '' ? '| ' . $site->schedule_hour : '' }}</span>
-									<span class="Spanish" hidden>{{ $site->schedule_day_es != '' ? $site->schedule_day_es : '' }} {{ $site->schedule_hour_es != '' ? '| ' . $site->schedule_hour_es : '' }}</span>
-                                    <p class="English">{{ $site->description }}</p>
-                                    <p class="Spanish" hidden>{{ $site->description_es }}</p>
-                                @endif
-                            @endforeach
-                            <div class="more-btn">
-                                <a class="view-more Spanish"><i class="fas fa-plus"></i></a>
-                            </div>
-                            <br>
-                            <div class="more-btn">
-                                @foreach ($buttons as $button)
-                                    @if ($button->rc_id == $rc->id)
-                                        <a class="view-more English"  href="{{ asset('assets/') }}">{{ $button->name }}</a>
-                                        <a class="view-more Spanish"  href="{{ asset('assets/') }}"  hidden>{{ $button->name_es }}</a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                        <!-- /col-md-6 -->
-                        <div class="col-md-6 mobile-margin-b54 order1">
-                            <div class="margin-l54">
-                                <img class="img-fluid"
-                                    src="{{ asset('assets/images/revenuecenters/' . $rc->image) }}"
-                                    alt="{{ $rc->name }}" />
-                            </div>
-                        </div>
-                        <!-- /col-md-6 -->
-                    </div>
-                @endif
+                    <!-- /col-md-6 -->
+                </div>
             </div>
+            <!-- Icono de Edición -->
             <div class="alignc col-md-2">
-                <a href="#" id="" data-toggle="modal" data-target="#ModalRCenter"><i class="fas fa-pen fa-lg" style="color: #e0b16f"></i></a>
+                <a href="#" data-toggle="modal" data-target="#ModalRVC"><i id="btn-rc-{{ $rc->id }}" class="edit-revenuecenter fas fa-pen fa-lg" style="color: #e0b16f"></i></a>
             </div>
         </section>
     @endforeach
-    <!-- FOOTER -->
+    <!--END REVENUECENTERS -->
+
+    <!--START FOOTER -->
     <footer>
         <div class="container">
             <!-- ROW -->
@@ -476,9 +293,9 @@
                     <div class="footer-content">
                         <h5>1 Homes Cabo Preview:</h5>
                         <p>Paseo de La Marina 4732, Col.
-                            El Médano 
-							23453 Cabo San Lucas, B.C.S.
-							Mexico 
+                            El Médano
+                            23453 Cabo San Lucas, B.C.S.
+                            Mexico
                         </p>
                     </div>
                 </div>
@@ -509,6 +326,8 @@
         <!--container-->
     </footer>
     <!-- /FOOTER -->
+
+
     <!------------------------------------------FORMULARIOS------------------------------------------>
     <form action="" method="post" enctype="multipart/form-data">
         <div id="ModalHeader" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true">
@@ -523,32 +342,43 @@
                     <div class="modal-body">
                         <div>
                             <h6 style="padding: 3px;">Titulo de la pagina</h6>
-                            <input type="text" name="" id="" class="reservation-fields" value="{{ $properties->title }}">
+                            <input type="text" name="" id="" class="reservation-fields"
+                                value="{{ $properties->title }}">
                         </div>
                         <div>
                             <h6 style="padding: 3px;">Nombre de la propiedad</h6>
-                            <input type="text" name="" id="" class="reservation-fields" value="{{ $properties->name }}">
+                            <input type="text" name="" id="" class="reservation-fields"
+                                value="{{ $properties->name }}">
                         </div>
                         <div>
                             <h6 style="padding: 3px;">Logo centro</h6>
-                            <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/icons/' . $properties->image) }}" alt="{{$properties->image}}" style="max-height: 120px;">
+                            <div class="alignc"
+                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
+                                <img src="{{ asset('assets/images/icons/' . $properties->image) }}"
+                                    alt="{{ $properties->image }}" style="max-height: 120px;">
                             </div>
-                            <input type="file" name="" id="" class="reservation-fields" value="{{ $properties->image}}">
+                            <input type="file" name="" id="" class="reservation-fields"
+                                value="{{ $properties->image }}">
                         </div>
                         <div>
                             <h6 style="padding: 3px;">Logo top</h6>
-                            <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/icons/' . $properties->logo) }}" alt="{{$properties->logo}}" style="max-height: 120px;">
+                            <div class="alignc"
+                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
+                                <img src="{{ asset('assets/images/icons/' . $properties->logo) }}"
+                                    alt="{{ $properties->logo }}" style="max-height: 120px;">
                             </div>
-                            <input type="file" name="" id="" class="reservation-fields" value="{{ $properties->logo }}">
+                            <input type="file" name="" id="" class="reservation-fields"
+                                value="{{ $properties->logo }}">
                         </div>
                         <div>
                             <h6 style="padding: 3px;">Baner</h6>
-                            <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}" alt="{{$properties->background}}" style="max-height: 120px;">
+                            <div class="alignc"
+                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
+                                <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}"
+                                    alt="{{ $properties->background }}" style="max-height: 120px;">
                             </div>
-                            <input type="file" name="" id="" class="reservation-fields" value="{{ $properties->background }}">
+                            <input type="file" name="" id="" class="reservation-fields"
+                                value="{{ $properties->background }}">
                         </div>
                         <div class="more-btn">
                             <a class="view-more Spanish">Guardar cambios</a>
@@ -558,121 +388,294 @@
             </div>
         </div>
     </form>
-    <form action="" method="post" enctype="multipart/form-data">
-        <div id="ModalRCenter" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">EDITAR CENTRO DE CONSUMO</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Centro de consumo</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sitios</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Botones</a>
-                            </li>
-                          </ul>
-                          <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div>
-                                    <h6>Nombre del centro de consumo</h6>
-                                    <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
-                                </div>
-                                <div>
-                                    <h6>Imagen del centro de consumo</h6>
-                                    <div class="alignc" style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                        <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}" alt="{{$properties->background}}" style="max-height: 120px;">
-                                    </div>
-                                    <input type="file" name="" id="" class="reservation-fields">
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div>
-                                    <h6 style="padding: 3px;">Nombre del sitio</h6>
-                                    <input type="text" name="nameSite" id="nameSite" class="reservation-fields">
-                                </div>
-                                <div>
-                                    <h6 style="padding: 3px;">Dias de apertura (Inglés)</h6>
-                                    <input type="text" name="scheduleDaySite" id="scheduleDaySite" class="reservation-fields">
-                                </div>
-                                <div>
-                                    <h6 style="padding: 3px;">Dias de apertura (Español)</h6>
-                                    <input type="text" name="scheduleDayEsSite" id="scheduleDayEsSite" class="reservation-fields">
-                                </div>
-                                <div>
-                                    <h6 style="padding: 3px;">Horario de apertura (Inglés)</h6>
-                                    <input type="text" name="scheduleHourSite" id="scheduleHourSite" class="reservation-fields">
-                                </div>
-                                <div>
-                                    <h6 style="padding: 3px;">Horario de apertura (Español)</h6>
-                                    <input type="text" name="scheduleHourEsSite" id="scheduleHourEsSite" class="reservation-fields">
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                <div class="row" style="margin: 2%;">
-                                    <div class="nav flex-column nav-pills col-md-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-                                    </div>
-                                    <div class="tab-content col-md-10" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                            <div>
-                                                <h6>Nombre del boton (Inglés)</h6>
-                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+
+    <div id="ModalRVC" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edición de contenido</h4>
+                    <button type="button" id="close-rvc" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="rvc-tab" data-toggle="tab" href="#TabRCV"
+                                role="tab" aria-controls="tabrvc" aria-selected="true">Centro de consumo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="content-tab" data-toggle="tab" href="#TabContent"
+                                role="tab" aria-controls="content" aria-selected="false">Contenido</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="buttons-tab" data-toggle="tab" href="#Tabbuttons"
+                                role="tab" aria-controls="buttons" aria-selected="false">Botones</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab content: Se debe usar una sola estructura de tab-content -->
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Tab 1: Centro de consumo -->
+                        <div class="tab-pane fade show active" id="TabRCV" role="tabpanel"
+                            aria-labelledby="rvc-tab">
+                            <section class="page-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="page-holder custom-page-template mt-2">
+                                                <p class="alignc">Datos generales</p>
                                             </div>
-                                            <div>
-                                                <h6>Nombre del boton (Español)</h6>
-                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
-                                            </div>
-                                            <div>
-                                                <h6>Archivo PDF (Inglés)</h6>
-                                                <input type="file" name="" id="" class="reservation-fields">
-                                            </div>
-                                            <div>
-                                                <h6>Archivo PDF (Español)</h6>
-                                                <input type="file" name="" id="" class="reservation-fields">
-                                            </div>
-                                            <div>
-                                                <h6>Descripción del boton (Inglés)</h6>
-                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
-                                            </div>
-                                            <div>
-                                                <h6>Descripción del boton (Español)</h6>
-                                                <input type="text" name="nameRC" id="nameRC" class="reservation-fields">
+                                            <div class="reservation_txt">
+                                                <form method="post" id="reservation-form"
+                                                    action="include/reservation-process.php"
+                                                    enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-md-12 text-center">
+                                                            <h3 id="title-revenuecenter"
+                                                                class="margin-b24 title-site title-headline"
+                                                                contenteditable="true"
+                                                                style="outline: none; cursor: text;text-transform: uppercase;">
+                                                                CENTRO DE CONSUMO
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Imagen mostrada -->
+                                                    <div class="row">
+                                                        <div class="col-md-12 mobile-margin-b32 text-center">
+                                                            <img id="image-revenuecenter"
+                                                                class="img-fluid img-feature"
+                                                                src="{{ asset('assets/images/blog/blog-1.jpg') }}"
+                                                                loading="lazy" alt="about 1">
+                                                            <br>
+                                                            <small>Cargar imagen (Solo PNG o JPG)</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="d-flex align-items-center">
+                                                                <!-- Input para seleccionar la imagen -->
+                                                                <input type="file" id="image-upload"
+                                                                    class="form-control mr-2"
+                                                                    accept="image/png, image/jpeg"
+                                                                    style="max-width: 800px;">
+                                                                <!-- Botón con ícono de regresar -->
+                                                                <button id="reset-image"
+                                                                    class="btn btn-secondary ms-2">
+                                                                    <i class="fas fa-undo"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
-                                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3</div>
-                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         </div>
-                        @foreach($buttons as $button)
-                            @if($button->rc_id == $revenue_centers[0]->id)
-                                <p>{{$button->name}}</p>
-                            @endif
-                        @endforeach
-                        <p>{{ $revenue_centers[0]->name }}</p>
-                        <div class="more-btn">
-                            <a class="view-more Spanish">Guardar cambios</a>
+
+                        <!-- Tab 2: Sitios -->
+                        <div class="tab-pane fade" id="TabContent" role="tabpanel" aria-labelledby="content-tab">
+                            <section class="page-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="page-holder custom-page-template mt-2">
+                                                <p class="alignc">Contenido</p>
+                                            </div>
+                                            <div class="reservation_txt">
+                                                <!-- Contenedor arrastrable -->
+                                                <div id="sortable-container" class="sortable-container">
+                                                    <!-- Ejemplo de contenedor inicial -->
+                                                    <div class="sortable-item" data-position="1">
+                                                        <div class="sortable-handle">
+                                                            <!-- Icono de arrastre -->
+                                                            <i class="fas fa-arrows-alt"></i>
+                                                        </div>
+                                                        <!-- Icono de eliminar -->
+                                                        <i class="remove-btn fas fa-times"
+                                                            style="cursor: pointer"></i>
+
+                                                        <h3 class="title-site" contenteditable="true"
+                                                            style="outline: none; cursor: text;">SITIO</h3>
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Abierto*</label>
+                                                                <p>
+                                                                    <select class="form-control avaible">
+                                                                        <Option text-es="ABIERTO TODOS LOS DÍAS"
+                                                                            text-en="OPEN DAILY" value="all">
+                                                                            Todos los dias</Option>
+                                                                        <option value="personalized">Definir
+                                                                        </option>
+                                                                    </select>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label>De*</label>
+                                                                <p>
+                                                                    <select class="form-control firstday"
+                                                                        name="firstday" disabled>
+                                                                        <option value="1" selected>Lunes
+                                                                        </option>
+                                                                        <option value="2">Martes</option>
+                                                                        <option value="3">Miércoles</option>
+                                                                        <option value="4">Jueves</option>
+                                                                        <option value="5">Viernes</option>
+                                                                        <option value="6">Sábado</option>
+                                                                        <option value="7">Domingo</option>
+                                                                    </select>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label>A*</label>
+                                                                <p>
+                                                                    <select class="form-control lastday"
+                                                                        name="lastday" disabled>
+                                                                        <option value="1">Lunes</option>
+                                                                        <option value="2">Martes</option>
+                                                                        <option value="3">Miércoles</option>
+                                                                        <option value="4">Jueves</option>
+                                                                        <option value="5">Viernes</option>
+                                                                        <option value="6">Sábado</option>
+                                                                        <option value="7" selected>Domingo
+                                                                        </option>
+                                                                    </select>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Desde las*</label>
+                                                                <p>
+                                                                    <select class="form-control" id="firsthour"
+                                                                        name="firsthour">
+                                                                        @php
+                                                                            $horas = [];
+                                                                            // Definimos las horas de apertura entre las 5 AM y 12 AM (medianoche)
+                                                                            for ($i = 1; $i <= 24; $i++) {
+                                                                                // Hora en formato 24 horas para el valor
+                                                                                $hora24 = \Carbon\Carbon::createFromFormat(
+                                                                                    'H',
+                                                                                    $i,
+                                                                                )->format('H:i');
+                                                                                // Hora en formato 12 horas con AM/PM para mostrar en el texto
+                                                                                $hora12 = \Carbon\Carbon::createFromFormat(
+                                                                                    'H',
+                                                                                    $i,
+                                                                                )->format('g:i A');
+                                                                                $horas[] = [
+                                                                                    'valor' => $hora24,
+                                                                                    'texto' => $hora12,
+                                                                                ];
+                                                                            }
+                                                                        @endphp
+
+                                                                        @foreach ($horas as $hora)
+                                                                            <option value="{{ $hora['valor'] }}">
+                                                                                {{ $hora['texto'] }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label>Hasta*</label>
+                                                                <p>
+                                                                    <select class="form-control" id="lasthour"
+                                                                        name="lasthour">
+                                                                        @foreach ($horas as $hora)
+                                                                            <option value="{{ $hora['valor'] }}">
+                                                                                {{ $hora['texto'] }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label>Descripción del sitio</label>
+                                                                <p>
+                                                                    <textarea name="description" id="description" class="form-control" rows="7"></textarea>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Botón para agregar más contenedores -->
+                                                <div class="text-center mt-3">
+                                                    <button type="button" class="btn btn-dark"
+                                                        id="add-container">+</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
+
+
+
+                        <!-- Tab 3: Botones -->
+                        <div class="tab-pane fade" id="Tabbuttons" role="tabpanel" aria-labelledby="buttons-tab">
+                            <section class="page-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="page-holder custom-page-template mt-2">
+                                                <p class="alignc">Definir enlaces y botones</p>
+                                            </div>
+
+                                            <!-- Tabla de botones creados -->
+                                            <div class="table-responsive mt-4" id="databuttons">
+                                                <table id="tablebuttons" class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>N°</th>
+                                                            <th>Idioma</th>
+                                                            <th>Boton</th>
+                                                            <th>Funcionalidad</th>
+                                                            <th>Dirección</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="button-list">
+                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <!-- Botón para agregar más contenedores -->
+                                            <div class="text-center mt-3">
+                                                <button type="button" class="btn btn-dark"
+                                                    id="add-button">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div> <!-- Fin de la única estructura de .tab-content -->
+
+                    <div class="more-btn mt-3">
+                        <a class="view-more Spanish">Guardar cambios</a>
                     </div>
                 </div>
+
             </div>
         </div>
-    </form>
+    </div>
     <!------------------------------------------/FORMULARIOS------------------------------------------>
+
+
+
     <!-- JS -->
     <script src='{{ asset('assets/js/jquery.js') }}'></script>
     <script src='{{ asset('assets/js/jquery-migrate.min.js') }}'></script>
@@ -683,14 +686,18 @@
     <script src='{{ asset('assets/js/jquery.magnific-popup.min.js') }}'></script>
     <script src='{{ asset('assets/js/owl-carousel/owl.carousel.min.js') }}'></script>
     <!-- MAIN JS -->
-    <script src='{{ 'assets/js/init.js' }}'></script>
+    <script src='{{ asset('assets/js/init.js') }}'></script>
     <!-- CONTACT FORM JS -->
     <script src='{{ asset('assets/js/jquery.form.min.js') }}'></script>
     <script src='{{ asset('assets/js/contactform.js') }}'></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/js/module-rc-basics.js') }}"></script>
-    
+
+    <script>
+        var url_get_sites = "{{ route('get_sites') }}";
+    </script>
+
 </body>
 
 </html>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class site extends Model
+class happening extends Model
 {
     use HasFactory;
 
@@ -13,15 +13,17 @@ class site extends Model
         'name',
         'schedule_day_start',
         'schedule_day_end',
+        'schedule_spe_day',
         'schedule_hour_start',
         'schedule_hour_end',
         'description',
         'description_es',
-        'rc_id'
+        'active',
+        'rc_name'
     ];
 
-    public function revenue_center()
-    {
-        return $this->belongsToMany(revenue_center::class, 'site_revenuecenter');
+    public function revenuecenter(){
+        // Relacion directa de Tablas, sin tabla intermedia
+        return $this->belongsTo(revenue_center::class, 'rc_name', 'id', 'revenue_centers');
     }
 }

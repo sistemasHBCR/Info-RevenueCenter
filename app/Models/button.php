@@ -14,13 +14,12 @@ class button extends Model
         'name_es',
         'file',
         'file_es',
-        'description',
-        'description_es',
+        'URL',
         'rc_id'
     ];
 
-    public function revenue_centers()
+    public function revenue_center()
     {
-        return $this->belongsToMany(revenue_center::class);
+        return $this->belongsToMany(revenue_center::class, 'button_revenuecenter');
     }
 }

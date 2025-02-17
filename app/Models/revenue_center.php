@@ -19,4 +19,17 @@ class revenue_center extends Model
     {
         return $this->belongsToMany(property::class);
     }
+
+    public function happening()
+    {
+        return $this->belongsToMany(happening::class);
+    }
+
+    public function button(){
+        return $this->belongsToMany(button::class, 'button_revenuecenter');
+    }
+
+    public function site(){
+        return $this->belongsToMany(site::class, 'site_revenuecenter');
+    }
 }
