@@ -153,7 +153,7 @@
 
             <!-- LOGO -->
             <div class="logo-4 alignc"><a href="{{ url('/') }}"><img class="img-fluid"
-                        src="{{ asset('assets/images/icons/' . $properties->image) }}" alt="1Homes"
+                        src="{{ asset('assets/images/1HOMES/icons/' . $properties->image) }}" alt="1Homes"
                         style="width: 120px; height: auto;" /></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
@@ -214,10 +214,10 @@
 
     <!-- START BANNER -->
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
-        style="background-image:url('{{ asset('assets/images/backgrounds/' . $properties->background) }}');">
+        style="background-image:url('{{ asset('assets/images/1HOMES/backgrounds/' . $properties->background) }}');">
         <div class="item-content-bkg">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/icons/' . $properties->logo) }}" class="img-fluid"
+                <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $properties->logo) }}" class="img-fluid"
                     alt="Logo" style="width: 55px; height: auto;">
                 <h1 id="propertyName" class="post-title single-post-title">{{ $properties->name }}</h1>
                 {{-- <span class="post-subtitle" style="font-size: 35px">TASTE</span> --}}
@@ -234,7 +234,7 @@
                     <!-- contenedor de Imagen -->
                     <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b54">
                         <div class="margin-r54">
-                            <img class="img-fluid" src="{{ asset('assets/images/revenuecenters/' . $rc->image) }}"
+                            <img class="img-fluid" src="{{ asset('assets/images/1HOMES/revenuecenters/' . $rc->image) }}"
                                 alt="{{ $rc->name }}" />
                         </div>
                     </div>
@@ -354,7 +354,7 @@
                             <h6 style="padding: 3px;">Logo centro</h6>
                             <div class="alignc"
                                 style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/icons/' . $properties->image) }}"
+                                <img src="{{ asset('assets/images/1HOMES/icons/' . $properties->image) }}"
                                     alt="{{ $properties->image }}" style="max-height: 120px;">
                             </div>
                             <input type="file" name="" id="" class="reservation-fields"
@@ -364,7 +364,7 @@
                             <h6 style="padding: 3px;">Logo top</h6>
                             <div class="alignc"
                                 style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/icons/' . $properties->logo) }}"
+                                <img src="{{ asset('assets/images/1HOMES/icons/' . $properties->logo) }}"
                                     alt="{{ $properties->logo }}" style="max-height: 120px;">
                             </div>
                             <input type="file" name="" id="" class="reservation-fields"
@@ -374,7 +374,7 @@
                             <h6 style="padding: 3px;">Baner</h6>
                             <div class="alignc"
                                 style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/backgrounds/' . $properties->background) }}"
+                                <img src="{{ asset('assets/images/1HOMES/backgrounds/' . $properties->background) }}"
                                     alt="{{ $properties->background }}" style="max-height: 120px;">
                             </div>
                             <input type="file" name="" id="" class="reservation-fields"

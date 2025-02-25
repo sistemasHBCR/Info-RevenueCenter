@@ -19,20 +19,23 @@ document.addEventListener('DOMContentLoaded', function () {
     $changelang.click(function () {
         if ($(this).hasClass('current-menu-item')) {
         } else {
-            var change_lang = $(this).text(); // Idioma seleccionado
-            var actual_lang = $('.this_change').text(); // Idioma actual
-            console.log($('.this_change').text());
-            console.log('Cambiar idioma de ' + actual_lang + ', a ' + change_lang);
+            // Busca el idioma que actualmente está activo
+            var before = $('.current-menu-item').attr('name');
+            var lang_before = (before).split('-');
 
-            // Actualizar la clase para reflejar el idioma seleccionado
-            $('.this_change').removeClass('current-menu-item');
-            $('.this_change').removeClass('this_change');
-            $(this).addClass('current-menu-item');
-            $(this).addClass('this_change');
+            // Remueve la clase de las etiquetas del idioma activo
+            $('.current-menu-item').removeClass('current-menu-item');
 
-            // Mostrar/ocultar contenido según el idioma seleccionado
-            $('.' + change_lang).prop('hidden', false);
-            $('.' + actual_lang).prop('hidden', true);
+            // Busca el nuevo idioma al que se cambiará
+            var item = $(this).attr('name');
+            var lang = (item).split('-');
+
+            // Añade la clase para activar las etiquetas correspondientes al nuevo idioma
+            $('li[name="to-' + lang[1] + '"]').addClass('current-menu-item');
+            
+            // Intercambia la visibilidad de las etiquetas correspondientes al idioma anterior y actual
+            $('.' + lang_before[1]).prop('hidden', true);
+            $('.' + lang[1]).prop('hidden', false);
         }
     });
 
