@@ -43,6 +43,13 @@
         .lineto-brown-regular {
             font-family: 'lineto-brown-regular';
         }
+        @font-face {
+            font-family: 'BrownLL-Medium';
+            src: url('/qr/public/assets/fonts/1HOMES/BrownLL-Medium.otf') format('opentype');
+        }
+        .BrownLL-Medium {
+            font-family: 'BrownLL-Medium';
+        }
 
 		html {
 			scroll-behavior: smooth;
@@ -64,6 +71,17 @@
                 gap: 10px;
                 /* Espacio entre los botones */
                 margin-left: 15px;
+            }
+            .description_rc {
+                font-size: 14px;
+            }
+            .titlerevenuecenter {
+                font-size: 35px;
+            }
+            .section-rc2 {
+                margin-left: 1%;
+                margin-right: 1%;
+                border-bottom: 1px solid #111111;
             }
         }
     </style>
@@ -184,17 +202,17 @@
                     </li>--}}
                     @foreach ($revenue_centers as $rc)
                         <li class="menu-item">
-                            <a href="#container_{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
+                            <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
                         </li>
                     @endforeach
 					<li class="menu-item menu-item-has-children">
-                        <a href="">Language</a>
+                        <a href="" class="BrownLL-Medium">Language</a>
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @else
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @endif
 							@endforeach
                         </ul>
@@ -370,18 +388,18 @@
                     <li class="menu-item"><a href="">|</a></li>--}}
                     @foreach ($revenue_centers as $rc)
                         <li class="menu-item">
-                            <a href="#container_{{ $rc->id }}{{ $rc->name }}" style="font-size: 15px;">{{ $rc->name }}</a>
+                            <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
                         </li>
                     @endforeach
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" style="font-size: 15px;">Language</a>
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">Language</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang current-menu-item this_change" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @else
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -408,7 +426,7 @@
             <div class="inner-desc">
                 <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $properties->logo ) }}" class="img-fluid"
                     alt="Logo" style="width: 70px; height: auto;">
-                <h1 id="propertyName" class="post-title single-post-title">{{ $properties->name }}</h1>
+                <h1 id="propertyName" class="BrownLL-Medium post-title single-post-title">{{ $properties->name }}</h1>
                 {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
             </div>
         </div>
@@ -452,7 +470,7 @@
     @foreach ($revenue_centers as $i => $rc)
         <section id="container_{{ $rc->id }}{{ $rc->name }}" class="section-rc" style="padding-top: 95px;">
             <div class="container">
-                <div class="row" style="padding-bottom: 72px;">
+                <div class="row section-rc2" style="padding-bottom: 72px;">
                     <!-- contenedor de Imagen -->
                     <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b54">
                         <div class="margin-r54">
@@ -475,8 +493,8 @@
                                 <span class="Spanish lineto-brown-regular"
                                     hidden>{{ $site['day_range_esp'] != '' ? $site['day_range_esp'] : '' }}
                                     {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
-                                <p class="English lineto-brown-regular" style="padding-top: 1.25%">{{ $site['description'] }}</p>
-                                <p class="Spanish lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site['description_es'] }}</p>
+                                <p class="English description_rc lineto-brown-regular" style="padding-top: 1.25%">{{ $site['description'] }}</p>
+                                <p class="Spanish description_rc lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site['description_es'] }}</p>
                             @endif
                         @endforeach
                         <!--START SITE-->
@@ -966,8 +984,8 @@
                 <!-- FOOTER COLUMN 2 -->
                 <div class="col-md-12">
                     <div class="footer-content">
-                        <h5>1 Homes Cabo Preview:</h5>
-                        <p>Paseo de La Marina 4732, Col.
+                        <h5 class="BrownLL-Medium">1 Homes Cabo Preview:</h5>
+                        <p class="lineto-brown-regular">Paseo de La Marina 4732, Col.
                             El Médano 
 							23453 Cabo San Lucas, B.C.S.
 							Mexico 

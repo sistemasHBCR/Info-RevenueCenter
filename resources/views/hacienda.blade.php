@@ -61,7 +61,7 @@
 			scroll-behavior: smooth;
 		}
         .nav-hacienda {
-            background: #FFFFFF !important;
+            background: #ffffff !important;
             padding-bottom: 8px;
             position: fixed;
             top:0;
@@ -86,17 +86,44 @@
             color: #ffffff !important;
         }
 
+        .more-btn {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permite que los botones se muevan a la siguiente línea si es necesario */
+            gap: 10px;
+            /* Espacio entre los botones */
+        }
         .hacienda-btn {
-            font-family: 'Cinzel-Regular';
-            background-color: #672100;
-            color: #FFFFFF;
-            padding: 15px 20px;
-            border: 3px solid #672100;
+            font-family: 'Cinzel-Regular' !important;
+            background-color: #672100 !important;
+            color: #FFFFFF !important;
+            padding: 15px 20px !important;
+            border: 1px solid #672100 !important;
+            margin-bottom: 5%;
+            transition: 0.2s !important;
         }
         .hacienda-btn:hover {
-            background-color: #FFFFFF;
-            color: #672100;
+            background-color: #FFFFFF !important;
+            color: #672100 !important;
             transition: 0.2s !important;
+        }
+
+        @media (max-width: 600px) {
+            .more-btn {
+                display: flex;
+                flex-wrap: wrap;
+                /* Permite que los botones se muevan a la siguiente línea si es necesario */
+                gap: 10px;
+                /* Espacio entre los botones */
+                margin-left: 4%;
+            }
+            .description_rc {
+                font-size: 14px;
+            }
+        }
+        .nav-button {
+            background-color: #6f4f37;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -107,18 +134,18 @@
             <div class="nav-holder nav-holder-2">
                 <ul id="menu-menu-2" class="menu-nav-2">
                     @foreach ($hacienda_revenue_centers as $rc)
-                        <li class="menu-item">
+                        <li class="menu-item Cinzel-Bold">
                             <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
                         </li>
                     @endforeach
                     <li class="menu-item menu-item-has-children">
-                        <a href="" style="font-size: 15px;">Language</a>
+                        <a href="" class="Cinzel-Bold" style="font-size: 15px;">Language</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang current-menu-item this_change" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="menu-item Cinzel-Bold change_lang current-menu-item this_change" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @else
-                                    <li name="to-{{ $language->name }}" class="menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="menu-item Cinzel-Bold change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -129,7 +156,6 @@
     </div>
     <header id="header-4" class="navbar-fixed-top nav-hacienda">
         <div class="headerWrap-4">
-
             <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" alt="{{ $properties->name }}" style="width: auto; height: 70px;"/></a></div>
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
@@ -154,7 +180,6 @@
                 </ul>
             </div>
             <div class="nav-button-holder nav-btn-mobile inactive">
-                {{-- <span class="menu-txt">MENU</span> --}}
                 <button type="button" class="nav-button">
                     <span class="icon-bar"></span>
                 </button>
@@ -167,7 +192,7 @@
         <div class="item-content-bkg" style="background-color: rgba(0,0,0,0.3)">
             <div class="inner-desc">
                 <img id="logoHeader" src="{{ asset('assets/images/HACIENDA/icons/' . $properties->image ) }}" class="img-fluid"
-                    alt="Logo">
+                    alt="Logo" style="max-width: 50%">
                 {{--<h1 id="propertyName" class="post-title single-post-title" style="color: #672100">{{ $properties->name }}</h1>--}}
                 {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
             </div>
@@ -205,31 +230,36 @@
         </section>
     @endif
     @foreach ($hacienda_revenue_centers as $i => $rc)
-        <section class="home-widget parallax margin-b72"  style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $rc->image_1 ) }}');" >
+        <section id="{{ $rc->id}}{{ $rc->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $rc->image_1 ) }}');" >
             <div class="parallax-content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
-                            <div class="alignc" style="display: none">
-                                <h3 class="home-subtitle">Our Main Dishes</h3>
-                                <h2 class="home-title title-headline">Tasting Menu</h2>
+                            <div class="alignc">
+                                <h3 class="home-subtitle" style="display: none">{{ $rc->name }}</h3>
+                                <h2 class="home-title">{{ $rc->name }}</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-		<section id="{{ $rc->id}}{{ $rc->name }}" class="margin-b72">
+		<sectionclass="margin-b72">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="margin-b32">
-							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100">{{ $rc->name }}</h2>
-							<p class="English Muli-Regular" style="color: #672100">{{ $rc->description }}</p>
-							<p class="Spanish Muli-Regular" hidden>{{ $rc->description_es }}</p>
+							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100; display: none">{{ $rc->name }}</h2>
+							<p class="English description_rc Muli-Regular" style="color: #672100">{{ $rc->description }}</p>
+							<p class="Spanish description_rc Muli-Regular" style="color: #672100" hidden>{{ $rc->description_es }}</p>
 						</div>
                         <div class="more-btn">
-                            <a href="" class="hacienda-btn">Menu</a>
+                            @foreach ($buttons as $button)
+                                @if ($button->rc_id == $rc->id)
+                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @endif
+                            @endforeach
                         </div>
 					</div>
 					<div class="col-md-6">

@@ -11,13 +11,14 @@ use App\Models\revenue_center;
 use App\Models\site;
 use App\Models\happening;
 use App\Models\hacienda_revenue_center;
+use App\Models\hacienda_button;
 
 class MainController extends Controller
 {
     public function hacienda(Request $request){
         $properties = property::where('id', 2)->get()->first();
         $sites = site::get();
-        $buttons = button::get();
+        $buttons = hacienda_button::get();
         $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->get();
         $languages = languages::get();
         $happenings = happening::where('active', 2)->with('revenuecenter')->get();
