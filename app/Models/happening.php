@@ -18,12 +18,15 @@ class happening extends Model
         'schedule_hour_end',
         'description',
         'description_es',
-        'active',
-        'rc_name'
+        'active'
     ];
 
-    public function revenuecenter(){
+    public function property(){
+        return $this->belongsToMany(property::class, 'happening_property');
+    }
+
+    /*public function revenuecenter(){
         // Relacion directa de Tablas, sin tabla intermedia
         return $this->belongsTo(revenue_center::class, 'rc_name', 'id', 'revenue_centers');
-    }
+    }*/
 }

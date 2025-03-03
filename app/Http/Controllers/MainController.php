@@ -21,9 +21,8 @@ class MainController extends Controller
         $buttons = hacienda_button::get();
         $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->get();
         $languages = languages::get();
-        $happenings = happening::where('active', 2)->with('revenuecenter')->get();
 
-        return view('hacienda', compact('sites', 'buttons', 'properties', 'hacienda_revenue_centers', 'languages', 'happenings'));
+        return view('hacienda', compact('sites', 'buttons', 'properties', 'hacienda_revenue_centers', 'languages'));
     }
 
     public function homes(Request $request){
@@ -32,7 +31,6 @@ class MainController extends Controller
         $properties = property::get()->first();
         $revenue_centers = revenue_center::get();
         $languages = languages::get();
-        $happenings = happening::where('active', 1)->with('revenuecenter')->get();
 
         $horaFormatoS = '';
         $horaFormatoE = '';
@@ -89,7 +87,7 @@ class MainController extends Controller
             ];
         }
 
-        return view('1homes', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages', 'happenings'));
+        return view('1homes', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
     }
 
     public function administrate(Request $request){
@@ -156,6 +154,14 @@ class MainController extends Controller
 
         return view('admin', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
 
+    }
+
+    public function homes_happenings(Request $request){
+        $property = property::where('id', 1)->with('happening')->get()->first();
+        $revenue_centers = revenue_center::get();
+        $languages = languages::get();
+
+        return view('happenings_1homes', compact('property', 'revenue_centers', 'languages'));
     }
 
     public function spa(Request $request){

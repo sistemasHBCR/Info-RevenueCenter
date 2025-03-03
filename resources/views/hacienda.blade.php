@@ -71,19 +71,17 @@
             border: none;
             border-bottom: 2px solid #672100;
         }
+        .nav-hacienda a:hover {
+            text-decoration: underline;
+        }
         .sub-menu-hacienda {
             background-color: #fff !important;
             border: none;
             border-right: 2px solid #672100;
             border-left: 2px solid #672100;
         }
-        .sub-menu-hacienda li:hover {
-            transition: 0.5s;
-            background-color: #672100 !important;
-        }
         .sub-menu-hacienda li:hover a {
-            transition: 0.5s;
-            color: #ffffff !important;
+            text-decoration: underline !important;
         }
 
         .more-btn {
@@ -133,13 +131,27 @@
         <nav class="navbar navbar-2 nav-mobile">
             <div class="nav-holder nav-holder-2">
                 <ul id="menu-menu-2" class="menu-nav-2">
-                    @foreach ($hacienda_revenue_centers as $rc)
-                        <li class="menu-item Cinzel-Bold">
-                            <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="Cinzel-Bold" style="font-size: 15px;">Language</a>
+                        <a href="" class="Cinzel-Bold">TASTE</a>
+                        <ul class="sub-menu">
+                            @foreach ($hacienda_revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold">{{ $rc->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold">DO</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="" class="Cinzel-Bold">WELLNESS</a>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold">MORE</a>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold">Language</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
@@ -159,11 +171,25 @@
             <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" alt="{{ $properties->name }}" style="width: auto; height: 70px;"/></a></div>
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
-                    @foreach ($hacienda_revenue_centers as $rc)
-                        <li class="menu-item">
-                            <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="font-size: 15px; color: #672100">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">TASTE</a>
+                        <ul class="sub-menu sub-menu-hacienda">
+                            @foreach ($hacienda_revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $rc->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">DO</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100">WELLNESS</a>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">MORE</a>
+                    </li>
                     <li class="menu-item"><a href="" style="font-size: 15px; color: #672100">|</a></li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100;">Language</a>
@@ -198,37 +224,6 @@
             </div>
         </div>
     </section>
-
-    @if ($happenings->toArray() != [])
-        <section id="home-content-1" class="margin-tb72">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="alignc margin-b54">
-                            <h3 class="home-subtitle English">For Limited Time</h3>
-                            <h3 class="home-subtitle Spanish" hidden>Por Tiempo Limitado</h3>
-                            <h2 class="home-title margin-b24 title-headline English">SPECIAL EVENTS</h2>
-                            <h2 class="home-title margin-b24 title-headline Spanish" hidden>EVENTOS ESPECIALES</h2>
-                            <p class="English">We invite you to check some of our special activities, some of them are for limited time, so hutty up.</p>
-                            <p class="Spanish" hidden>Te invitamos a revisar una de nuestras actividades especiales, algunas de ellas por tiempo limitado, aprovecha mientras puedas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach($happenings as $happening)
-                        <div class="col-md-3 mobile-margin-b54">
-                            <div class="service">
-                                <img class="img-fluid" src="images/gallery/gallery-2.jpg" loading="lazy" alt="service 1">
-                                <h3>{{ $happening->name}}</h3>
-                                <p class="English">{{ $happening->description }}</p>
-                                <p class="Spanish" hidden>{{ $happening->description_es }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
     @foreach ($hacienda_revenue_centers as $i => $rc)
         <section id="{{ $rc->id}}{{ $rc->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $rc->image_1 ) }}');" >
             <div class="parallax-content">

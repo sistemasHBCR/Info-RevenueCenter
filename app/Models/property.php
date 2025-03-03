@@ -17,4 +17,8 @@ class property extends Model
         'title',
         'description'
     ];
+
+    public function happening(){
+        return $this->belongsToMany(happening::class, 'happening_property');
+    }
 }

@@ -90,123 +90,27 @@
 <body class="body-header1">
     <!-- MOBILE MENU -->
     <div class="mask-nav-2">
-        <!-- MENU -->
         <nav class="navbar navbar-2 nav-mobile">
             <div class="nav-holder nav-holder-2">
-                {{-- <ul id="menu-menu-2" class="menu-nav-2">
-                    <li class="menu-item menu-item-has-children">
-                        <a href="index.html">Home</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="index.html">Home 1</a></li>
-                            <li class="menu-item"><a href="homepage-2.html">Home 2</a></li>
-                            <li class="menu-item"><a href="homepage-3.html">Home 3</a></li>
-                            <li class="menu-item"><a href="homepage-4.html">Home 4</a></li>
-                            <li class="menu-item"><a href="homepage-5.html">Home 5</a></li>
-                            <li class="menu-item"><a href="homepage-6.html">Home 6</a></li>
-                            <li class="menu-item"><a href="homepage-7.html">Home 7</a></li>
-                            <li class="menu-item"><a href="homepage-8.html">Home 8</a></li>
-                            <li class="menu-item"><a href="homepage-9.html">Home 9</a></li>
-                            <li class="menu-item"><a href="homepage-10.html">Home 10</a></li>
-                            <li class="menu-item"><a href="homepage-video.html">Home Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="menu-2-col.html">Menu</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="menu-1-col.html">Menu 1 Col</a></li>
-                            <li class="menu-item"><a href="menu-2-col.html">Menu 2 Cols</a></li>
-                            <li class="menu-item"><a href="menu-3-col.html">Menu 3 Cols</a></li>
-                            <li class="menu-item"><a href="menu-accordion.html">Menu Accordion</a></li>
-                            <li class="menu-item"><a href="menu-grid-v2.html">Menu Grid v2</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="menu-grid-v3.html">Menu Grid v3</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="menu-grid-v3-2cols.html">Menu Grid v3 2 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3.html">Menu Grid v3 3 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-4cols.html">Menu Grid v3 4 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-5cols.html">Menu Grid v3 5 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="menu-grid-image.html">Menu Grid Images</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children current-menu-item">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-has-children current-menu-item">
-                                <a href="index.html">Headers</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="index.html">Header 1</a></li>
-                                    <li class="menu-item"><a href="header-2.html">Header 2</a></li>
-                                    <li class="menu-item"><a href="header-3.html">Header 3</a></li>
-                                    <li class="menu-item"><a href="header-4.html">Header 4</a></li>
-                                    <li class="menu-item"><a href="header-5.html">Header 5</a></li>
-                                    <li class="menu-item"><a href="header-6.html">Header 6</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="about-us.html">About Us</a></li>
-                            <li class="menu-item"><a href="about-me.html">About Me</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="team.html">Team</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="team-2-cols.html">Team 2 Cols</a></li>
-                                    <li class="menu-item"><a href="team-3-cols.html">Team 3 Cols</a></li>
-                                    <li class="menu-item"><a href="team.html">Team 4 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="services.html">Services</a></li>
-                            <li class="menu-item"><a href="faq.html">FAQ</a></li>
-                            <li class="menu-item"><a href="404-error.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="reservation.html">Reservation</a></li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="gallery-3-cols.html">Gallery</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="gallery-3-cols.html">Gallery 3 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-4-cols.html">Gallery 4 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-3-cols.html">Gallery Full Screen 3
-                                    Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-4-cols.html">Gallery Full Screen 4
-                                    Cols</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="blog.html">Blog</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="blog-single-post.html">Blog Single Post</a></li>
-                            <li class="menu-item"><a href="blog.html">Blog List</a></li>
-                            <li class="menu-item"><a href="blog-classic.html">Blog Classic</a></li>
-                            <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
-                            <li class="menu-item"><a href="blog-grid-3-cols.html">Blog Grid 3 Cols</a></li>
-                            <li class="menu-item"><a href="blog-fullwidth.html">Blog FullWidth</a></li>
-                            <li class="menu-item"><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="contact.html">Contact</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
-                            <li class="menu-item"><a href="contact-2.html">Contact 2</a></li>
-                            <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
-                        </ul>
-                    </li>
-                </ul> --}}
                 <ul id="menu-menu-2" class="menu-nav-2">
-                    {{--<li class="menu-item menu-item-has-children">
-                        <a href="">Inicio</a>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium">TASTE</a>
                         <ul class="sub-menu">
-                            <li class="menu-item current-menu-item"><a href="{{ url('/') }}" class="white" style="cursor: pointer">Revenue Centers</a></li>
-                            <li class="menu-item"><a href="{{ url('spa') }}" class="white" style="cursor: pointer">SPA</a></li>
+                            @foreach ($revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
-                    </li>--}}
-                    @foreach ($revenue_centers as $rc)
-                        <li class="menu-item">
-                            <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium">DO</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium">Happenings</a></li>
+                        </ul>
+                    </li>
 					<li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium">Language</a>
+                        <a href="" class="BrownLL-Medium">LANGUAGE</a>
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
@@ -220,51 +124,6 @@
                 </ul>
             </div>
         </nav>
-        <!-- /MENU -->
-        {{--<div class="rightside-nav-2">
-            <ul class="right-side-contact">
-                <li class="menu-item menu-item-has-children">
-                    <a href="">Language</a>
-                    <ul class="sub-menu">
-                        @foreach ($languages as $i => $language)
-                            @if ($i == 0)
-                                <li class="menu-item change_lang current-menu-item this_change"
-                                    value="{{ $language->id }}"><a class="white"
-                                        style="cursor: pointer">{{ $language->name }}</a></li>
-                            @else
-                                <li class="menu-item change_lang" value="{{ $language->id }}"><a class="white"
-                                        style="cursor: pointer">{{ $language->name }}</a></li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </li>
-            </ul>
-        </div>--}}
-        <!-- RIGHT SIDE -->
-        {{-- <div class="rightside-nav-2">
-
-            <h3>Book Now</h3>
-            <ul class="right-side-contact">
-                <li><label>Address:</label> 40 Park Ave, Brooklyn, New York 70250</li>
-                <li><label>Phone:</label> 000-111-2222</li>
-                <li><label>Email:</label> contact@dina.com </li>
-            </ul>
-
-            <!-- SOCIAL ICONS -->
-            <ul class="search-social search-social-2">
-                <li><a class="social-facebook" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li><a class="social-twitter" href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                <li><a class="social-tripadvisor" href="#" target="_blank"><i
-                            class="fab fa-tripadvisor"></i></a></li>
-                <li><a class="social-pinterest" href="#" target="_blank"><i class="fab fa-pinterest"></i></a>
-                </li>
-                <li><a class="social-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                </li>
-            </ul>
-            <!-- /SOCIAL ICONS -->
-        </div> --}}
-        <!-- /RIGHT SIDE -->
     </div>
     <!-- /MOBILE MENU -->
     <!-- HEADER -->
@@ -275,122 +134,29 @@
             <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/1HOMES/icons/' . $properties->image) }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
-                {{-- <ul id="menu-menu-1" class="menu-nav menu-nav-1">
-                    <li class="menu-item menu-item-has-children">
-                        <a href="index.html">Home</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="index.html">Home 1</a></li>
-                            <li class="menu-item"><a href="homepage-2.html">Home 2</a></li>
-                            <li class="menu-item"><a href="homepage-3.html">Home 3</a></li>
-                            <li class="menu-item"><a href="homepage-4.html">Home 4</a></li>
-                            <li class="menu-item"><a href="homepage-5.html">Home 5</a></li>
-                            <li class="menu-item"><a href="homepage-6.html">Home 6</a></li>
-                            <li class="menu-item"><a href="homepage-7.html">Home 7</a></li>
-                            <li class="menu-item"><a href="homepage-8.html">Home 8</a></li>
-                            <li class="menu-item"><a href="homepage-9.html">Home 9</a></li>
-                            <li class="menu-item"><a href="homepage-10.html">Home 10</a></li>
-                            <li class="menu-item"><a href="homepage-video.html">Home Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="menu-2-col.html">Menu</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="menu-1-col.html">Menu 1 Col</a></li>
-                            <li class="menu-item"><a href="menu-2-col.html">Menu 2 Cols</a></li>
-                            <li class="menu-item"><a href="menu-3-col.html">Menu 3 Cols</a></li>
-                            <li class="menu-item"><a href="menu-accordion.html">Menu Accordion</a></li>
-                            <li class="menu-item"><a href="menu-grid-v2.html">Menu Grid v2</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="menu-grid-v3.html">Menu Grid v3</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="menu-grid-v3-2cols.html">Menu Grid v3 2 Cols</a>
-                                    </li>
-                                    <li class="menu-item"><a href="menu-grid-v3.html">Menu Grid v3 3 Cols</a></li>
-                                    <li class="menu-item"><a href="menu-grid-v3-4cols.html">Menu Grid v3 4 Cols</a>
-                                    </li>
-                                    <li class="menu-item"><a href="menu-grid-v3-5cols.html">Menu Grid v3 5 Cols</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="menu-grid-image.html">Menu Grid Images</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children current-menu-item">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-has-children current-menu-item">
-                                <a href="index.html">Headers</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="index.html">Header 1</a></li>
-                                    <li class="menu-item"><a href="header-2.html">Header 2</a></li>
-                                    <li class="menu-item"><a href="header-3.html">Header 3</a></li>
-                                    <li class="menu-item"><a href="header-4.html">Header 4</a></li>
-                                    <li class="menu-item"><a href="header-5.html">Header 5</a></li>
-                                    <li class="menu-item"><a href="header-6.html">Header 6</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="about-us.html">About Us</a></li>
-                            <li class="menu-item"><a href="about-me.html">About Me</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="team.html">Team</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="team-2-cols.html">Team 2 Cols</a></li>
-                                    <li class="menu-item"><a href="team-3-cols.html">Team 3 Cols</a></li>
-                                    <li class="menu-item"><a href="team.html">Team 4 Cols</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="services.html">Services</a></li>
-                            <li class="menu-item"><a href="faq.html">FAQ</a></li>
-                            <li class="menu-item"><a href="404-error.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="reservation.html">Reservation</a></li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="gallery-3-cols.html">Gallery</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="gallery-3-cols.html">Gallery 3 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-4-cols.html">Gallery 4 Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-3-cols.html">Gallery Full Screen 3
-                                    Cols</a></li>
-                            <li class="menu-item"><a href="gallery-full-screen-4-cols.html">Gallery Full Screen 4
-                                    Cols</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="blog.html">Blog</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="blog-single-post.html">Blog Single Post</a></li>
-                            <li class="menu-item"><a href="blog.html">Blog List</a></li>
-                            <li class="menu-item"><a href="blog-classic.html">Blog Classic</a></li>
-                            <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
-                            <li class="menu-item"><a href="blog-grid-3-cols.html">Blog Grid 3 Cols</a></li>
-                            <li class="menu-item"><a href="blog-fullwidth.html">Blog FullWidth</a></li>
-                            <li class="menu-item"><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="contact.html">Contact</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
-                            <li class="menu-item"><a href="contact-2.html">Contact 2</a></li>
-                            <li class="menu-item"><a href="contact-3.html">Contact 3</a></li>
-                        </ul>
-                    </li>
-                </ul> --}}
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
-                    {{--<li class="menu-item menu-item-has-children">
-                        <a href="" style="font-size: 15px;">Inicio</a>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">TASTE</a>
                         <ul class="sub-menu">
-                            <li class="menu-item current-menu-item"><a href="{{ url('/') }}" class="white" style="cursor: pointer">Revenue Centers</a></li>
-                            <li class="menu-item"><a href="{{ url('spa') }}" class="white" style="cursor: pointer">SPA</a></li>
+                            @foreach ($revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
-                    <li class="menu-item"><a href="">|</a></li>--}}
-                    @foreach ($revenue_centers as $rc)
-                        <li class="menu-item">
-                            <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">Happenings</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
+                    </li>
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium" style="font-size: 15px;">Language</a>
@@ -432,40 +198,6 @@
         </div>
         <!-- /container-->
     </section>
-    @if (!$happenings)
-        <section id="home-content-1" class="margin-tb72">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="alignc margin-b54">
-                            <h3 class="home-subtitle English">For Limited Time</h3>
-                            <h3 class="home-subtitle Spanish" hidden>Por Tiempo Limitado</h3>
-                            <h2 class="home-title margin-b24 title-headline English">SPECIAL EVENTS</h2>
-                            <h2 class="home-title margin-b24 title-headline Spanish" hidden>EVENTOS ESPECIALES</h2>
-                            <p class="English">We invite you to check some of our special activities, some of them are for limited time, so hutty up.</p>
-                            <p class="Spanish" hidden>Te invitamos a revisar una de nuestras actividades especiales, algunas de ellas por tiempo limitado, aprovecha mientras puedas.</p>
-                        </div>
-                    </div>
-                    <!-- /col-md-10 -->
-                </div>
-                <!-- /row-->
-                <div class="row">
-                    @foreach($happenings as $happening)
-                        <div class="col-md-3 mobile-margin-b54">
-                            <div class="service">
-                                <img class="img-fluid" src="images/gallery/gallery-2.jpg" loading="lazy" alt="service 1">
-                                <h3>{{ $happening->name}}</h3>
-                                <p class="English">{{ $happening->description }}</p>
-                                <p class="Spanish" hidden>{{ $happening->description_es }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <!-- /row-->
-            </div>
-            <!-- /container-->
-        </section>
-    @endif
     <!-- /HOME HERO IMAGE -->
     @foreach ($revenue_centers as $i => $rc)
         <section id="container_{{ $rc->id }}{{ $rc->name }}" class="section-rc" style="padding-top: 95px;">
