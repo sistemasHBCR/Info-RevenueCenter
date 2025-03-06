@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $property->title }} - HAPPENINGS</title>
+    <title>{{ $property->title }} - WELLNESS</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,6 +79,8 @@
                 font-size: 35px;
             }
             .section-rc2 {
+                padding-top: 10%;
+                padding-bottom: 5%;
                 margin-left: 1%;
                 margin-right: 1%;
                 border-bottom: 1px solid #111111;
@@ -98,7 +100,7 @@
                         <ul class="sub-menu">
                             @foreach ($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
+                                    <a href="{{ url('/')}}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -143,7 +145,7 @@
                         <ul class="sub-menu">
                             @foreach ($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="{{ url('/') }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
+                                    <a href="{{ url('/') }}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -154,8 +156,15 @@
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}" style="font-size: 15px;">Happenings</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-item-has-children">
                         <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="#container_well_{{ $wellness->id }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
@@ -207,22 +216,24 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="alignc margin-b54">
-                        <h2 class="home-title margin-b24 title-headline lineto-brown-bold">HAPPENINGS</h2>
+                        <h2 class="home-title margin-b24 title-headline lineto-brown-bold">WELLNESS</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @foreach ($property->happening as $happening)
-                    <div class="col-md-4 mobile-margin-b54">
-                        <div class="service">
-                            <div style="width: 100%; height: 200px; background-image: url('{{ asset('assets/images/1HOMES/happenings/' . $happening->image ) }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;"></div>
-                            <h3 class="lineto-brown-bold titlerevenuecenter">{{ $happening->name }}</h3>
-                            <p class="English lineto-brown-regular description_rc">{{ $happening->description }}</p>
-                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $happening->description_es }}</p>
+            @foreach ($property->wellness as $wellness)
+                <div id="#container_well_{{ $wellness->id }}" class="row section-rc2">
+                    <div class="col-md-6">
+                        <div class="margin-b32">
+                            <h2 class="home-title margin-b24 lineto-brown-bold titlerevenuecenter">{{ $wellness->name }}</h2>
+                            <p class="English lineto-brown-regular description_rc">{{ $wellness->description }}</p>
+                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $wellness->description_es }}</p>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                    <div class="col-md-6">
+                        <img class="img-fluid margin-b24" src="{{ asset('assets/images/1HOMES/wellness/' . $wellness->image )}}" alt="{{ $wellness->name }}">
+                    </div>
+                </div>
+            @endforeach
         </div>
     </section>
     <!-- FOOTER -->

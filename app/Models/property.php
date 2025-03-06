@@ -21,4 +21,8 @@ class property extends Model
     public function happening(){
         return $this->belongsToMany(happening::class, 'happening_property');
     }
+
+    public function wellness(){
+        return $this->belongsToMany(wellness::class, 'wellness_property');
+    }
 }

@@ -109,6 +109,9 @@
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium">Happenings</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium">WELLNESS</a>
+                    </li>
 					<li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">LANGUAGE</a>
                         <ul class="sub-menu">
@@ -152,7 +155,7 @@
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
                     </li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>

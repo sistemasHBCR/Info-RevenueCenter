@@ -16,6 +16,7 @@ class hacienda_revenue_center extends Model
         'image_1',
         'image_2',
         'image_3',
+        'active',
         'property_id'
     ];
 }

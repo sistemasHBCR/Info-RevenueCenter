@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $properties->title }} - MENUS</title>
+    <title>{{ $property->title }} - MENUS</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,9 +23,9 @@
     <link rel='stylesheet' id='dina-style-css-css' href='{{ asset('assets/style.css') }}' type='text/css'
         media='all' />
     <!-- favicons -->
-    <link rel="icon" href="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" sizes="32x32" />
-    <link rel="icon" href="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" />
+    <link rel="icon" href="{{ asset('assets/images/HACIENDA/icons/' . $property->logo) }}" sizes="32x32" />
+    <link rel="icon" href="{{ asset('assets/images/HACIENDA/icons/' . $property->logo) }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/HACIENDA/icons/' . $property->logo) }}" />
 
     <style>
         @font-face {
@@ -136,7 +136,7 @@
                         <ul class="sub-menu">
                             @foreach ($hacienda_revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold">{{ $rc->name }}</a>
+                                    <a href="{{ url('hacienda') }}#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -168,15 +168,15 @@
     </div>
     <header id="header-4" class="navbar-fixed-top nav-hacienda">
         <div class="headerWrap-4">
-            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/HACIENDA/icons/' . $properties->logo) }}" alt="{{ $properties->name }}" style="width: auto; height: 70px;"/></a></div>
+            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/HACIENDA/icons/' . $property->logo) }}" alt="{{ $property->name }}" style="width: auto; height: 70px;"/></a></div>
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">TASTE</a>
+                        <a href="{{ url('hacienda') }}" class="Cinzel-Bold" style="font-size: 15px; color: #672100">TASTE</a>
                         <ul class="sub-menu sub-menu-hacienda">
                             @foreach ($hacienda_revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $rc->name }}</a>
+                                    <a href="{{ url('hacienda') }}#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -185,7 +185,7 @@
                         <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">DO</a>
                     </li>
                     <li class="menu-item">
-                        <a href="{{ url('hacienda-wellness') }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100">WELLNESS</a>
+                        <a href="" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100">WELLNESS</a>
                     </li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">MORE</a>
@@ -214,25 +214,25 @@
         </div>
     </header>
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
-        style="background-image:url('{{ asset('assets/images/HACIENDA/backgrounds/' . $properties->background) }}');">
+        style="background-image:url('{{ asset('assets/images/HACIENDA/backgrounds/' . $property->background) }}');">
         <div class="item-content-bkg" style="background-color: rgba(0,0,0,0.3)">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/HACIENDA/icons/' . $properties->image ) }}" class="img-fluid"
+                <img id="logoHeader" src="{{ asset('assets/images/HACIENDA/icons/' . $property->image ) }}" class="img-fluid"
                     alt="Logo" style="max-width: 50%">
-                {{--<h1 id="propertyName" class="post-title single-post-title" style="color: #672100">{{ $properties->name }}</h1>--}}
+                {{--<h1 id="propertyName" class="post-title single-post-title" style="color: #672100">{{ $property->name }}</h1>--}}
                 {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
             </div>
         </div>
     </section>
-    @foreach ($hacienda_revenue_centers as $i => $rc)
-        <section id="{{ $rc->id}}{{ $rc->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $rc->image_1 ) }}');" >
+    @foreach ($property->wellness as $i => $wellness)
+        <section id="{{ $wellness->id}}{{ $wellness->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $wellness->image ) }}');" >
             <div class="parallax-content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
                             <div class="alignc">
-                                <h3 class="home-subtitle" style="display: none">{{ $rc->name }}</h3>
-                                <h2 class="home-title">{{ $rc->name }}</h2>
+                                <h3 class="home-subtitle" style="display: none">{{ $wellness->name }}</h3>
+                                <h2 class="home-title">{{ $wellness->name }}</h2>
                             </div>
                         </div>
                     </div>
@@ -244,21 +244,21 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="margin-b32">
-							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100; display: none">{{ $rc->name }}</h2>
-							<p class="English description_rc Muli-Regular" style="color: #672100">{{ $rc->description }}</p>
-							<p class="Spanish description_rc Muli-Regular" style="color: #672100" hidden>{{ $rc->description_es }}</p>
+							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100; display: none">{{ $wellness->name }}</h2>
+							<p class="English description_rc Muli-Regular" style="color: #672100">{{ $wellness->description }}</p>
+							<p class="Spanish description_rc Muli-Regular" style="color: #672100" hidden>{{ $wellness->description_es }}</p>
 						</div>
                         <div class="more-btn">
                             @foreach ($buttons as $button)
-                                @if ($button->rc_id == $rc->id)
-                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
-                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @if ($button->rc_id == $wellness->id)
+                                    <a id="btnRC-{{ $wellness->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $wellness->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
                                 @endif
                             @endforeach
                         </div>
 					</div>
 					<div class="col-md-6">
-						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/revenuecenters/' . $rc->image_2 )}}" alt="" loading="lazy">
+						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/wellness/' . $wellness->image )}}" alt="" loading="lazy">
 					</div>
 				</div>
 			</div>

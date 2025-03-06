@@ -10,6 +10,7 @@ use App\Models\property;
 use App\Models\revenue_center;
 use App\Models\site;
 use App\Models\happening;
+use App\Models\wellness;
 use App\Models\hacienda_revenue_center;
 use App\Models\hacienda_button;
 
@@ -19,7 +20,7 @@ class MainController extends Controller
         $properties = property::where('id', 2)->get()->first();
         $sites = site::get();
         $buttons = hacienda_button::get();
-        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->get();
+        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
         $languages = languages::get();
 
         return view('hacienda', compact('sites', 'buttons', 'properties', 'hacienda_revenue_centers', 'languages'));
@@ -162,6 +163,23 @@ class MainController extends Controller
         $languages = languages::get();
 
         return view('happenings_1homes', compact('property', 'revenue_centers', 'languages'));
+    }
+
+    public function homes_wellness(Request $request){
+        $property = property::where('id', 1)->with('wellness')->get()->first();
+        $revenue_centers = revenue_center::get();
+        $languages = languages::get();
+
+        return view('wellness_1homes', compact('property', 'revenue_centers', 'languages'));
+    }
+
+    public function hacienda_wellness(Request $request){
+        $property = property::where('id', 2)->with('wellness')->get()->first();
+        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
+        $buttons = hacienda_button::get();
+        $languages = languages::get();
+
+        return view('wellness_hacienda', compact('property', 'hacienda_revenue_centers', 'buttons', 'languages'));
     }
 
     public function spa(Request $request){
