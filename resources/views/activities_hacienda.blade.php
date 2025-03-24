@@ -186,11 +186,11 @@
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">TASTE</a>
+                        <a href="{{ url('hacienda') }}" class="Cinzel-Bold" style="font-size: 15px; color: #672100">TASTE</a>
                         <ul class="sub-menu sub-menu-hacienda">
                             @foreach ($hacienda_revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $rc->name }}</a>
+                                    <a href="{{ url('hacienda') }}#{{ $rc->id }}{{ $rc->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -199,8 +199,8 @@
                         <a href="{{ url('hacienda-activities') }}" class="Cinzel-Bold" style="font-size: 15px; color: #672100">DO</a>
                         <ul class="sub-menu sub-menu-hacienda">
                             @foreach ($property->activity as $activity)
-                                <li class="menu-item sub-menu-hacienda">
-                                    <a href="{{ url('hacienda-activities') }}#container_do_{{ $activity->id }}{{ $activity->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $activity->name }}</a>
+                                <li class="menu-item">
+                                    <a href="#container_do_{{ $activity->id }}{{ $activity->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $activity->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -247,46 +247,45 @@
             <div class="inner-desc">
                 <img id="logoHeader" src="{{ asset('assets/images/HACIENDA/icons/' . $property->image ) }}" class="img-fluid"
                     alt="Logo" style="max-width: 50%">
-                {{--<h1 id="propertyName" class="post-title single-post-title" style="color: #672100">{{ $property->name }}</h1>--}}
-                {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
             </div>
         </div>
     </section>
-    @foreach ($hacienda_revenue_centers as $i => $rc)
-        <section id="{{ $rc->id}}{{ $rc->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $rc->image_1 ) }}');" >
+    @foreach ($property->activity as $i => $activity)
+        <section id="container_do_{{ $activity->id}}{{ $activity->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $activity->image ) }}');" >
             <div class="parallax-content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
                             <div class="alignc">
-                                <h3 class="home-subtitle" style="display: none">{{ $rc->name }}</h3>
-                                <h2 class="home-title">{{ $rc->name }}</h2>
+                                <h3 class="home-subtitle" style="display: none">{{ $activity->name }}</h3>
+                                <h2 class="home-title">{{ $activity->name }}</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-		<sectionclass="margin-b72">
+		<section class="margin-b72">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="margin-b32">
-							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100; display: none">{{ $rc->name }}</h2>
-							<p class="English description_rc Muli-Regular" style="color: #672100">{{ $rc->description }}</p>
-							<p class="Spanish description_rc Muli-Regular" style="color: #672100" hidden>{{ $rc->description_es }}</p>
+							<h2 class="home-title margin-b24 title-headline Cinzel-Bold" style="color: #672100; display: none">{{ $activity->name }}</h2>
+							<p class="English description_rc Muli-Regular" style="color: #672100">{{ $activity->description }}</p>
+							<p class="Spanish description_rc Muli-Regular" style="color: #672100" hidden>{{ $activity->description_es }}</p>
 						</div>
                         <div class="more-btn">
                             @foreach ($buttons as $button)
-                                @if ($button->rc_id == $rc->id)
-                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
-                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @if ($button->rc_id == $activity->id)
+                                    <a id="btnRC-{{ $activity->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $activity->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
                                 @endif
                             @endforeach
                         </div>
 					</div>
 					<div class="col-md-6">
-						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/revenuecenters/' . $rc->image_2 )}}" alt="" loading="lazy">
+						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/activities/' . $activity->image )}}" alt="" loading="lazy" style="display: none">
+                        <div style="background-image: url({{ asset('assets/images/HACIENDA/activities/' . $activity->image )}}); background-position:center center !important; background-size: cover; width: auto; height: 300px; margin:0% 5%;"></div>
 					</div>
 				</div>
 			</div>

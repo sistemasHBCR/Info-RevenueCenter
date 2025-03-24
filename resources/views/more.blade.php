@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $property->title }} - DO</title>
+    <title>{{ $property->title }} - MORE</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,16 +67,8 @@
             margin-top: 0%;
         }
 
-        .header-section {
+        .section-rc2 {
             scroll-margin-top: 120px;
-        }
-
-        .homes-img {
-            width: 100%; 
-            height: 350px;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
         }
 
         @media (max-width: 600px) {
@@ -95,15 +87,12 @@
                 font-size: 35px;
             }
             .section-rc2 {
-                padding-top: 5%;
+                padding-top: 10%;
                 padding-bottom: 5%;
                 margin-left: 1%;
                 margin-right: 1%;
                 border-bottom: 1px solid #111111;
                 scroll-margin-top: 75px;
-            }
-            .homes-img {
-                height: 250px;
             }
         }
     </style>
@@ -120,7 +109,7 @@
                         <ul class="sub-menu">
                             @foreach ($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="{{ url('1homes') }}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
+                                    <a href="{{ url('1homes')}}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -128,8 +117,8 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
@@ -137,17 +126,17 @@
                         <ul class="sub-menu">
                             @foreach ($property->wellness as $wellness)
                                 <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium">MORE</a>
+                        <a href="#" class="BrownLL-Medium">MORE</a>
                         <ul class="sub-menu">
                             @foreach ($property->more as $more)
                                 <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
+                                    <a href="#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -204,10 +193,10 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
+                        <a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
@@ -215,7 +204,7 @@
                         <ul class="sub-menu">
                             @foreach ($property->wellness as $wellness)
                                 <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                    <a href="#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -225,7 +214,7 @@
                         <ul class="sub-menu">
                             @foreach ($property->more as $more)
                                 <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
+                                    <a href="#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -266,75 +255,32 @@
                 <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $property->logo ) }}" class="img-fluid"
                     alt="Logo" style="width: 70px; height: auto;">
                 <h1 id="propertyName" class="BrownLL-Medium post-title single-post-title">{{ $property->name }}</h1>
-                <span class="lineto-brown-bold white" style="font-size: 25px">DO</span>
+                <span class="lineto-brown-bold white" style="font-size: 25px;">MORE</span>
             </div>
         </div>
         <!-- /container-->
     </section>
     <!-- /HOME HERO IMAGE -->
-    <section id="happenings-section" class="margin-tb72 header-section">
+    <section id="home-content-2" class="margin-tb72">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="alignc margin-b54">
-                        <h2 class="home-title margin-b24 title-headline lineto-brown-bold">HAPPENINGS</h2>
+                        <h2 class="home-title margin-b24 title-headline lineto-brown-bold">MORE</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @foreach ($property->happening as $happening)
-                    <div class="col-md-4 mobile-margin-b54">
-                        <div class="service section-rc2">
-                            <div style="width: 100%; height: 200px; background-image: url('{{ asset('assets/images/1HOMES/happenings/' . $happening->image ) }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;"></div>
-                            <h3 class="lineto-brown-bold titlerevenuecenter">{{ $happening->name }}</h3>
-                            <p class="English lineto-brown-regular description_rc">{{ $happening->description }}</p>
-                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $happening->description_es }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="row">
-                @foreach ($property->happening as $happening)
-                    <div class="col-md-4">
-                        <div class="home-featured-item">
-                        <div class="home-featured-img" style="background-image:url('{{ asset('assets/images/1HOMES/happenings/' . $happening->image ) }}');"> </div>
-                        <a href="menu-2-col.html">
-                            <div class="grid-overlay"></div>
-                            <div class="featured-item-content">
-                                <h5 class="lineto-brown-bold">{{ $happening->name }}</h5>
-                                <div class="English lineto-brown-regular featured-short-desc">More...</div>
-                                <div class="Spanish lineto-brown-regular featured-short-desc" hidden>Más...</div>
-                            </div>
-                            <!--featured-item-content-->	
-                        </a>
-                        </div>
-                        <!--home-featured-item-->		
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    
-    <section id="activities-section" class="margin-tb72 header-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <div class="alignc margin-b54">
-                        <h2 class="home-title margin-b24 title-headline lineto-brown-bold">Activities</h2>
-                    </div>
-                </div>
-            </div>
-            @foreach ($property->activity as $activities)
-                <div id="container_well_{{ $activities->id }}{{ $activities->name }}" class="row section-rc2">
+            @foreach ($property->more as $more)
+                <div id="container_more_{{ $more->id }}{{ $more->name }}" class="row section-rc2">
                     <div class="col-md-6">
                         <div class="margin-b32">
-                            <h2 class="home-title margin-b24 lineto-brown-bold titlerevenuecenter">{{ $activities->name }}</h2>
-                            <p class="English lineto-brown-regular description_rc">{{ $activities->description }}</p>
-                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $activities->description_es }}</p>
+                            <h2 class="home-title margin-b24 lineto-brown-bold titlerevenuecenter">{{ $more->name }}</h2>
+                            <p class="English lineto-brown-regular description_rc">{{ $more->description }}</p>
+                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $more->description_es }}</p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="img-fluid margin-b24 homes-img" style="background-image: url('{{ asset('assets/images/1HOMES/activities/' . $activities->image ) }}');"></div>
+                        <div class="img-fluid margin-b24" style="width: 100%; height: 300px; background-image: url('{{ asset('assets/images/1HOMES/more/' . $more->image ) }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;"></div>
                     </div>
                 </div>
             @endforeach

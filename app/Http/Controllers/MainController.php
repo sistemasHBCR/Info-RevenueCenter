@@ -16,20 +16,11 @@ use App\Models\hacienda_button;
 
 class MainController extends Controller
 {
-    public function hacienda(Request $request){
-        $properties = property::where('id', 2)->get()->first();
-        $sites = site::get();
-        $buttons = hacienda_button::get();
-        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
-        $languages = languages::get();
-
-        return view('hacienda', compact('sites', 'buttons', 'properties', 'hacienda_revenue_centers', 'languages'));
-    }
-
+    //------------------------------ 1HOMES ------------------------------
     public function homes(Request $request){
         $sites_b = site::get();
         $buttons = button::get();
-        $properties = property::get()->first();
+        $property = property::where('id', 1)->with('wellness')->get()->first();
         $revenue_centers = revenue_center::get();
         $languages = languages::get();
 
@@ -88,7 +79,7 @@ class MainController extends Controller
             ];
         }
 
-        return view('1homes', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
+        return view('1homes', compact('sites', 'buttons', 'property', 'revenue_centers', 'languages'));
     }
 
     public function administrate(Request $request){
@@ -158,7 +149,7 @@ class MainController extends Controller
     }
 
     public function homes_happenings(Request $request){
-        $property = property::where('id', 1)->with('happening')->get()->first();
+        $property = property::where('id', 1)->with('happening', 'wellness', 'activity', 'more')->get()->first();
         $revenue_centers = revenue_center::get();
         $languages = languages::get();
 
@@ -173,6 +164,33 @@ class MainController extends Controller
         return view('wellness_1homes', compact('property', 'revenue_centers', 'languages'));
     }
 
+    public function homes_activities(Request $request){
+        $property = property::where('id', 1)->with('wellness', 'activity')->get()->first();
+        $revenue_centers = revenue_center::get();
+        $languages = languages::get();
+
+        return view('activities_1homes', compact('property', 'revenue_centers', 'languages'));
+    }
+
+    public function homes_more(Request $request){
+        $property = property::where('id', 1)->with('happening', 'wellness', 'activity', 'more')->get()->first();
+        $revenue_centers = revenue_center::get();
+        $languages = languages::get();
+
+        return view('more', compact('property', 'revenue_centers', 'languages'));
+    }
+
+    //------------------------------ HACIENDA ------------------------------
+    public function hacienda(Request $request){
+        $property = property::where('id', 2)->with('wellness')->get()->first();
+        $sites = site::get();
+        $buttons = hacienda_button::get();
+        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
+        $languages = languages::get();
+
+        return view('hacienda', compact('sites', 'buttons', 'property', 'hacienda_revenue_centers', 'languages'));
+    }
+
     public function hacienda_wellness(Request $request){
         $property = property::where('id', 2)->with('wellness')->get()->first();
         $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
@@ -182,6 +200,17 @@ class MainController extends Controller
         return view('wellness_hacienda', compact('property', 'hacienda_revenue_centers', 'buttons', 'languages'));
     }
 
+    public function hacienda_activities(Request $request){
+        $property = property::where('id', 2)->with('wellness', 'activity')->get()->first();
+        $hacienda_revenue_centers = hacienda_revenue_center::where('property_id', 2)->where('active', 1)->get();
+        $buttons = hacienda_button::get();
+        $languages = languages::get();
+
+        return view('activities_hacienda', compact('property', 'hacienda_revenue_centers', 'buttons', 'languages'));
+    }
+
+
+    //------------------------------ FUNCTIONS ------------------------------
     public function spa(Request $request){
         $sites = site::get();
         $buttons = button::get();
@@ -201,8 +230,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function verPDF($file)
-    {
+    public function verPDF($file){
         // Ruta completa del archivo en public/assets/files
         $path = public_path('assets/files/' . $file);
 

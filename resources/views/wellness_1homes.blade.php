@@ -63,6 +63,14 @@
             /* Espacio entre los botones */
         }
 
+        .nav-holder-2 {
+            margin-top: 0%;
+        }
+
+        .section-rc2 {
+            scroll-margin-top: 120px;
+        }
+
         @media (max-width: 600px) {
             .more-btn {
                 display: flex;
@@ -84,6 +92,7 @@
                 margin-left: 1%;
                 margin-right: 1%;
                 border-bottom: 1px solid #111111;
+                scroll-margin-top: 75px;
             }
         }
     </style>
@@ -100,7 +109,7 @@
                         <ul class="sub-menu">
                             @foreach ($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="{{ url('/')}}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
+                                    <a href="{{ url('1homes')}}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -108,11 +117,29 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium">Happenings</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-item-has-children">
                         <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium">MORE</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->more as $more)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">LANGUAGE</a>
@@ -129,6 +156,21 @@
                 </ul>
             </div>
         </nav>
+        <div class="rightside-nav-2">
+            <ul class="right-side-contact">
+                <li class="English lineto-brown-regular">A resort inspired by the natural beauty of Baja, homes from one to seven bedrooms in a modern Hacienda style bring the outdoors in, with views of Land’s End and Marina Cabo San Lucas.</li>
+                <li class="Spanish lineto-brown-regular" hidden>Un resort inspirado en la belleza natural de Baja, casas de uno a siete dormitorios en un moderno estilo Hacienda que traen el aire libre al interior, con vistas a Land's End y Marina Cabo San Lucas.</li>
+            </ul>
+            <!-- SOCIAL ICONS -->
+            <ul class="search-social search-social-2">
+                <li><a class="social-instagram" href="https://www.instagram.com/1hotel.cabo/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a class="social-facebook" href="https://www.facebook.com/1hotelandhomescabo/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a class="social-youtube" href="https://www.youtube.com/channel/UCH2q5uF3_ga9bucN1OTnNpg" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a class="social-facebook" href="https://www.linkedin.com/company/1-hotels/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a class="social-spotify" href="https://open.spotify.com/user/qca21ppzzndotj8cfgbdmy442" target="_blank"><i class="fab fa-spotify"></i></a></li>
+            </ul>
+            <!-- /SOCIAL ICONS -->
+        </div>
     </div>
     <!-- /MOBILE MENU -->
     <!-- HEADER -->
@@ -141,19 +183,20 @@
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">TASTE</a>
+                        <a href="{{ url('1homes') }}" class="BrownLL-Medium" style="font-size: 15px;">TASTE</a>
                         <ul class="sub-menu">
                             @foreach ($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="{{ url('/') }}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
+                                    <a href="{{ url('1homes') }}#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
+                        <a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}" style="font-size: 15px;">Happenings</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
@@ -161,13 +204,20 @@
                         <ul class="sub-menu">
                             @foreach ($property->wellness as $wellness)
                                 <li class="menu-item">
-                                    <a href="#container_well_{{ $wellness->id }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                    <a href="#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
+                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->more as $more)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
@@ -205,7 +255,7 @@
                 <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $property->logo ) }}" class="img-fluid"
                     alt="Logo" style="width: 70px; height: auto;">
                 <h1 id="propertyName" class="BrownLL-Medium post-title single-post-title">{{ $property->name }}</h1>
-                {{--<span class="post-subtitle" style="font-size: 35px">TASTE</span>--}}
+                <span class="lineto-brown-bold white" style="font-size: 25px;">WELLNESS</span>
             </div>
         </div>
         <!-- /container-->
@@ -221,7 +271,7 @@
                 </div>
             </div>
             @foreach ($property->wellness as $wellness)
-                <div id="#container_well_{{ $wellness->id }}" class="row section-rc2">
+                <div id="container_well_{{ $wellness->id }}{{ $wellness->name }}" class="row section-rc2">
                     <div class="col-md-6">
                         <div class="margin-b32">
                             <h2 class="home-title margin-b24 lineto-brown-bold titlerevenuecenter">{{ $wellness->name }}</h2>
@@ -230,7 +280,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img class="img-fluid margin-b24" src="{{ asset('assets/images/1HOMES/wellness/' . $wellness->image )}}" alt="{{ $wellness->name }}">
+                        <div class="img-fluid margin-b24" style="width: 100%; height: 350px; background-image: url('{{ asset('assets/images/1HOMES/wellness/' . $wellness->image ) }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;"></div>
                     </div>
                 </div>
             @endforeach

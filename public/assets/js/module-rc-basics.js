@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var $sortableContainer = $('#sortable-container');
     var $btnaddCont = $("#add-container");
 
+    //Generar variable de session storage 
+    sessionStorage.setItem("idioma", "English");
+    console.log(sessionStorage.getItem("Idioma"));
+
     /************************************/
     /*       Funcionalidad generales Contenido del Sitio Web       */
     /************************************/

@@ -144,8 +144,15 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold">DO</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold">MORE</a>
@@ -182,10 +189,24 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">DO</a>
+                        <a href="{{ url('hacienda-activities') }}" class="Cinzel-Bold" style="font-size: 15px; color: #672100">DO</a>
+                        <ul class="sub-menu sub-menu-hacienda">
+                            @foreach ($property->activity as $activity)
+                                <li class="menu-item">
+                                    <a href="{{ url('hacienda-activities') }}#container_do_{{ $activity->id }}{{ $activity->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $activity->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100">WELLNESS</a>
+                        <ul class="sub-menu sub-menu-hacienda">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="Cinzel-Bold" style="cursor: pointer; font-size: 15px; color: #672100;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="Cinzel-Bold" style="font-size: 15px; color: #672100">MORE</a>
@@ -225,7 +246,7 @@
         </div>
     </section>
     @foreach ($property->wellness as $i => $wellness)
-        <section id="{{ $wellness->id}}{{ $wellness->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $wellness->image ) }}');" >
+        <section id="container_well_{{ $wellness->id }}{{ $wellness->name }}" class="home-widget parallax margin-b72" style="background-image:url('{{ asset('assets/images/HACIENDA/sections/' . $wellness->image ) }}');" >
             <div class="parallax-content">
                 <div class="container">
                     <div class="row">
@@ -239,7 +260,7 @@
                 </div>
             </div>
         </section>
-		<sectionclass="margin-b72">
+		<section class="margin-b72">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
@@ -258,7 +279,8 @@
                         </div>
 					</div>
 					<div class="col-md-6">
-						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/wellness/' . $wellness->image )}}" alt="" loading="lazy">
+						<img class="img-fluid margin-b24" src="{{ asset('assets/images/HACIENDA/wellness/' . $wellness->image )}}" alt="" loading="lazy" style="display: none">
+                        <div style="background-image: url({{ asset('assets/images/HACIENDA/wellness/' . $wellness->image )}}); background-position:center center !important; background-size: cover; width: auto; height: 300px; margin:0% 5%;"></div>
 					</div>
 				</div>
 			</div>
