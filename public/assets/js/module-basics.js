@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const container_site_form = $('.sortable-item').first().clone();
     // Definición de variables para los elementos del DOM
     var $changelang = $('.change_lang');
+    var $titleRevenueCenter = $("#title-revenuecenter");
+    var $imageRevenueCenter = $('#image-revenuecenter');
+    var $imageUpload = $('#image-upload');
+    var $btnresetImage = $('#reset-image');
+    var $sortableContainer = $('#sortable-container');
+    var $btnaddCont = $("#add-container");
 
     //Generar variable de session storage 
     sessionStorage.setItem("idioma", "English");
@@ -15,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Cambiar idioma
     $changelang.click(function () {
-        //Si la etiqueta presionada tiene la clase 'current-menu-item'
         if ($(this).hasClass('current-menu-item')) {
         } else {
             // Busca el idioma que actualmente está activo
@@ -45,11 +50,5 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.nav-button-holder').children().trigger( "click" );
     });
 
-    $(document).on('click', '.btnmenu', function(){
-        var item = $('div.ndfHFb-c4YZDc-Wrql6b')[0];
-        var pop = $(document).find(item);
-        console.log('CLICK', pop);
-        
-    })
 
 });

@@ -15,18 +15,22 @@
     <script src="https://cdn.tiny.cloud/1/u80xw4p0r3an4ddwr5v3deb3rarjokle36c4i2duyh0cvgm5/tinymce/7/tinymce.min.js"
             referrerpolicy="strict-origin-when-cross-origin"></script>
     <!-- Bootstrap CSS -->
-    <link rel='stylesheet' id='dina-bootstrap-css-css' href='{{ asset('assets/css/bootstrap/css/bootstrap.min.css') }}'
+    <link rel='stylesheet' id='dina-bootstrap-css-css' href='{{ env('BASE_URL') . 'assets/css/bootstrap/css/bootstrap.min.css' }}'
         type='text/css' media='all' />
     <!-- Font Awesome Icons CSS -->
     <link rel='stylesheet' id='dina-font-awesome-css'
-        href='{{ asset('assets/css/fontawesome/css/font-awesome.min.css') }}' type='text/css' media='all' />
+        href='{{ env('BASE_URL') . 'assets/css/fontawesome/css/font-awesome.min.css' }}' type='text/css' media='all' />
     <!-- Main CSS File -->
-    <link rel='stylesheet' id='dina-style-css-css' href='{{ asset('assets/style.css') }}' type='text/css'
+    <link rel='stylesheet' id='dina-style-css-css' href='{{ env('BASE_URL') . 'assets/style.css' }}' type='text/css'
         media='all' />
     <!-- favicons -->
-    <link rel="icon" href="{{ asset('assets/images/1HOMES/icons/' . $property->logo) }}" sizes="32x32" />
-    <link rel="icon" href="{{ asset('assets/images/1HOMES/icons/' . $property->logo) }}" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/1HOMES/icons/' . $property->logo) }}" />
+    <link rel="icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" sizes="32x32" />
+    <link rel="icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <style>
         @font-face {
@@ -79,6 +83,86 @@
             background-size: cover;
         }
 
+        .prov-class {
+            width:50px;
+            height:110px;
+            margin-left:80%;
+            min-height: 10em;
+            display: table-cell;
+            vertical-align: middle;
+
+        }
+
+        .date-container {
+            background: rgba(237, 229, 221, 0.85);
+            padding: 0.5vw 1vw;
+            width: min-content;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .date-container span {
+            height: min-content;
+            font-size: 18px;
+        }
+
+        .date-container span strong {
+            font-size: 20px;
+        }
+
+        .date-container .happH {
+            white-space: nowrap;
+        }
+
+        .swiper {
+            width: 80%;
+            height: 30vw;
+        }
+
+        .swiper-pagination-bullet {
+            padding: 5px !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #BC8D4B !important;
+        }
+
+        .swiper-button-prev {
+            color: #000000 !important;
+            --swiper-navigation-size: 34px;
+        }
+
+        .swiper-button-next {
+            color: #000000 !important;
+            --swiper-navigation-size: 34px;
+        }
+
+        .show-info {
+            width:80% !important;
+            height:25vw;
+            backdrop-filter: blur(20px);
+            position: absolute;
+            z-index: 3;
+            align-content: center;
+            margin: auto;
+        }
+
+        .show-info div span {
+            font-size:18px;
+        }
+
+        .home-featured-item {
+            height: 25vw !important;
+            margin-bottom: 5% !important;
+        }
+
+        .display-happ {
+            width: 80% !important;
+            margin: auto !important;
+        }
+
         @media (max-width: 600px) {
             .more-btn {
                 display: flex;
@@ -86,14 +170,17 @@
                 /* Permite que los botones se muevan a la siguiente línea si es necesario */
                 gap: 10px;
                 /* Espacio entre los botones */
-                margin-left: 15px;
+                margin-left: 50px;
             }
+
             .description_rc {
                 font-size: 14px;
             }
+
             .titlerevenuecenter {
                 font-size: 35px;
             }
+
             .section-rc2 {
                 padding-top: 5%;
                 padding-bottom: 5%;
@@ -102,8 +189,31 @@
                 border-bottom: 1px solid #111111;
                 scroll-margin-top: 75px;
             }
+
             .homes-img {
                 height: 250px;
+            }
+
+            .date-container {
+                padding: 3vw 4vw;
+            }
+
+            .show-info .row span {
+                font-size:16px;
+            }
+
+            .swiper {
+                width: 90% !important;
+                height: 95vw !important;
+            }
+
+            .home-featured-item {
+                height: 85vw !important;
+                margin-bottom: 5% !important;
+            }
+
+            .show-info {
+                height: 85vw;
             }
         }
     </style>
@@ -128,28 +238,8 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium">WELLNESS</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->wellness as $wellness)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium">MORE</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->more as $more)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
-                                </li>
-                            @endforeach
+                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium rc-select">HAPPENINGS</a></li>
+                            <li class="menu-item" style="display: none"><a href="#activities-section" class="BrownLL-Medium rc-select">ACTIVITIES</a></li>
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
@@ -157,9 +247,9 @@
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
-                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="BrownLL-Medium white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @else
-                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="menu-item change_lang" value="{{ $language->id }}"><a class="BrownLL-Medium white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @endif
 							@endforeach
                         </ul>
@@ -184,12 +274,13 @@
         </div>
     </div>
     <!-- /MOBILE MENU -->
+
     <!-- HEADER -->
     <header id="header-4" class="navbar-fixed-top">
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/1HOMES/icons/' . $property->image) }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
+            <div class="logo-4 alignc"><a href="{{ url('1homes')}}"><img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->image }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
@@ -207,27 +298,7 @@
                         <a href="" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->wellness as $wellness)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->more as $more)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
-                                </li>
-                            @endforeach
+                            <li class="menu-item" style="display: none"><a href="#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
@@ -258,12 +329,13 @@
         <!--headerWrap-->
     </header>
     <!-- /HEADER -->
+
     <!-- HOME HERO IMAGE -->
-    <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
-        style="background-image:url('{{ asset('assets/images/1HOMES/backgrounds/' . $property->background ) }}');">
+    <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72" style="background-image:url('{{ env('BASE_URL') . 'assets/images/1HOMES/backgrounds/' . $property->background }}');">
+        <!-- container-->
         <div class="item-content-bkg" style="background-color: rgba(0,0,0,0.15)">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $property->logo ) }}" class="img-fluid"
+                <img id="logoHeader" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" class="img-fluid"
                     alt="Logo" style="width: 70px; height: auto;">
                 <h1 id="propertyName" class="BrownLL-Medium post-title single-post-title">{{ $property->name }}</h1>
                 <span class="lineto-brown-bold white" style="font-size: 25px">DO</span>
@@ -272,6 +344,8 @@
         <!-- /container-->
     </section>
     <!-- /HOME HERO IMAGE -->
+
+    <!-- HAPPENINGS LIST -->
     <section id="happenings-section" class="margin-tb72 header-section">
         <div class="container">
             <div class="row">
@@ -281,41 +355,69 @@
                     </div>
                 </div>
             </div>
+            <!-- HAPPENING MODAL BTN -->
             <div class="row">
-                @foreach ($property->happening as $happening)
-                    <div class="col-md-4 mobile-margin-b54">
-                        <div class="service section-rc2">
-                            <div style="width: 100%; height: 200px; background-image: url('{{ asset('assets/images/1HOMES/happenings/' . $happening->image ) }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;"></div>
-                            <h3 class="lineto-brown-bold titlerevenuecenter">{{ $happening->name }}</h3>
-                            <p class="English lineto-brown-regular description_rc">{{ $happening->description }}</p>
-                            <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $happening->description_es }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="row">
-                @foreach ($property->happening as $happening)
-                    <div class="col-md-4">
-                        <div class="home-featured-item">
-                        <div class="home-featured-img" style="background-image:url('{{ asset('assets/images/1HOMES/happenings/' . $happening->image ) }}');"> </div>
-                        <a href="menu-2-col.html">
-                            <div class="grid-overlay"></div>
-                            <div class="featured-item-content">
-                                <h5 class="lineto-brown-bold">{{ $happening->name }}</h5>
-                                <div class="English lineto-brown-regular featured-short-desc">More...</div>
-                                <div class="Spanish lineto-brown-regular featured-short-desc" hidden>Más...</div>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        @foreach ($property->happening as $i => $happening)
+                            <div class="swiper-slide">
+                                <div class="display-happ">
+                                    <div id="happ_container_{{ $happening->id }}" class="show-info" hidden>
+                                        <div class="row">
+                                            <span class="lineto-brown-regular white English" style="width: 80%; margin:auto">{{ $happenings[$i]['description'] }}</span><strong></strong>
+                                            <span class="lineto-brown-regular white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['description_es'] }}</span><strong></strong>
+                                        </div>
+                                    </div>
+                                    <div class="home-featured-item">
+                                        <div style="z-index:2; position: absolute">
+                                            <div style="display: none" class="date-container">
+                                                <span class="lineto-brown-regular">{{ $happenings[$i]['month'] }}</span>
+                                                <span class="lineto-brown-bold"><strong>{{ $happenings[$i]['dayNum'] }}</strong></span>
+                                                <span class="lineto-brown-regular">{{ $happenings[$i]['dayAbbr'] }}</span>
+                                            </div>
+                                            <div class="date-container">
+                                                @if($happenings[$i]['schedule_spe_day'] != null)
+                                                    <span class="lineto-brown-regular English">{{ $happenings[$i]['dayAbbr']}}</span>
+                                                    <span class="lineto-brown-regular Spanish" hidden>{{ $happenings[$i]['dayAbbr_es']}}</span>
+                                                    <span class="lineto-brown-bold"><strong>{{ $happenings[$i]['dayNum']}}</strong></span>
+                                                    <span class="lineto-brown-regular English">{{ $happenings[$i]['month']}}</span>
+                                                    <span class="lineto-brown-regular Spanish" hidden>{{ $happenings[$i]['month_es']}}</span>
+                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
+                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
+                                                @else
+                                                    <span class="English lineto-brown-bold"><strong>{{ $happenings[$i]['dayRange']}}</strong></span>
+                                                    <span class="Spanish lineto-brown-bold" hidden><strong>{{ $happenings[$i]['dayRange_es']}}</strong></span>
+                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
+                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="home-featured-img" style="background-image:url('{{ env('BASE_URL') . 'assets/images/1HOMES/happenings/' . $happening->image }}');"> </div>
+                                        <a id="{{ $happening->id }}_happening_modal" class="happening_modal" rc_id="{{ $happening->id }}" happ="{{ $happening->id }}">
+                                            <div class="grid-overlay"></div>
+                                            <div class="featured-item-content">
+                                                <h5 class="lineto-brown-bold">{{ $happening->name }}</h5>
+                                                <div class="English lineto-brown-regular featured-short-desc">More...</div>
+                                                <div class="Spanish lineto-brown-regular featured-short-desc" hidden>Más...</div>
+                                            </div>
+                                        </a>
+                                    </div>	
+                                </div>
                             </div>
-                            <!--featured-item-content-->	
-                        </a>
-                        </div>
-                        <!--home-featured-item-->		
+                        @endforeach
                     </div>
-                @endforeach
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
+            <!-- /HAPPENING MODAL BTN -->
         </div>
     </section>
+    <!-- /HAPPENINGS LIST -->
     
-    <section id="activities-section" class="margin-tb72 header-section">
+    <!-- ACTIVITIES LIST -->
+    <section style="display: none" id="activities-section" class="margin-tb72 header-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
@@ -334,12 +436,14 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="img-fluid margin-b24 homes-img" style="background-image: url('{{ asset('assets/images/1HOMES/activities/' . $activities->image ) }}');"></div>
+                        <div class="img-fluid margin-b24 homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/activities/' . $activities->image }}');"></div>
                     </div>
                 </div>
             @endforeach
         </div>
     </section>
+    <!-- /ACTIVITIES LIST -->
+
     <!-- FOOTER -->
     <footer>
         <div class="container">
@@ -385,23 +489,25 @@
         <!--container-->
     </footer>
     <!-- /FOOTER -->
-    <!-- JS -->
-    <script src='{{ asset('assets/js/jquery.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery-migrate.min.js') }}'></script>
-    <script src='{{ asset('assets/css/bootstrap/js/popper.min.js') }}'></script>
-    <script src='{{ asset('assets/css/bootstrap/js/bootstrap.min.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.easing.min.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.fitvids.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.magnific-popup.min.js') }}'></script>
-    <script src='{{ asset('assets/js/owl-carousel/owl.carousel.min.js') }}'></script>
-    <!-- MAIN JS -->
-    <script src='{{ 'assets/js/init.js' }}'></script>
-    <!-- CONTACT FORM JS -->
-    <script src='{{ asset('assets/js/jquery.form.min.js') }}'></script>
-    <script src='{{ asset('assets/js/contactform.js') }}'></script>
 
+    <!-- JS -->
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery-migrate.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/css/bootstrap/js/popper.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/css/bootstrap/js/bootstrap.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.easing.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.fitvids.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.magnific-popup.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/owl-carousel/owl.carousel.min.js' }}'></script>
+    <!-- MAIN JS -->
+    <script src='{{ env('BASE_URL') . 'assets/js/init.js' }}'></script>
+    <!-- CONTACT FORM JS -->
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.form.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/contactform.js' }}'></script>
+    <!-- GENERAL JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets/js/module-rc-basics.js') }}"></script>
+    <script src="{{ env('BASE_URL') . 'assets/js/module-rc-basics.js' }}"></script>
+    <script src="{{ env('BASE_URL') . 'assets/js/module_happ.js' }}"></script>
 </body>
 
 </html>

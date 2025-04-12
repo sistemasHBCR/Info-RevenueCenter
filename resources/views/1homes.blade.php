@@ -72,6 +72,20 @@
             scroll-margin-top: 120px;
         }
 
+        .homes-img {
+            width: 100%; 
+            height: 350px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%; /* Ajusta según necesites */
+            border: none;
+        }
+        
         @media (max-width: 600px) {
             .more-btn {
                 display: flex;
@@ -97,6 +111,9 @@
                 border-bottom: 1px solid #111111;
                 padding-bottom: 15%;
             }
+            .homes-img {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -110,9 +127,9 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">TASTE</a>
                         <ul class="sub-menu">
-                            @foreach ($revenue_centers as $rc)
+                            @foreach($revenue_centers as $rc)
                                 <li class="menu-item">
-                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium">{{ $rc->name }}</a>
+                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium rc-select">{{ $rc->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -121,37 +138,18 @@
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium">WELLNESS</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->wellness as $wellness)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium">MORE</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->more as $more)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
-                                </li>
-                            @endforeach
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium English">Language</a>
+                        <a href="" class="BrownLL-Medium Spanish" hidden>Idioma</a>
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
-                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @else
-                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
                                 @endif
 							@endforeach
                         </ul>
@@ -181,14 +179,14 @@
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->image }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
+            <div class="logo-4 alignc"><a href="#"><img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->image }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium" style="font-size: 15px;">TASTE</a>
                         <ul class="sub-menu">
-                            @foreach ($revenue_centers as $rc)
+                            @foreach($revenue_centers as $rc)
                                 <li class="menu-item">
                                     <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
                                 </li>
@@ -199,32 +197,13 @@
                         <a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->wellness as $wellness)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-more') }}" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
-                        <ul class="sub-menu">
-                            @foreach ($property->more as $more)
-                                <li class="menu-item">
-                                    <a href="{{ url('1homes-more') }}#container_more_{{ $more->id }}{{ $more->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $more->name }}</a>
-                                </li>
-                            @endforeach
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">Language</a>
+                        <a href="" class="BrownLL-Medium English" style="font-size: 15px;">Language</a>
+                        <a href="" class="BrownLL-Medium Spanish" style="font-size: 15px;" hidden>Idioma</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
@@ -269,18 +248,18 @@
             <div class="container">
                 <div class="row section-rc2">
                     <!-- contenedor de Imagen -->
-                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b54">
-                        <div class="margin-r54">
-                            <img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}"
-                                alt="{{ $rc->name }}" />
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b24">
+                        <div>
+                            {{--<img class="img-fluid " src="{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}" alt="{{ $rc->name }}" />--}}
+                            <div class="img-fluid homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}');"></div>
                         </div>
                     </div>
                     <!-- /col-md-6 -->
 
                     <!-- contenedor de Texto -->
-                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-2' : 'order-md-1' }}">
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-2' : 'order-md-1' }} mobile-margin-b24">
                         <h2 id="RC_{{ $rc->id }}{{ $rc->name }}"
-                            class="home-title margin-b24 title-headline titlerevenuecenter lineto-brown-bold">{{ $rc->name }}</h2>
+                            class="home-title title-headline titlerevenuecenter lineto-brown-bold">{{ $rc->name }}</h2>
                         <!--START SITE-->
                         @foreach ($sites as $site)
                             @if ($site['rc_id'] == $rc->id)
@@ -296,11 +275,22 @@
                         @endforeach
                         <!--START SITE-->
                         <!--START BUTTONS-->
-                        <div class="more-btn">
+                        <div class="more-btn" style="display: none">
                             @foreach ($buttons as $button)
                                 @if ($button->rc_id == $rc->id)
-                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more English lineto-brown-regular" href="#" data-toggle="modal" data-target="#ModalRVC">{{ $button->name }}</a>
-                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more English lineto-brown-regular" href="#" data-toggle="modal" data-target="#ModalRVC">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="more-btn">
+                            @foreach($rc->button as $button)
+                                @if($button->file != "" && $button->file_es != "")
+                                    <a href="#" class="btnmenu view-more English lineto-brown-regular" data-toggle="modal" data-target="#ModalRVC">{{ $button->name}}</a>
+                                    <a href="#" class="btnmenu view-more Spanish lineto-brown-regular" data-toggle="modal" data-target="#ModalRVC" hidden>{{ $button->name}}</a>
+                                @else
+                                    <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" English lineto-brown-regular">{{ $button->name}} <i class="fas fa-arrow-right fa-sm"></i></a>
+                                    <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" Spanish lineto-brown-regular" hidden>{{ $button->name_es}} <i class="fas fa-arrow-right fa-sm"></i></a>
                                 @endif
                             @endforeach
                         </div>
@@ -350,26 +340,26 @@
         </div>
         <!--container-->
     </footer>
+    <!-- /FOOTER -->
 
-    <div id="ModalRVC" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
-        <div class="modal-dialog modal-lg" role="document" style="max-width: 95%; max-height: 95%;">
-            <div class="modal-content">
+    <!-- MODAL PARA MENÚS -->
+    <div id="ModalRVC" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 95%; height: 95%;">
+            <div class="modal-content" style="height: 100%">
                 <div class="modal-header">
-                    <h5 class="modal-title">TEST MENU</h5>
+                    <h5 class="modal-title btnmenu">TEST MENU</h5>
                     <button type="button" id="close-rvc" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="alignc">
-                        <iframe src="https://drive.google.com/file/d/1l6Nzn4IXIR1RGojfOWyR_VrUkpO-CPEv/preview" style="width: 90%; height:38em"></iframe>
-                    </div>
+                        <iframe src="{{ env('BASE_URL') . 'assets/files/Food_Mezcal_Bar_Menu.pdf'}}"></iframe>
                 </div>
             </div>
         </div>
     </div>
+    <!-- /MODAL PARA MENÚS -->
 
-    <!-- /FOOTER -->
     <!-- JS -->
     <script src='{{ env('BASE_URL') . 'assets/js/jquery.js' }}'></script>
     <script src='{{ env('BASE_URL') . 'assets/js/jquery-migrate.min.js' }}'></script>

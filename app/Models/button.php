@@ -15,6 +15,7 @@ class button extends Model
         'file',
         'file_es',
         'URL',
+        'active',
         'rc_id'
     ];
 
