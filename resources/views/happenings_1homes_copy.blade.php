@@ -33,6 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <style>
+        /* Fuentes para la pagina */
         @font-face {
             font-family: 'lineto-brown-bold';
             src: url('/qr/public/assets/fonts/1HOMES/lineto-brown-bold.ttf') format('truetype');
@@ -55,26 +56,29 @@
             font-family: 'BrownLL-Medium';
         }
 
+        /* Ajustes generales */
 		html {
 			scroll-behavior: smooth;
 		}
         
+        /* Ajustes de los botones */
         .more-btn {
             display: flex;
             flex-wrap: wrap;
-            /* Permite que los botones se muevan a la siguiente línea si es necesario */
             gap: 10px;
-            /* Espacio entre los botones */
         }
 
+        /* Ajustes de la Navegacion en Movil */
         .nav-holder-2 {
             margin-top: 0%;
         }
 
+        /* Encabezados de las secciones */
         .header-section {
             scroll-margin-top: 120px;
         }
 
+        /* Imagen de las Actividades */
         .homes-img {
             width: 100%; 
             height: 350px;
@@ -83,16 +87,7 @@
             background-size: cover;
         }
 
-        .prov-class {
-            width:50px;
-            height:110px;
-            margin-left:80%;
-            min-height: 10em;
-            display: table-cell;
-            vertical-align: middle;
-
-        }
-
+        /* Contenedor de Fecha */
         .date-container {
             background: rgba(237, 229, 221, 0.85);
             padding: 1vw 1.5vw;
@@ -103,25 +98,31 @@
             text-align: center;
         }
 
+        /* Fuente dentro del contenedor de Fecha */
         .date-container span {
             height: min-content;
             font-size: 18px;
         }
 
+        /* Fuente remarcada dentro del contenedor de Fecha */
         .date-container span strong {
             font-size: 20px;
         }
 
+        /* Horario en el contenedor de fecha */
         .date-container .happH {
             white-space: nowrap;
+            font-size: 12px;
         }
 
+        /* SWIPER */
         .swiper {
             width: 100%;
             height: 30vw;
             min-height: 250px;
         }
 
+        /* Barra de progreso Faltante */
         .swiper-pagination {
             width: 80% !important;
             height: 6px !important;
@@ -131,28 +132,24 @@
             background: rgba(188, 141, 75, 0.25);
         }
 
+        /* Barra de progreso Actual */
         .swiper-pagination-progressbar-fill {
             background: #BC8D4B !important;
         }
 
-        .swiper-pagination-bullet {
-            padding: 5px !important;
-        }
-
-        .swiper-pagination-bullet-active {
-            background-color: #BC8D4B !important;
-        }
-
+        /* Flecha Izquierda del Swiper */
         .swiper-button-prev {
             color: #000000 !important;
             --swiper-navigation-size: 34px;
         }
 
+        /* Flecha Derecha del Swiper */
         .swiper-button-next {
             color: #000000 !important;
             --swiper-navigation-size: 34px;
         }
 
+        /* Estilos para la seccion de mostrar descripcion */
         .show-info {
             width:80% !important;
             height:30vw;
@@ -162,7 +159,6 @@
             align-content: center;
             margin: auto;
             min-height: 250px;
-            cursor: pointer;
         }
 
         .show-info div span {
@@ -178,20 +174,6 @@
         .display-happ {
             width: 80% !important;
             margin: auto !important;
-        }
-
-        @media (max-width: 1000px) {
-            .show-info {
-                height:50vw;
-            }
-
-            .home-featured-item {
-                height: 50vw !important;
-            }
-
-            .swiper {
-                height: 50vw !important;
-            }
         }
 
         @media (max-width: 600px) {
@@ -395,13 +377,17 @@
                                 <div class="display-happ">
                                     <div id="happ_container_{{ $happening->id }}" class="show-info thenHide" style="opacity: 0">
                                         <div class="row">
-                                            <span class="lineto-brown-bold white" style="width: 80%; margin:auto; font-size: 20px"><strong>{{ $happening->name }}</strong></span>
                                             <span class="lineto-brown-regular white English" style="width: 80%; margin:auto">{{ $happenings[$i]['description'] }}</span><strong></strong>
                                             <span class="lineto-brown-regular white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['description_es'] }}</span><strong></strong>
                                         </div>
                                     </div>
                                     <div class="home-featured-item">
-                                        <div style="z-index:2; position: absolute; backdrop-filter: blur(20px)">
+                                        <div style="z-index:2; position: absolute">
+                                            <div style="display: none" class="date-container">
+                                                <span class="lineto-brown-regular">{{ $happenings[$i]['month'] }}</span>
+                                                <span class="lineto-brown-bold"><strong>{{ $happenings[$i]['dayNum'] }}</strong></span>
+                                                <span class="lineto-brown-regular">{{ $happenings[$i]['dayAbbr'] }}</span>
+                                            </div>
                                             <div class="date-container">
                                                 @if($happenings[$i]['schedule_spe_day'] != null)
                                                     <span class="lineto-brown-regular English">{{ $happenings[$i]['dayAbbr']}}</span>
@@ -409,20 +395,20 @@
                                                     <span class="lineto-brown-bold"><strong>{{ $happenings[$i]['dayNum']}}</strong></span>
                                                     <span class="lineto-brown-regular English">{{ $happenings[$i]['month']}}</span>
                                                     <span class="lineto-brown-regular Spanish" hidden>{{ $happenings[$i]['month_es']}}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hStart'] }}</span>
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hEnd'] }}</span>
                                                 @else
                                                     <span class="English lineto-brown-bold"><strong>{{ $happenings[$i]['dayRange']}}</strong></span>
                                                     <span class="Spanish lineto-brown-bold" hidden><strong>{{ $happenings[$i]['dayRange_es']}}</strong></span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hStart'] }}</span>
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hEnd'] }}</span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="home-featured-img" style="background-image:url('{{ env('BASE_URL') . 'assets/images/1HOMES/happenings/' . $happening->image }}');"> </div>
                                         <a id="{{ $happening->id }}_happening_modal" class="happening_modal" happ="{{ $happening->id }}">
                                             <div class="grid-overlay"></div>
-                                            <div class="featured-item-content" style="backdrop-filter: blur(0px)">
+                                            <div class="featured-item-content">
                                                 <h5 class="lineto-brown-bold">{{ $happening->name }}</h5>
                                                 <div class="English lineto-brown-regular featured-short-desc">More...</div>
                                                 <div class="Spanish lineto-brown-regular featured-short-desc" hidden>Más...</div>
