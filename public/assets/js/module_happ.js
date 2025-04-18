@@ -1,32 +1,20 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    var $happening_modal = $('.happening_modal');
-    var $happ_desc = $('.show-info');
-
-    //$happening_modal.click(function () {
-    //    var happ_id = $(this).attr("happ");
-    //    $('#happ_container_' + happ_id).show(400).animate({
-    //        opacity: '1',
-    //        position: 'absolute',
-    //        transform: 'translate (-50%, -50%) scale (0)'
-    //      });
-    //});
-
+    var $happ_desc = $('.show-info');   //Contenedores de descripción
     $happ_desc.click(function (){
         // Oculta o muestra las descripcions que se encuentren visibles
-        if($(this).hasClass('thenHide')){
-            console.log('hisdcv');
-            $(this).removeClass('thenHide');
+        // Muestra el contenedor de descripción
+        if($(this).css('opacity') != 1){
             $(this).animate({
                 opacity: '1'
-            }, 200);
+            }, 100);
         }
+        // Oculta el contenedor de descripción
         else{
-            $(this).addClass('thenHide');
             $(this).animate({
                 opacity: '0'
-            }, 200);
+            }, 100);
         }
     });
 
@@ -65,9 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // Al cambiar entre slides
         on : {
             slideChange: function () {
-                // Oculta las descripcions que se encuentren visibles
-                $('.show-info').animate({
-                    opacity: '0'
+                // Navega por los slides
+                $('.show-info').each(function(index){
+                    // Oculta las descripcions que se encuentren visibles
+                    if($(this).css('opacity') > 0){
+                        $(this).animate({
+                            opacity: '0'
+                        }, 0);
+                    }
                 });
             }
         }

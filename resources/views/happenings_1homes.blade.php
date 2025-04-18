@@ -58,23 +58,25 @@
 		html {
 			scroll-behavior: smooth;
 		}
-        
+
+        /* Botones */
         .more-btn {
             display: flex;
             flex-wrap: wrap;
-            /* Permite que los botones se muevan a la siguiente línea si es necesario */
             gap: 10px;
-            /* Espacio entre los botones */
         }
 
+        /* Navegación movil */
         .nav-holder-2 {
             margin-top: 0%;
         }
 
+        /* Cabecera de las secciones */
         .header-section {
             scroll-margin-top: 120px;
         }
 
+        /* Imagenes de las actividades */
         .homes-img {
             width: 100%; 
             height: 350px;
@@ -83,16 +85,7 @@
             background-size: cover;
         }
 
-        .prov-class {
-            width:50px;
-            height:110px;
-            margin-left:80%;
-            min-height: 10em;
-            display: table-cell;
-            vertical-align: middle;
-
-        }
-
+        /* Contenedor de fecha dentro del Swiper */
         .date-container {
             background: rgba(237, 229, 221, 0.85);
             padding: 1vw 1.5vw;
@@ -103,25 +96,30 @@
             text-align: center;
         }
 
+        /* Texto dentro del Contenedor de fecha */
         .date-container span {
             height: min-content;
             font-size: 18px;
         }
 
+        /* Texto resaltado dentro del Contenedor de fecha */
         .date-container span strong {
             font-size: 20px;
         }
 
+        /* Horario dentro del texto resaltado */
         .date-container .happH {
             white-space: nowrap;
         }
 
+        /* Swiper happening */
         .swiper {
             width: 100%;
-            height: 30vw;
+            height: 25vw;
             min-height: 250px;
         }
 
+        /* Paginación dentro del Swiper */
         .swiper-pagination {
             width: 80% !important;
             height: 6px !important;
@@ -131,31 +129,27 @@
             background: rgba(188, 141, 75, 0.25);
         }
 
+        /* Barra de progreso de la paginación */
         .swiper-pagination-progressbar-fill {
             background: #BC8D4B !important;
         }
 
-        .swiper-pagination-bullet {
-            padding: 5px !important;
-        }
-
-        .swiper-pagination-bullet-active {
-            background-color: #BC8D4B !important;
-        }
-
+        /* Botón izquierdo de navegación */
         .swiper-button-prev {
             color: #000000 !important;
             --swiper-navigation-size: 34px;
         }
 
+        /* Botón derecho de navegación */
         .swiper-button-next {
             color: #000000 !important;
             --swiper-navigation-size: 34px;
         }
 
+        /* Contenedor de información del happening */
         .show-info {
             width:80% !important;
-            height:30vw;
+            height:25vw;
             backdrop-filter: blur(20px);
             position: absolute;
             z-index: 3;
@@ -165,24 +159,31 @@
             cursor: pointer;
         }
 
+        /* Texto dentro del Contenedor de información */
         .show-info div span {
             font-size:18px;
         }
 
+        /* Contenedor de vista previa del Swiper */
         .home-featured-item {
-            height: 30vw !important;
-            margin-bottom: 5% !important;
+            height: 25vw !important;
             min-height: 250px;
         }
 
+        /* Contenedor dentro del Slide */
         .display-happ {
             width: 80% !important;
             margin: auto !important;
         }
 
-        @media (max-width: 1000px) {
+        /* --- Tamaño de la vista menor o igual a 11000px --- */
+        @media (max-width: 1100px) {
             .show-info {
                 height:50vw;
+            }
+
+            .show-info .row span {
+                font-size: 17px;
             }
 
             .home-featured-item {
@@ -194,6 +195,7 @@
             }
         }
 
+        /* --- Tamaño de la vista menor o igual a 600px --- */
         @media (max-width: 600px) {
             .more-btn {
                 display: flex;
@@ -229,22 +231,22 @@
                 padding: 3vw 4vw;
             }
 
+            .show-info {
+                height: 100vw;
+            }
+
             .show-info .row span {
-                font-size:16px;
+                font-size: 16px;
             }
 
             .swiper {
-                width: 90% !important;
-                height: 85vw !important;
+                width: 100% !important;
+                height: 100vw !important;
             }
 
             .home-featured-item {
-                height: 85vw !important;
+                height: 100vw !important;
                 margin-bottom: 5% !important;
-            }
-
-            .show-info {
-                height: 85vw;
             }
         }
     </style>
@@ -274,7 +276,8 @@
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium English">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium Spanish" hidden>IDIOMA</a>
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
@@ -334,7 +337,8 @@
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">Language</a>
+                        <a href="" class="BrownLL-Medium English" style="font-size: 15px;">Language</a>
+                        <a href="" class="BrownLL-Medium Spanish" style="font-size: 15px;" hidden>IDIOMA</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
@@ -396,8 +400,11 @@
                                     <div id="happ_container_{{ $happening->id }}" class="show-info thenHide" style="opacity: 0">
                                         <div class="row">
                                             <span class="lineto-brown-bold white" style="width: 80%; margin:auto; font-size: 20px"><strong>{{ $happening->name }}</strong></span>
-                                            <span class="lineto-brown-regular white English" style="width: 80%; margin:auto">{{ $happenings[$i]['description'] }}</span><strong></strong>
-                                            <span class="lineto-brown-regular white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['description_es'] }}</span><strong></strong>
+                                            <span class="lineto-brown-bold white English" style="width: 80%; margin:auto; font-size: 18px">{{ $happenings[$i]['schedule_spe_day'] != null ? $happenings[$i]['dayName'] . ', ' . $happenings[$i]['month'] . ' ' . $happenings[$i]['dayNum'] : $happenings[$i]['dayRange'] }}</span>
+                                            <span class="lineto-brown-bold white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['schedule_spe_day'] != null ? $happenings[$i]['dayName_es'] . ', ' . $happenings[$i]['month_es'] . ' ' . $happenings[$i]['dayNum'] : $happenings[$i]['dayRange_es'] }}</span>
+                                            <span class="lineto-brown-bold white" style="width: 80%; margin:auto">{{ $happenings[$i]['hStart'] . ' - ' . $happenings[$i]['hEnd']}}</span>
+                                            <span class="lineto-brown-regular white English" style="width: 80%; margin:auto">{{ $happenings[$i]['description'] }}</span>
+                                            <span class="lineto-brown-regular white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['description_es'] }}</span>
                                         </div>
                                     </div>
                                     <div class="home-featured-item">
@@ -423,6 +430,7 @@
                                         <a id="{{ $happening->id }}_happening_modal" class="happening_modal" happ="{{ $happening->id }}">
                                             <div class="grid-overlay"></div>
                                             <div class="featured-item-content" style="backdrop-filter: blur(0px)">
+                                                <h6 class="lineto-brown-bold white">{{ $happening->subtitle }}</h6>
                                                 <h5 class="lineto-brown-bold">{{ $happening->name }}</h5>
                                                 <div class="English lineto-brown-regular featured-short-desc">More...</div>
                                                 <div class="Spanish lineto-brown-regular featured-short-desc" hidden>Más...</div>

@@ -19,7 +19,7 @@ class MainController extends Controller
 {
     //------------------------------ 1HOMES ------------------------------
     public function homes(Request $request){
-        $sites_b = site::get();
+        $sites = site::get()->toArray();
         $buttons = button::get();
         $property = property::where('id', 1)->with('wellness')->get()->first();
         $revenue_centers = revenue_center::with([
@@ -27,54 +27,65 @@ class MainController extends Controller
                 $query->where('active', 1);
             }])->get();
         $languages = languages::get();
-        //dd($revenue_centers);
 
-        $horaFormatoS = '';
-        $horaFormatoE = '';
-        $horaAltS = '';
-        $horaAltE = '';
+        $time_array = [];
+        foreach($sites as $i => $site){
+            $day_range_ing = null;
+            $day_range_esp = null;
+            $hour_range_ing = null;
+            $hour_range_esp = null;
+            $horaFormatoS = null;
+            $horaFormatoE = null;
+            $horaAltS = null;
+            $horaAltE = null;
 
-        $sites = [];
-        foreach($sites_b as $site){
-            $day_range_ing = '';
-            $day_range_esp = '';
             $days_ing = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
             $days_esp = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
-            if($site->schedule_hour_start != '00:00:00'){
-                $horaS = Carbon::createFromFormat('H:i:s', $site->schedule_hour_start);
+
+            if($site['schedule_hour_start'] == '00:00:00' && $site['schedule_hour_end'] == '24:00:00'){
+                $hour_range_ing = 'AVAILABLE 24/7';
+                $hour_range_esp = 'DISPONIBLE 24/7';
+            }
+            elseif($site['schedule_hour_start'] != null && $site['schedule_hour_end'] != null){
+                $horaS = Carbon::createFromFormat('H:i:s', $site['schedule_hour_start']);
                 $horaFormatoS = $horaS->format('H:i');
-                $horaE = Carbon::createFromFormat('H:i:s', $site->schedule_hour_end);
+                $horaE = Carbon::createFromFormat('H:i:s', $site['schedule_hour_end']);
                 $horaFormatoE = $horaE->format('H:i');
 
-                $horaAltS = $horaS->format('h A');
-                $horaAltE = $horaE->format('h A');
+                $horaAltS = Carbon::createFromFormat('H:i:s', $site['schedule_hour_start'])->format('h A');
+                $horaAltE = Carbon::createFromFormat('H:i:s', $site['schedule_hour_end'])->format('h A');
+                
+                $hour_range_ing = 'AT ' . $horaAltS . ' - ' . $horaAltE;
+                $hour_range_esp = 'DE ' . $horaAltS . ' - ' . $horaAltE;
             }
 
-            if($site->schedule_day_start > 0 && $site->schedule_day_end > 0){
-                $day_range_ing = 'OPEN FROM ' . $days_ing[($site->schedule_day_start)-1] . ' TO ' . $days_ing[($site->schedule_day_end)-1];
-                $day_range_esp = 'ABIERTO DE ' . $days_esp[($site->schedule_day_start)-1] . ' A ' . $days_esp[($site->schedule_day_end)-1];
+            if($site['schedule_day_start'] > 0 && $site['schedule_day_end'] > 0){
+                $day_range_ing = 'OPEN FROM ' . $days_ing[($site['schedule_day_start']) - 1] . ' TO ' . $days_ing[($site['schedule_day_end'])-1];
+                $day_range_esp = 'ABIERTO DE ' . $days_esp[($site['schedule_day_start']) - 1] . ' A ' . $days_esp[($site['schedule_day_end'])-1];
             }
-            if($site->schedule_day_start == 1 && $site->schedule_day_end == 7){
+            if($site['schedule_day_start'] == 1 && $site['schedule_day_end'] == 7){
                 $day_range_ing = 'OPEN DAILY';
                 $day_range_esp = 'ABIERTO TODOS LOS DIAS';
             }
             
-            $sites[] = [
-                'id' => $site->id,
-                'name' => $site->name,
-                'day_start' => $site->schedule_day_start,
-                'day_end' => $site->schedule_day_end,
+            $time_array = array (
                 'day_range_ing' => $day_range_ing,
                 'day_range_esp' => $day_range_esp,
                 'hour_start' => $horaFormatoS,
                 'hour_end' => $horaFormatoE,
                 'hour_start_alt' => $horaAltS,
                 'hour_end_alt' => $horaAltE,
-                'description' => $site->description,
-                'description_es' => $site->description_es,
-                'rc_id' => $site->rc_id
-            ];
+                'hour_range_ing' => $hour_range_ing,
+                'hour_range_esp' => $hour_range_esp
+            );
+
+            //----- Combinación del array original junto al array de tiempo -----//
+            $site = array_merge($site, $time_array);
+            
+            $sites[$i] = $site;
         }
+        
+        //dd($sites);
 
         return view('1homes', compact('sites', 'buttons', 'property', 'revenue_centers', 'languages'));
     }
@@ -148,7 +159,10 @@ class MainController extends Controller
     public function homes_happenings(Request $request){
         $property = property::where('id', 1)
         ->with([
-            'happening',
+            'happening' => function ($query) {
+                $query->orderBy('schedule_spe_day', 'ASC');
+                $query->where('active', 1);
+            },
             'wellness',
             'activity',
             'more'
@@ -159,19 +173,23 @@ class MainController extends Controller
         $languages = languages::get();
         
         //----- Happening solicitado por el AJAX -----//
-        $happenings = happening::where('active', 1)->get()->toArray();
+        $happenings = ($property->happening)->toArray();
         $day = null;
         $dayName = null;
+        $dayName_es = null;
         $dayAbbr = null;
+        $dayAbbr_es = null;
         $month = null;
+        $month_es = null;
         
         $days_ing = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
         $days_esp = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+        $days_com_ing = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $days_com_esp = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
         $dayRange = null;
         $dayRange_es = null;
 
         foreach($happenings as $i => $happening) {
-
             //----- Horario del Happening (Inicio - Fin) -----//
             $horarioStart = Carbon::createFromFormat('H:i:s', $happening['schedule_hour_start'])->format('h:i a');
             $horarioEnd = Carbon::createFromFormat('H:i:s', $happening['schedule_hour_end'])->format('h:i a');

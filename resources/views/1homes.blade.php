@@ -142,8 +142,8 @@
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium English">Language</a>
-                        <a href="" class="BrownLL-Medium Spanish" hidden>Idioma</a>
+                        <a href="" class="BrownLL-Medium English">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium Spanish" hidden>IDIOMA</a>
                         <ul class="sub-menu">
 							@foreach($languages as $i => $language)
                                 @if ($i == 0)
@@ -202,8 +202,8 @@
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="" class="BrownLL-Medium English" style="font-size: 15px;">Language</a>
-                        <a href="" class="BrownLL-Medium Spanish" style="font-size: 15px;" hidden>Idioma</a>
+                        <a href="" class="BrownLL-Medium English" style="font-size: 15px;">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium Spanish" style="font-size: 15px;" hidden>IDIOMA</a>
                         <ul class="sub-menu">
                             @foreach ($languages as $i => $language)
                                 @if ($i == 0)
@@ -265,15 +265,15 @@
                             @if ($site['rc_id'] == $rc->id)
                                 <h6 class="lineto-brown-bold">{{ $site['name'] }}</h6>
                                 <span class="English lineto-brown-regular">{{ $site['day_range_ing'] != '' ? $site['day_range_ing'] : '' }}
-                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
+                                    {{ $site['hour_range_ing'] != null ? '| ' . $site['hour_range_ing'] : '' }}</span>
                                 <span class="Spanish lineto-brown-regular"
                                     hidden>{{ $site['day_range_esp'] != '' ? $site['day_range_esp'] : '' }}
-                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
+                                    {{ $site['hour_range_esp'] != null ? '| ' . $site['hour_range_esp'] : '' }}</span>
                                 <p class="English description_rc lineto-brown-regular" style="padding-top: 1.25%">{{ $site['description'] }}</p>
                                 <p class="Spanish description_rc lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site['description_es'] }}</p>
                             @endif
                         @endforeach
-                        <!--START SITE-->
+                        <!--END SITE-->
                         <!--START BUTTONS-->
                         <div class="more-btn" style="display: none">
                             @foreach ($buttons as $button)

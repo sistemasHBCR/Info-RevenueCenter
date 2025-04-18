@@ -118,7 +118,7 @@
         /* SWIPER */
         .swiper {
             width: 100%;
-            height: 30vw;
+            height: 20vw;
             min-height: 250px;
         }
 
@@ -149,10 +149,10 @@
             --swiper-navigation-size: 34px;
         }
 
-        /* Estilos para la seccion de mostrar descripcion */
+        /* Contenedor para mostrar descripcion */
         .show-info {
             width:80% !important;
-            height:30vw;
+            height:20vw;
             backdrop-filter: blur(20px);
             position: absolute;
             z-index: 3;
@@ -166,7 +166,7 @@
         }
 
         .home-featured-item {
-            height: 30vw !important;
+            height: 20vw !important;
             margin-bottom: 5% !important;
             min-height: 250px;
         }
