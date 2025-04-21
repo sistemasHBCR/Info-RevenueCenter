@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $properties->title }} - ADMIN</title>
+    <title>{{ $property->title }} - MENUS</title>
     <meta name="robots" content="noodp" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,33 +12,58 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/u80xw4p0r3an4ddwr5v3deb3rarjokle36c4i2duyh0cvgm5/tinymce/7/tinymce.min.js"
+            referrerpolicy="strict-origin-when-cross-origin"></script>
     <!-- Bootstrap CSS -->
-    <link rel='stylesheet' id='dina-bootstrap-css-css' href='{{ asset('assets/css/bootstrap/css/bootstrap.min.css') }}'
+    <link rel='stylesheet' id='dina-bootstrap-css-css' href='{{ env('BASE_URL') . 'assets/css/bootstrap/css/bootstrap.min.css' }}'
         type='text/css' media='all' />
     <!-- Font Awesome Icons CSS -->
     <link rel='stylesheet' id='dina-font-awesome-css'
-        href='{{ asset('assets/css/fontawesome/css/font-awesome.min.css') }}' type='text/css' media='all' />
+        href='{{ env('BASE_URL') . 'assets/css/fontawesome/css/font-awesome.min.css' }}' type='text/css' media='all' />
     <!-- Main CSS File -->
-    <link rel='stylesheet' id='dina-style-css-css' href='{{ asset('assets/style.css') }}' type='text/css'
+    <link rel='stylesheet' id='dina-style-css-css' href='{{ env('BASE_URL') . 'assets/style.css' }}' type='text/css'
         media='all' />
     <!-- favicons -->
-    <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="32x32" />
-    <link rel="icon" href="{{ asset('assets/images/icons/' . $properties->logo) }}" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/icons/' . $properties->logo) }}" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link rel="icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" sizes="32x32" />
+    <link rel="icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" />
+
+    <link rel="manifest" href="{{ env('BASE_URL') . 'manifest.json' }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/1HClogo.png' }}">
+    <meta name="theme-color" content="#317EFB">
+
+    <!-- Para iOS -->
+    <link rel="apple-touch-icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/1HClogo.png' }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-        html {
-            scroll-behavior: smooth;
+        @font-face {
+            font-family: 'lineto-brown-bold';
+            src: url('/qr/public/assets/fonts/1HOMES/lineto-brown-bold.ttf') format('truetype');
+        }
+        .lineto-brown-bold {
+            font-family: 'lineto-brown-bold';
+        }
+        @font-face {
+            font-family: 'lineto-brown-regular';
+            src: url('/qr/public/assets/fonts/1HOMES/lineto-brown-regular.ttf') format('truetype');
+        }
+        .lineto-brown-regular {
+            font-family: 'lineto-brown-regular';
+        }
+        @font-face {
+            font-family: 'BrownLL-Medium';
+            src: url('/qr/public/assets/fonts/1HOMES/BrownLL-Medium.otf') format('opentype');
+        }
+        .BrownLL-Medium {
+            font-family: 'BrownLL-Medium';
         }
 
-        .section-rc:hover {
-            background: rgb(255, 255, 255);
-            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 241, 225, 1) 15%, rgba(255, 241, 225, 1) 85%, rgba(255, 255, 255, 1) 100%);
-
-        }
-
-        /*****ELEMENTOS REVENUE CENTER***/
+		html {
+			scroll-behavior: smooth;
+		}
+        
         .more-btn {
             display: flex;
             flex-wrap: wrap;
@@ -47,76 +72,57 @@
             /* Espacio entre los botones */
         }
 
-        .view-more {
-            flex: 1 1 45%;
-            /* Los botones ocupan el 45% del contenedor, y se ajustan para ocupar espacio en 2 columnas */
-            box-sizing: border-box;
-            /* Para asegurarnos de que el padding y el margen no afecten el tamaño de los botones */
-            text-align: center;
-            margin-bottom: 10px;
-            /* Espacio inferior entre los botones */
+        .nav-holder-2 {
+            margin-top: 0%;
         }
 
-
-        /******ELEMENTOS MODAL*******/
-        #image-revenuecenter {
-            width: 359px;
-            /* Ancho fijo */
-            height: 269px;
-            /* Alto fijo */
-            object-fit: cover;
-            /* Ajusta la imagen para que cubra el contenedor */
-            border: 5px solid #e0b16f;
-            /* Agrega un borde de 5px de color dorado (#e0b16f) */
-            border-radius: 10px;
-            /* Opcional: agrega bordes redondeados */
+        .section-rc {
+            padding-bottom: 5%;
+            scroll-margin-top: 120px;
         }
 
-        .sortable-item {
-            border: 1px solid #ddd;
-            /* Borde que separa los contenedores */
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #fdfdfd;
-            border-radius: 5px;
-            position: relative;
+        .homes-img {
+            width: 100%; 
+            height: 350px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
-        .sortable-item h3 {
-            margin-top: 0;
+        .modal-body iframe {
+            width: 100%;
+            height: 100%; /* Ajusta según necesites */
+            border: none;
         }
-
-        .sortable-item .sortable-handle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: grab;
-            font-size: 20px;
-            color: #aaa;
-        }
-
-        .sortable-item:hover .sortable-handle {
-            color: #333;
-        }
-
-
-        /*Escala de tabla */
-        #databuttons table td,
-        #databuttons table th {
-            font-size: 0.8em;
-        }
-
-        /*Truncar/cortar url*/
-        .truncate-url {
-            display: inline-block;
-            max-width: 40ch;
-            /* Limita a 40 caracteres */
-            white-space: nowrap;
-            /* Evita el salto de línea */
-            overflow: hidden;
-            /* Oculta el texto que sobresale */
-            text-overflow: ellipsis;
-            /* Agrega "..." al final */
+        
+        @media (max-width: 600px) {
+            .more-btn {
+                display: flex;
+                flex-wrap: wrap;
+                /* Permite que los botones se muevan a la siguiente línea si es necesario */
+                gap: 10px;
+                /* Espacio entre los botones */
+                margin-left: 15px;
+            }
+            .description_rc {
+                font-size: 14px;
+            }
+            .titlerevenuecenter {
+                font-size: 35px;
+            }
+            .section-rc {
+                padding-bottom: 15%;
+                scroll-margin-top: 75px;
+            }
+            .section-rc2 {
+                margin-left: 1%;
+                margin-right: 1%;
+                border-bottom: 1px solid #111111;
+                padding-bottom: 15%;
+            }
+            .homes-img {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -124,75 +130,98 @@
 <body class="body-header1">
     <!-- MOBILE MENU -->
     <div class="mask-nav-2">
-        <!-- MENU -->
         <nav class="navbar navbar-2 nav-mobile">
             <div class="nav-holder nav-holder-2">
                 <ul id="menu-menu-2" class="menu-nav-2">
-                    @foreach ($revenue_centers as $rc)
-                        <li class="menu-item">
-                            <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
                     <li class="menu-item menu-item-has-children">
-                        <a href="">Language</a>
+                        <a href="" class="BrownLL-Medium">TASTE</a>
                         <ul class="sub-menu">
-                            @foreach ($languages as $language)
-                                <li class="menu-item"><a href="">{{ $language->name }}</a></li>
+                            @foreach($revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium rc-select">{{ $rc->name }}</a>
+                                </li>
                             @endforeach
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium">DO</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
+                        </ul>
+                    </li>
+					<li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium English">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium Spanish" hidden>IDIOMA</a>
+                        <ul class="sub-menu">
+							@foreach($languages as $i => $language)
+                                @if ($i == 0)
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change_too" value="{{ $language->id }}"><a class="white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                @else
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white rc-select" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                @endif
+							@endforeach
                         </ul>
                     </li>
                 </ul>
             </div>
         </nav>
+        <div class="rightside-nav-2">
+            <ul class="right-side-contact">
+                <li class="English lineto-brown-regular">A resort inspired by the natural beauty of Baja, homes from one to seven bedrooms in a modern Hacienda style bring the outdoors in, with views of Land’s End and Marina Cabo San Lucas.</li>
+                <li class="Spanish lineto-brown-regular" hidden>Un resort inspirado en la belleza natural de Baja, casas de uno a siete dormitorios en un moderno estilo Hacienda que traen el aire libre al interior, con vistas a Land's End y Marina Cabo San Lucas.</li>
+            </ul>
+            <!-- SOCIAL ICONS -->
+            <ul class="search-social search-social-2">
+                <li><a class="social-instagram" href="https://www.instagram.com/1hotel.cabo/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a class="social-facebook" href="https://www.facebook.com/1hotelandhomescabo/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a class="social-youtube" href="https://www.youtube.com/channel/UCH2q5uF3_ga9bucN1OTnNpg" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a class="social-facebook" href="https://www.linkedin.com/company/1-hotels/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a class="social-spotify" href="https://open.spotify.com/user/qca21ppzzndotj8cfgbdmy442" target="_blank"><i class="fab fa-spotify"></i></a></li>
+            </ul>
+            <!-- /SOCIAL ICONS -->
+        </div>
     </div>
-
     <!-- /MOBILE MENU -->
-    <!-- START TOPBAR -->
+    <!-- HEADER -->
     <header id="header-4" class="navbar-fixed-top">
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="{{ url('/') }}"><img class="img-fluid"
-                        src="{{ asset('assets/images/1HOMES/icons/' . $properties->image) }}" alt="1Homes"
-                        style="width: 120px; height: auto;" /></a></div>
+            <div class="logo-4 alignc"><a href="#"><img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->image }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
-
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
                     <li class="menu-item menu-item-has-children">
-                        <a href="">Inicio</a>
+                        <a href="" class="BrownLL-Medium" style="font-size: 15px;">TASTE</a>
                         <ul class="sub-menu">
-                            <li class="menu-item current-menu-item"><a class="white" style="cursor: pointer">Revenue
-                                    Centers</a></li>
-                            <li class="menu-item"><a href="{{ url('spa') }}" class="white"
-                                    style="cursor: pointer">SPA</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="">|</a></li>
-                    @foreach ($revenue_centers as $rc)
-                        <li class="menu-item">
-                            <a href="#{{ $rc->id }}{{ $rc->name }}">{{ $rc->name }}</a>
-                        </li>
-                    @endforeach
-                    <li class="menu-item"><a href="">|</a></li>
-                    <li class="menu-item menu-item-has-children">
-                        <a href="">Language</a>
-                        <ul class="sub-menu">
-                            @foreach ($languages as $i => $language)
-                                @if ($i == 0)
-                                    <li class="menu-item change_lang current-menu-item this_change"
-                                        value="{{ $language->id }}"><a class="white"
-                                            style="cursor: pointer">{{ $language->name }}</a></li>
-                                @else
-                                    <li class="menu-item change_lang" value="{{ $language->id }}"><a class="white"
-                                            style="cursor: pointer">{{ $language->name }}</a></li>
-                                @endif
+                            @foreach($revenue_centers as $rc)
+                                <li class="menu-item">
+                                    <a href="#container_{{ $rc->id }}{{ $rc->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $rc->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </li>
-                    <li>
-                        <a href="" data-toggle="modal" data-target="#ModalHeader"><i class="fas fa-cogs fa-lg"
-                                style="color: #e0b16f"></i></a>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="">|</a></li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="" class="BrownLL-Medium English" style="font-size: 15px;">LANGUAGE</a>
+                        <a href="" class="BrownLL-Medium Spanish" style="font-size: 15px;" hidden>IDIOMA</a>
+                        <ul class="sub-menu">
+                            @foreach ($languages as $i => $language)
+                                @if ($i == 0)
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang current-menu-item this_change" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                @else
+                                    <li name="to-{{ $language->name }}" class="BrownLL-Medium menu-item change_lang" value="{{ $language->id }}"><a class="white" style="cursor: pointer; font-size: 15px;">{{ $language->name }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -203,69 +232,74 @@
                 <button type="button" class="nav-button">
                     <span class="icon-bar"></span>
                 </button>
-                <div class="btn-header btn-header4"><a href="" data-toggle="modal" data-target="#ModalHeader"><i
-                            class="fas fa-cogs fa-lg"></i></a></div>
             </div>
-            <div class="btn-header btn-header4"></div>
+            <div class="btn-header btn-header4">{{--<a href="#" class="view-more more-white">Book a Table</a>--}}</div>
         </div>
         <!--headerWrap-->
     </header>
     <!-- /HEADER -->
-
-    <!-- START BANNER -->
+    <!-- HOME HERO IMAGE -->
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
-        style="background-image:url('{{ asset('assets/images/1HOMES/backgrounds/' . $properties->background) }}');">
-        <div class="item-content-bkg">
+        style="background-image:url('{{ env('BASE_URL') . 'assets/images/1HOMES/backgrounds/' . $property->background }}');">
+        <div class="item-content-bkg" style="background-color: rgba(0,0,0,0.15)">
             <div class="inner-desc">
-                <img id="logoHeader" src="{{ asset('assets/images/1HOMES/icons/' . $properties->logo) }}" class="img-fluid"
-                    alt="Logo" style="width: 55px; height: auto;">
-                <h1 id="propertyName" class="post-title single-post-title">{{ $properties->name }}</h1>
-                {{-- <span class="post-subtitle" style="font-size: 35px">TASTE</span> --}}
+                <img id="logoHeader" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo  }}" class="img-fluid"
+                    alt="Logo" style="width: 70px; height: auto;">
+                <h1 id="propertyName" class="BrownLL-Medium post-title single-post-title">{{ $property->name }}</h1>
+                <span class="lineto-brown-bold white" style="font-size: 25px">TASTE</span>
             </div>
         </div>
+        <!-- /container-->
     </section>
-    <!-- /END BANNER -->
-
-    <!--START REVENUECENTER-->
+    <!-- /HOME HERO IMAGE -->
     @foreach ($revenue_centers as $i => $rc)
-        <section id="container_{{ $rc->id }}{{ $rc->name }}" class="row section-rc" style="padding-top: 90px;">
+        <section id="container_{{ $rc->id }}{{ $rc->name }}" class="section-rc">
             <div class="container">
-                <div class="row" style="padding-bottom: 72px;">
+                <div class="row section-rc2">
                     <!-- contenedor de Imagen -->
-                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b54">
-                        <div class="margin-r54">
-                            <img class="img-fluid" src="{{ asset('assets/images/1HOMES/revenuecenters/' . $rc->image) }}"
-                                alt="{{ $rc->name }}" />
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-1' : 'order-md-2' }} mobile-margin-b24">
+                        <div>
+                            {{--<img class="img-fluid " src="{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}" alt="{{ $rc->name }}" />--}}
+                            <div class="img-fluid homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}');"></div>
                         </div>
                     </div>
                     <!-- /col-md-6 -->
 
                     <!-- contenedor de Texto -->
-                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-2' : 'order-md-1' }}">
+                    <div class="col-md-6 {{ $i % 2 == 0 ? 'order-md-2' : 'order-md-1' }} mobile-margin-b24">
                         <h2 id="RC_{{ $rc->id }}{{ $rc->name }}"
-                            class="home-title margin-b24 title-headline titlerevenuecenter">{{ $rc->name }}</h2>
+                            class="home-title title-headline titlerevenuecenter lineto-brown-bold">{{ $rc->name }}</h2>
                         <!--START SITE-->
                         @foreach ($sites as $site)
                             @if ($site['rc_id'] == $rc->id)
-                                <h6>{{ $site['name'] }}</h6>
-                                <span class="English">{{ $site['day_range_ing'] != '' ? $site['day_range_ing'] : '' }}
-                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
-                                <span class="Spanish"
+                                <h6 class="lineto-brown-bold">{{ $site['name'] }}</h6>
+                                <span class="English lineto-brown-regular">{{ $site['day_range_ing'] != '' ? $site['day_range_ing'] : '' }}
+                                    {{ $site['hour_range_ing'] != null ? '| ' . $site['hour_range_ing'] : '' }}</span>
+                                <span class="Spanish lineto-brown-regular"
                                     hidden>{{ $site['day_range_esp'] != '' ? $site['day_range_esp'] : '' }}
-                                    {{ $site['hour_start_alt'] != '' ? '| ' . $site['hour_start_alt'] . ' - ' . $site['hour_end_alt'] : '' }}</span>
-                                <p class="English">{{ $site['description'] }}</p>
-                                <p class="Spanish" hidden>{{ $site['description_es'] }}</p>
+                                    {{ $site['hour_range_esp'] != null ? '| ' . $site['hour_range_esp'] : '' }}</span>
+                                <p class="English description_rc lineto-brown-regular" style="padding-top: 1.25%">{{ $site['description'] }}</p>
+                                <p class="Spanish description_rc lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site['description_es'] }}</p>
                             @endif
                         @endforeach
-                        <!--START SITE-->
+                        <!--END SITE-->
                         <!--START BUTTONS-->
-                        <div class="more-btn">
+                        <div class="more-btn" style="display: none">
                             @foreach ($buttons as $button)
                                 @if ($button->rc_id == $rc->id)
-                                    <a class="view-more English"
-                                        href="{{ asset('assets/files/' . $button->file) }}">{{ $button->name }}</a>
-                                    <a class="view-more Spanish" href="{{ asset('assets/files/' . $button->file) }}"
-                                        hidden>{{ $button->name_es }}</a>
+                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more English lineto-brown-regular" href="#" data-toggle="modal" data-target="#ModalRVC">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="more-btn">
+                            @foreach($rc->button as $button)
+                                @if($button->file != "" && $button->file_es != "")
+                                    <a href="{{ url('pdf/' . $button->file) }}" class="btnmenu view-more English lineto-brown-regular">{{ $button->name}}</a>
+                                    <a href="{{ url('pdf/' . $button->file_es) }}" class="btnmenu view-more Spanish lineto-brown-regular" hidden>{{ $button->name}}</a>
+                                @else
+                                    <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" English lineto-brown-regular">{{ $button->name}} <i class="fas fa-arrow-right fa-sm"></i></a>
+                                    <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" Spanish lineto-brown-regular" hidden>{{ $button->name_es}} <i class="fas fa-arrow-right fa-sm"></i></a>
                                 @endif
                             @endforeach
                         </div>
@@ -274,15 +308,10 @@
                     <!-- /col-md-6 -->
                 </div>
             </div>
-            <!-- Icono de Edición -->
-            <div class="alignc col-md-2">
-                <a href="#" data-toggle="modal" data-target="#ModalRVC"><i id="btn-rc-{{ $rc->id }}" class="edit-revenuecenter fas fa-pen fa-lg" style="color: #e0b16f"></i></a>
-            </div>
         </section>
     @endforeach
-    <!--END REVENUECENTERS -->
 
-    <!--START FOOTER -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <!-- ROW -->
@@ -291,11 +320,11 @@
                 <!-- FOOTER COLUMN 2 -->
                 <div class="col-md-12">
                     <div class="footer-content">
-                        <h5>1 Homes Cabo Preview:</h5>
-                        <p>Paseo de La Marina 4732, Col.
-                            El Médano
-                            23453 Cabo San Lucas, B.C.S.
-                            Mexico
+                        <h5 class="BrownLL-Medium">1 Homes Cabo Preview:</h5>
+                        <p class="lineto-brown-regular">Paseo de La Marina 4732, Col.
+                            El Médano 
+							23453 Cabo San Lucas, B.C.S.
+							Mexico 
                         </p>
                     </div>
                 </div>
@@ -304,15 +333,11 @@
             <!-- /ROW -->
             <!-- FOOTER SOCIAL -->
             <ul class="footer-social">
-                <li><a class="social-facebook" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li><a class="social-twitter" href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                <li><a class="social-tripadvisor" href="#" target="_blank"><i
-                            class="fab fa-tripadvisor"></i></a></li>
-                <li><a class="social-pinterest" href="#" target="_blank"><i class="fab fa-pinterest"></i></a>
-                </li>
-                <li><a class="social-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                </li>
+                <li><a class="social-instagram" href="https://www.instagram.com/1hotel.cabo/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a class="social-facebook" href="https://www.facebook.com/1hotelandhomescabo/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a class="social-youtube" href="https://www.youtube.com/channel/UCH2q5uF3_ga9bucN1OTnNpg" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a class="social-facebook" href="https://www.linkedin.com/company/1-hotels/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a class="social-spotify" href="https://open.spotify.com/user/qca21ppzzndotj8cfgbdmy442" target="_blank"><i class="fab fa-spotify"></i></a></li>
             </ul>
             <!-- /FOOTER SOCIAL -->
             <!-- FOOTER SCROLL UP -->
@@ -320,6 +345,7 @@
                 <a class="scrolltop" href="#">
                     <i class="fas fa-chevron-up"></i>
                 </a>
+                <a href="#" id="toModalRVC" data-toggle="modal" data-target="#ModalRVC"><i class="edit-revenuecenter fas fa-pen fa-lg" style="color: #e0b16f"></i></a>
             </div>
             <!-- /FOOTER SCROLL UP -->
         </div>
@@ -327,377 +353,90 @@
     </footer>
     <!-- /FOOTER -->
 
-
-    <!------------------------------------------FORMULARIOS------------------------------------------>
-    <form action="" method="post" enctype="multipart/form-data">
-        <div id="ModalHeader" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">EDITAR PROPIEDAD</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <h6 style="padding: 3px;">Titulo de la pagina</h6>
-                            <input type="text" name="" id="" class="reservation-fields"
-                                value="{{ $properties->title }}">
-                        </div>
-                        <div>
-                            <h6 style="padding: 3px;">Nombre de la propiedad</h6>
-                            <input type="text" name="" id="" class="reservation-fields"
-                                value="{{ $properties->name }}">
-                        </div>
-                        <div>
-                            <h6 style="padding: 3px;">Logo centro</h6>
-                            <div class="alignc"
-                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/1HOMES/icons/' . $properties->image) }}"
-                                    alt="{{ $properties->image }}" style="max-height: 120px;">
-                            </div>
-                            <input type="file" name="" id="" class="reservation-fields"
-                                value="{{ $properties->image }}">
-                        </div>
-                        <div>
-                            <h6 style="padding: 3px;">Logo top</h6>
-                            <div class="alignc"
-                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/1HOMES/icons/' . $properties->logo) }}"
-                                    alt="{{ $properties->logo }}" style="max-height: 120px;">
-                            </div>
-                            <input type="file" name="" id="" class="reservation-fields"
-                                value="{{ $properties->logo }}">
-                        </div>
-                        <div>
-                            <h6 style="padding: 3px;">Baner</h6>
-                            <div class="alignc"
-                                style="height: 120px; width: 200px; background-color: rgba(0, 0, 0, 0.2)">
-                                <img src="{{ asset('assets/images/1HOMES/backgrounds/' . $properties->background) }}"
-                                    alt="{{ $properties->background }}" style="max-height: 120px;">
-                            </div>
-                            <input type="file" name="" id="" class="reservation-fields"
-                                value="{{ $properties->background }}">
-                        </div>
-                        <div class="more-btn">
-                            <a class="view-more Spanish">Guardar cambios</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <div id="ModalRVC" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true"
-        data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
-            <div class="modal-content">
+    <!-- MODAL PARA MENÚS -->
+    <div id="ModalRVC" class="modal fade text-left" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 95%; height: 95%;">
+            <div class="modal-content" style="height: 100%">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edición de contenido</h4>
+                    <h5 class="modal-title btnmenu">EDICIÓN DE CENTROS DE CONSUMO</h5>
                     <button type="button" id="close-rvc" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="rvc-tab" data-toggle="tab" href="#TabRCV"
-                                role="tab" aria-controls="tabrvc" aria-selected="true">Centro de consumo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="content-tab" data-toggle="tab" href="#TabContent"
-                                role="tab" aria-controls="content" aria-selected="false">Contenido</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="buttons-tab" data-toggle="tab" href="#Tabbuttons"
-                                role="tab" aria-controls="buttons" aria-selected="false">Botones</a>
-                        </li>
-                    </ul>
-
-                    <!-- Tab content: Se debe usar una sola estructura de tab-content -->
-                    <div class="tab-content" id="myTabContent">
-                        <!-- Tab 1: Centro de consumo -->
-                        <div class="tab-pane fade show active" id="TabRCV" role="tabpanel"
-                            aria-labelledby="rvc-tab">
-                            <section class="page-content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="page-holder custom-page-template mt-2">
-                                                <p class="alignc">Datos generales</p>
-                                            </div>
-                                            <div class="reservation_txt">
-                                                <form method="post" id="reservation-form"
-                                                    action="include/reservation-process.php"
-                                                    enctype="multipart/form-data">
-                                                    <div class="row">
-                                                        <div class="col-md-12 text-center">
-                                                            <h3 id="title-revenuecenter"
-                                                                class="margin-b24 title-site title-headline"
-                                                                contenteditable="true"
-                                                                style="outline: none; cursor: text;text-transform: uppercase;">
-                                                                CENTRO DE CONSUMO
-                                                            </h3>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Imagen mostrada -->
-                                                    <div class="row">
-                                                        <div class="col-md-12 mobile-margin-b32 text-center">
-                                                            <img id="image-revenuecenter"
-                                                                class="img-fluid img-feature"
-                                                                src="{{ asset('assets/images/blog/blog-1.jpg') }}"
-                                                                loading="lazy" alt="about 1">
-                                                            <br>
-                                                            <small>Cargar imagen (Solo PNG o JPG)</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex align-items-center">
-                                                                <!-- Input para seleccionar la imagen -->
-                                                                <input type="file" id="image-upload"
-                                                                    class="form-control mr-2"
-                                                                    accept="image/png, image/jpeg"
-                                                                    style="max-width: 800px;">
-                                                                <!-- Botón con ícono de regresar -->
-                                                                <button id="reset-image"
-                                                                    class="btn btn-secondary ms-2">
-                                                                    <i class="fas fa-undo"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                @foreach($revenue_centers as $i => $rc)
+                                    <button class="nav-link lineto-brown-bold {{ $i == 0 ? 'active' : '' }}" id="v-{{ $rc->id }}-tab" data-toggle="pill" data-target="#v-{{ $rc->id }}" type="button" role="tab" aria-controls="v-{{ $rc->id }}" aria-selected="{{ $i == 0 ? 'true' : 'false' }}" style="border-style: none">{{ $rc->name }}</button>
+                                @endforeach
+                            </div>
                         </div>
-
-                        <!-- Tab 2: Sitios -->
-                        <div class="tab-pane fade" id="TabContent" role="tabpanel" aria-labelledby="content-tab">
-                            <section class="page-content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="page-holder custom-page-template mt-2">
-                                                <p class="alignc">Contenido</p>
+                        <div class="col-8" style="margin: auto; margin-top:0;">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                @foreach($revenue_centers as $i => $rc)
+                                    <div class="tab-pane fade {{ $i == 0 ? 'show active' : '' }}" id="v-{{ $rc->id }}" role="tabpanel" aria-labelledby="v-{{ $rc->id }}-tab">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab{{ $rc->id }}" role="tablist">
+                                                <button class="nav-link lineto-brown-bold active" id="nav-rc-tab-{{ $rc->id }}" data-toggle="tab" data-target="#nav-rc-{{ $rc->id }}" type="button" role="tab" aria-controls="nav-rc-{{ $rc->id }}" aria-selected="true">R.C.</button>
+                                                <button class="nav-link lineto-brown-bold" id="nav-site-tab-{{ $rc->id }}" data-toggle="tab" data-target="#nav-site-{{ $rc->id }}" type="button" role="tab" aria-controls="nav-site-{{ $rc->id }}" aria-selected="false">Sitios</button>
+                                                <button class="nav-link lineto-brown-bold" id="nav-more-tab-{{ $rc->id }}" data-toggle="tab" data-target="#nav-more-{{ $rc->id }}" type="button" role="tab" aria-controls="nav-more-{{ $rc->id }}" aria-selected="false">Más</button>
                                             </div>
-                                            <div class="reservation_txt">
-                                                <!-- Contenedor arrastrable -->
-                                                <div id="sortable-container" class="sortable-container">
-                                                    <!-- Ejemplo de contenedor inicial -->
-                                                    <div class="sortable-item" data-position="1">
-                                                        <div class="sortable-handle">
-                                                            <!-- Icono de arrastre -->
-                                                            <i class="fas fa-arrows-alt"></i>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade lineto-brown-regular show active" id="nav-rc-{{ $rc->id }}" role="tabpanel" aria-labelledby="nav-rc-tab-{{ $rc->id }}">
+                                                <div>
+                                                    <span class="BrownLL-Medium">{{ $rc->name }}</span>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-default-{{ $rc->id }}">Nombre</span>
                                                         </div>
-                                                        <!-- Icono de eliminar -->
-                                                        <i class="remove-btn fas fa-times"
-                                                            style="cursor: pointer"></i>
-
-                                                        <h3 class="title-site" contenteditable="true"
-                                                            style="outline: none; cursor: text;">SITIO</h3>
-
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <label>Abierto*</label>
-                                                                <p>
-                                                                    <select class="form-control avaible">
-                                                                        <Option text-es="ABIERTO TODOS LOS DÍAS"
-                                                                            text-en="OPEN DAILY" value="all">
-                                                                            Todos los dias</Option>
-                                                                        <option value="personalized">Definir
-                                                                        </option>
-                                                                    </select>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label>De*</label>
-                                                                <p>
-                                                                    <select class="form-control firstday"
-                                                                        name="firstday" disabled>
-                                                                        <option value="1" selected>Lunes
-                                                                        </option>
-                                                                        <option value="2">Martes</option>
-                                                                        <option value="3">Miércoles</option>
-                                                                        <option value="4">Jueves</option>
-                                                                        <option value="5">Viernes</option>
-                                                                        <option value="6">Sábado</option>
-                                                                        <option value="7">Domingo</option>
-                                                                    </select>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label>A*</label>
-                                                                <p>
-                                                                    <select class="form-control lastday"
-                                                                        name="lastday" disabled>
-                                                                        <option value="1">Lunes</option>
-                                                                        <option value="2">Martes</option>
-                                                                        <option value="3">Miércoles</option>
-                                                                        <option value="4">Jueves</option>
-                                                                        <option value="5">Viernes</option>
-                                                                        <option value="6">Sábado</option>
-                                                                        <option value="7" selected>Domingo
-                                                                        </option>
-                                                                    </select>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <label>Desde las*</label>
-                                                                <p>
-                                                                    <select class="form-control" id="firsthour"
-                                                                        name="firsthour">
-                                                                        @php
-                                                                            $horas = [];
-                                                                            // Definimos las horas de apertura entre las 5 AM y 12 AM (medianoche)
-                                                                            for ($i = 1; $i <= 24; $i++) {
-                                                                                // Hora en formato 24 horas para el valor
-                                                                                $hora24 = \Carbon\Carbon::createFromFormat(
-                                                                                    'H',
-                                                                                    $i,
-                                                                                )->format('H:i');
-                                                                                // Hora en formato 12 horas con AM/PM para mostrar en el texto
-                                                                                $hora12 = \Carbon\Carbon::createFromFormat(
-                                                                                    'H',
-                                                                                    $i,
-                                                                                )->format('g:i A');
-                                                                                $horas[] = [
-                                                                                    'valor' => $hora24,
-                                                                                    'texto' => $hora12,
-                                                                                ];
-                                                                            }
-                                                                        @endphp
-
-                                                                        @foreach ($horas as $hora)
-                                                                            <option value="{{ $hora['valor'] }}">
-                                                                                {{ $hora['texto'] }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label>Hasta*</label>
-                                                                <p>
-                                                                    <select class="form-control" id="lasthour"
-                                                                        name="lasthour">
-                                                                        @foreach ($horas as $hora)
-                                                                            <option value="{{ $hora['valor'] }}">
-                                                                                {{ $hora['texto'] }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <label>Descripción del sitio</label>
-                                                                <p>
-                                                                    <textarea name="description" id="description" class="form-control" rows="7"></textarea>
-                                                                </p>
-                                                            </div>
-                                                        </div>
+                                                        <input type="text" class="form-control rc-input-name" aria-label="Default" aria-describedby="inputGroup-sizing-default" rc_id="{{ $rc->id }}">
                                                     </div>
+                                                    <div class="img-fluid homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}');"></div>
                                                 </div>
-
-                                                <!-- Botón para agregar más contenedores -->
-                                                <div class="text-center mt-3">
-                                                    <button type="button" class="btn btn-dark"
-                                                        id="add-container">+</button>
+                                            </div>
+                                            <div class="tab-pane fade lineto-brown-regular" id="nav-site-{{ $rc->id }}" role="tabpanel" aria-labelledby="nav-site-tab-{{ $rc->id }}">
+                                                <div style="display: flex; flex-wrap: wrap;">
+                                                    <span>Sitios</span>
                                                 </div>
-
+                                            </div>
+                                            <div class="tab-pane fade lineto-brown-regular" id="nav-more-{{ $rc->id }}" role="tabpanel" aria-labelledby="nav-more-tab-{{ $rc->id }}">
+                                                <div style="display: flex; flex-wrap: wrap; flex-direction: column;">
+                                                    <span>Botones</span>
+                                                    <span>Links</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </section>
+                                @endforeach
+                            </div>
                         </div>
-
-
-
-                        <!-- Tab 3: Botones -->
-                        <div class="tab-pane fade" id="Tabbuttons" role="tabpanel" aria-labelledby="buttons-tab">
-                            <section class="page-content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="page-holder custom-page-template mt-2">
-                                                <p class="alignc">Definir enlaces y botones</p>
-                                            </div>
-
-                                            <!-- Tabla de botones creados -->
-                                            <div class="table-responsive mt-4" id="databuttons">
-                                                <table id="tablebuttons" class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>N°</th>
-                                                            <th>Idioma</th>
-                                                            <th>Boton</th>
-                                                            <th>Funcionalidad</th>
-                                                            <th>Dirección</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="button-list">
-                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <!-- Botón para agregar más contenedores -->
-                                            <div class="text-center mt-3">
-                                                <button type="button" class="btn btn-dark"
-                                                    id="add-button">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-
-                    </div> <!-- Fin de la única estructura de .tab-content -->
-
-                    <div class="more-btn mt-3">
-                        <a class="view-more Spanish">Guardar cambios</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <!------------------------------------------/FORMULARIOS------------------------------------------>
-
-
+    <!-- /MODAL PARA MENÚS -->
 
     <!-- JS -->
-    <script src='{{ asset('assets/js/jquery.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery-migrate.min.js') }}'></script>
-    <script src='{{ asset('assets/css/bootstrap/js/popper.min.js') }}'></script>
-    <script src='{{ asset('assets/css/bootstrap/js/bootstrap.min.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.easing.min.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.fitvids.js') }}'></script>
-    <script src='{{ asset('assets/js/jquery.magnific-popup.min.js') }}'></script>
-    <script src='{{ asset('assets/js/owl-carousel/owl.carousel.min.js') }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery-migrate.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/css/bootstrap/js/popper.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/css/bootstrap/js/bootstrap.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.easing.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.fitvids.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.magnific-popup.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/owl-carousel/owl.carousel.min.js' }}'></script>
     <!-- MAIN JS -->
-    <script src='{{ asset('assets/js/init.js') }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/init.js' }}'></script>
     <!-- CONTACT FORM JS -->
-    <script src='{{ asset('assets/js/jquery.form.min.js') }}'></script>
-    <script src='{{ asset('assets/js/contactform.js') }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/jquery.form.min.js' }}'></script>
+    <script src='{{ env('BASE_URL') . 'assets/js/contactform.js' }}'></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets/js/module-rc-basics.js') }}"></script>
-
-    <script>
-        var url_get_sites = "{{ route('get_sites') }}";
-    </script>
-
+    <script src="{{ env('BASE_URL') . 'assets/js/module-rc-basics.js' }}"></script>
+    <script src="{{ env('BASE_URL') . 'assets/js/module-rc-admin.js' }}"></script>
 </body>
 
 </html>

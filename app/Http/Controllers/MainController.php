@@ -28,14 +28,11 @@ class MainController extends Controller
             }])->get();
         $languages = languages::get();
 
-        $time_array = [];
         foreach($sites as $i => $site){
             $day_range_ing = null;
             $day_range_esp = null;
             $hour_range_ing = null;
             $hour_range_esp = null;
-            $horaFormatoS = null;
-            $horaFormatoE = null;
             $horaAltS = null;
             $horaAltE = null;
 
@@ -47,10 +44,6 @@ class MainController extends Controller
                 $hour_range_esp = 'DISPONIBLE 24/7';
             }
             elseif($site['schedule_hour_start'] != null && $site['schedule_hour_end'] != null){
-                $horaS = Carbon::createFromFormat('H:i:s', $site['schedule_hour_start']);
-                $horaFormatoS = $horaS->format('H:i');
-                $horaE = Carbon::createFromFormat('H:i:s', $site['schedule_hour_end']);
-                $horaFormatoE = $horaE->format('H:i');
 
                 $horaAltS = Carbon::createFromFormat('H:i:s', $site['schedule_hour_start'])->format('h A');
                 $horaAltE = Carbon::createFromFormat('H:i:s', $site['schedule_hour_end'])->format('h A');
@@ -71,10 +64,6 @@ class MainController extends Controller
             $time_array = array (
                 'day_range_ing' => $day_range_ing,
                 'day_range_esp' => $day_range_esp,
-                'hour_start' => $horaFormatoS,
-                'hour_end' => $horaFormatoE,
-                'hour_start_alt' => $horaAltS,
-                'hour_end_alt' => $horaAltE,
                 'hour_range_ing' => $hour_range_ing,
                 'hour_range_esp' => $hour_range_esp
             );
@@ -84,75 +73,67 @@ class MainController extends Controller
             
             $sites[$i] = $site;
         }
-        
-        //dd($sites);
 
         return view('1homes', compact('sites', 'buttons', 'property', 'revenue_centers', 'languages'));
     }
 
     public function administrate(Request $request){
-        $sites_b = site::get();
+        $sites = site::get()->toArray();
         $buttons = button::get();
-        $properties = property::get()->first();
-        $revenue_centers = revenue_center::get();
+        $property = property::where('id', 1)->with('wellness')->get()->first();
+        $revenue_centers = revenue_center::where('active', 1)->with([
+            'button' => function ($query) {
+                $query->where('active', 1);
+            }])->get();
         $languages = languages::get();
 
-        $horaFormatoS = '';
-        $horaFormatoE = '';
-        $horaAltS = '';
-        $horaAltE = '';
+        foreach($sites as $i => $site){
+            $day_range_ing = null;
+            $day_range_esp = null;
+            $hour_range_ing = null;
+            $hour_range_esp = null;
+            $horaAltS = null;
+            $horaAltE = null;
 
-        $sites = [];
-        foreach($sites_b as $site){
-            $day_range_ing = '';
-            $day_range_esp = '';
             $days_ing = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
             $days_esp = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
-            if($site->schedule_hour_start == '00:00:00'){
-                $horaFormatoS = '';
-                $horaFormatoE = '';
-                $horaAltS = '';
-                $horaAltE = '';
-            }
-            else{
-                $horaS = Carbon::createFromFormat('H:i:s', $site->schedule_hour_start);
-                $horaFormatoS = $horaS->format('H:i');
-                $horaE = Carbon::createFromFormat('H:i:s', $site->schedule_hour_end);
-                $horaFormatoE = $horaE->format('H:i');
 
-                $horaAltS = $horaS->format('h A');
-                $horaAltE = $horaE->format('h A');
+            if($site['schedule_hour_start'] == '00:00:00' && $site['schedule_hour_end'] == '24:00:00'){
+                $hour_range_ing = 'AVAILABLE 24/7';
+                $hour_range_esp = 'DISPONIBLE 24/7';
+            }
+            elseif($site['schedule_hour_start'] != null && $site['schedule_hour_end'] != null){
+
+                $horaAltS = Carbon::createFromFormat('H:i:s', $site['schedule_hour_start'])->format('h A');
+                $horaAltE = Carbon::createFromFormat('H:i:s', $site['schedule_hour_end'])->format('h A');
+                
+                $hour_range_ing = 'AT ' . $horaAltS . ' - ' . $horaAltE;
+                $hour_range_esp = 'DE ' . $horaAltS . ' - ' . $horaAltE;
             }
 
-
-
-            if($site->schedule_day_start > 0 && $site->schedule_day_end > 0){
-                $day_range_ing = 'OPEN FROM ' . $days_ing[($site->schedule_day_start)-1] . ' TO ' . $days_ing[($site->schedule_day_end)-1];
-                $day_range_esp = 'ABIERTO DE ' . $days_esp[($site->schedule_day_start)-1] . ' A ' . $days_esp[($site->schedule_day_end)-1];
+            if($site['schedule_day_start'] > 0 && $site['schedule_day_end'] > 0){
+                $day_range_ing = 'OPEN FROM ' . $days_ing[($site['schedule_day_start']) - 1] . ' TO ' . $days_ing[($site['schedule_day_end'])-1];
+                $day_range_esp = 'ABIERTO DE ' . $days_esp[($site['schedule_day_start']) - 1] . ' A ' . $days_esp[($site['schedule_day_end'])-1];
             }
-            if($site->schedule_day_start == 1 && $site->schedule_day_end == 7){
+            if($site['schedule_day_start'] == 1 && $site['schedule_day_end'] == 7){
                 $day_range_ing = 'OPEN DAILY';
                 $day_range_esp = 'ABIERTO TODOS LOS DIAS';
             }
             
-            $sites[] = [
-                'id' => $site->id,
-                'name' => $site->name,
-                'day_start' => $site->schedule_day_start,
-                'day_end' => $site->schedule_day_end,
+            $time_array = array (
                 'day_range_ing' => $day_range_ing,
                 'day_range_esp' => $day_range_esp,
-                'hour_start' => $horaFormatoS,
-                'hour_end' => $horaFormatoE,
-                'hour_start_alt' => $horaAltS,
-                'hour_end_alt' => $horaAltE,
-                'description' => $site->description,
-                'description_es' => $site->description_es,
-                'rc_id' => $site->rc_id
-            ];
+                'hour_range_ing' => $hour_range_ing,
+                'hour_range_esp' => $hour_range_esp
+            );
+
+            //----- Combinación del array original junto al array de tiempo -----//
+            $site = array_merge($site, $time_array);
+            
+            $sites[$i] = $site;
         }
 
-        return view('admin', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
+        return view('admin', compact('sites', 'buttons', 'property', 'revenue_centers', 'languages'));
 
     }
 

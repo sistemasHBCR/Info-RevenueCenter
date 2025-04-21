@@ -28,6 +28,15 @@
     <link rel="icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->logo }}" />
 
+    <link rel="manifest" href="{{ env('BASE_URL') . 'manifest.json' }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/1HClogo.png' }}">
+    <meta name="theme-color" content="#317EFB">
+
+    <!-- Para iOS -->
+    <link rel="apple-touch-icon" href="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/1HClogo.png' }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
         @font-face {
             font-family: 'lineto-brown-bold';
