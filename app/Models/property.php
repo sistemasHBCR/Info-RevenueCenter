@@ -18,6 +18,10 @@ class property extends Model
         'description'
     ];
 
+    public function revenuecenter(){
+        return $this->belongsToMany(revenue_center::class, 'rc_property');
+    }
+
     public function happening(){
         return $this->belongsToMany(happening::class, 'happening_property');
     }

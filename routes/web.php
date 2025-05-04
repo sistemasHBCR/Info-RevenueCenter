@@ -20,7 +20,7 @@ Route::get('1homes-more', [MainController::class, 'homes_more'])->name('homes_mo
 Route::get('hacienda-wellness', [MainController::class, 'hacienda_wellness'])->name('hacienda_wellness');
 Route::get('hacienda-activities', [MainController::class, 'hacienda_activities'])->name('hacienda_activities');
 
-Route::get('get_sites', [MainController::class, 'get_sites'])->name('get_sites');
+Route::get('get_rc', [MainController::class, 'get_rc'])->name('get_rc');
 Route::get('get_happ', [MainController::class, 'get_happ'])->name('get_happ');
 
 Route::get('pdf/{filename}', [MainController::class, 'verPDF'])->name('verpdf');

@@ -17,7 +17,7 @@ class revenue_center extends Model
 
     public function property()
     {
-        return $this->belongsToMany(property::class);
+        return $this->belongsToMany(property::class, 'rc_revenuecenter');
     }
 
     public function happening()

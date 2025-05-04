@@ -117,8 +117,8 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">Happenings</a></li>
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">Activities</a></li>
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
@@ -131,7 +131,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="menu-item menu-item-has-children">
+                    <li class="menu-item menu-item-has-children" style="display: none">
                         <a href="{{ url('1homes-more') }}" class="BrownLL-Medium">MORE</a>
                         <ul class="sub-menu">
                             @foreach ($property->more as $more)
@@ -173,12 +173,13 @@
         </div>
     </div>
     <!-- /MOBILE MENU -->
+    
     <!-- HEADER -->
     <header id="header-4" class="navbar-fixed-top">
         <div class="headerWrap-4">
 
             <!-- LOGO -->
-            <div class="logo-4 alignc"><a href="{{ url('admin')}}"><img class="img-fluid" src="{{ asset('assets/images/1HOMES/icons/' . $property->image) }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
+            <div class="logo-4 alignc"><a href="{{ url('1homes') }}"><img class="img-fluid" src="{{ env('BASE_URL') . 'assets/images/1HOMES/icons/' . $property->image }}" alt="1Homes" style="width: 120px; height: auto;"/></a></div>
             <!-- MENU -->
             <div class="nav-holder nav-holder-4">
                 <ul id="menu-menu-1" class="menu-nav menu-nav-1">
@@ -196,11 +197,11 @@
                         <a href="{{ url('1homes-happenings')}}" class="BrownLL-Medium" style="font-size: 15px;">DO</a>
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
                         </ul>
                     </li>
                     <li class="menu-item menu-item-has-children">
-                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                        <a href="#" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
                         <ul class="sub-menu">
                             @foreach ($property->wellness as $wellness)
                                 <li class="menu-item">
@@ -209,7 +210,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="menu-item menu-item-has-children">
+                    <li class="menu-item menu-item-has-children" style="display: none">
                         <a href="{{ url('1homes-more') }}" class="BrownLL-Medium" style="font-size: 15px;">MORE</a>
                         <ul class="sub-menu">
                             @foreach ($property->more as $more)
@@ -247,6 +248,7 @@
         <!--headerWrap-->
     </header>
     <!-- /HEADER -->
+
     <!-- HOME HERO IMAGE -->
     <section id="home-content-9" class="no-parallax bkg-img-100vh margin-b72"
         style="background-image:url('{{ asset('assets/images/1HOMES/backgrounds/' . $property->background ) }}');">
@@ -277,6 +279,12 @@
                             <h2 class="home-title margin-b24 lineto-brown-bold titlerevenuecenter">{{ $wellness->name }}</h2>
                             <p class="English lineto-brown-regular description_rc">{{ $wellness->description }}</p>
                             <p class="Spanish lineto-brown-regular description_rc" hidden>{{ $wellness->description_es }}</p>
+                            <div class="more-btn">
+                                @foreach ($wellness->button as $button)
+                                    <a id="btnRC-{{ $wellness->id }}_{{ $button->id }}" class="view-more hacienda-btn English Muli-Regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $wellness->id }}_{{ $button->id }}" class="view-more hacienda-btn Spanish Muli-Regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">

@@ -146,8 +146,18 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">HAPPENINGS</a></li>
-                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium">ACTIVITIES</a></li>
+                            <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium">Happenings</a></li>
+                            <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium rc-select">Activities</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
@@ -207,6 +217,16 @@
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="{{ url('1homes-happenings')}}#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
                             <li class="menu-item" style="display: none"><a href="{{ url('1homes-happenings')}}#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-wellness') }}#container_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
@@ -270,40 +290,43 @@
                         <h2 id="RC_{{ $rc->id }}{{ $rc->name }}"
                             class="home-title title-headline titlerevenuecenter lineto-brown-bold">{{ $rc->name }}</h2>
                         <!--START SITE-->
-                        @foreach ($sites as $site)
-                            @if ($site['rc_id'] == $rc->id)
-                                <h6 class="lineto-brown-bold">{{ $site['name'] }}</h6>
-                                <span class="English lineto-brown-regular">{{ $site['day_range_ing'] != '' ? $site['day_range_ing'] : '' }}
-                                    {{ $site['hour_range_ing'] != null ? '| ' . $site['hour_range_ing'] : '' }}</span>
-                                <span class="Spanish lineto-brown-regular"
-                                    hidden>{{ $site['day_range_esp'] != '' ? $site['day_range_esp'] : '' }}
-                                    {{ $site['hour_range_esp'] != null ? '| ' . $site['hour_range_esp'] : '' }}</span>
-                                <p class="English description_rc lineto-brown-regular" style="padding-top: 1.25%">{{ $site['description'] }}</p>
-                                <p class="Spanish description_rc lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site['description_es'] }}</p>
+                        @foreach ($rc->site as $i => $site)
+                            <h6 class="lineto-brown-bold">{{ $site->name }}</h6>
+                            <span class="English lineto-brown-regular">{{ $sites[$i]['day_range_ing'] != '' ? $sites[$i]['day_range_ing'] : '' }}
+                                {{ $sites[$i]['hour_range_ing'] != null ? '| ' . $sites[$i]['hour_range_ing'] : '' }}</span>
+                            <span class="Spanish lineto-brown-regular"
+                                hidden>{{ $sites[$i]['day_range_esp'] != '' ? $sites[$i]['day_range_esp'] : '' }}
+                                {{ $sites[$i]['hour_range_esp'] != null ? '| ' . $sites[$i]['hour_range_esp'] : '' }}</span>
+                            <p class="English description_rc lineto-brown-regular" style="padding-top: 1.25%">{{ $site->description }}</p>
+                            <p class="Spanish description_rc lineto-brown-regular" style="padding-top: 1.25%" hidden>{{ $site->description_es }}</p>
+                            @if($site->name == 'ROOM SERVICE')
+                                <div class="more-btn margin-b24">
+                                    @foreach($rc->button as $button)
+                                        @if($button->file != "" && $button->file_es != "" && $button->id == 4)
+                                            <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more English lineto-brown-regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                            <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                        @elseif($button->id == 4)
+                                            <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" English lineto-brown-regular">{{ $button->name}} <i class="fas fa-arrow-right fa-sm"></i></a>
+                                            <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" Spanish lineto-brown-regular" hidden>{{ $button->name_es}} <i class="fas fa-arrow-right fa-sm"></i></a>
+                                        @endif
+                                    @endforeach
+                                </div>
                             @endif
                         @endforeach
                         <!--END SITE-->
                         <!--START BUTTONS-->
-                        <div class="more-btn" style="display: none">
-                            @foreach ($buttons as $button)
-                                @if ($button->rc_id == $rc->id)
-                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more English lineto-brown-regular" href="#" data-toggle="modal" data-target="#ModalRVC">{{ $button->name }}</a>
-                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="btnmenu view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
-                                @endif
-                            @endforeach
-                        </div>
                         <div class="more-btn">
                             @foreach($rc->button as $button)
-                                @if($button->file != "" && $button->file_es != "")
-                                    <a href="#" class="btnmenu view-more English lineto-brown-regular" data-toggle="modal" data-target="#ModalRVC">{{ $button->name}}</a>
-                                    <a href="#" class="btnmenu view-more Spanish lineto-brown-regular" data-toggle="modal" data-target="#ModalRVC" hidden>{{ $button->name}}</a>
-                                @else
+                                @if($button->file != "" && $button->file_es != "" && $button->id != 4)
+                                    <a id="btnRC-{{ $rc->id }}_{{ $button->id }}" class="view-more English lineto-brown-regular"  href="{{ url('pdf/' . $button->file) }}">{{ $button->name }}</a>
+                                    <a id="btnRC_es-{{ $rc->id }}_{{ $button->id }}" class="view-more Spanish lineto-brown-regular"  href="{{ url('pdf/' . $button->file_es) }}" hidden>{{ $button->name_es }}</a>
+                                @elseif($button->id != 4)
                                     <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" English lineto-brown-regular">{{ $button->name}} <i class="fas fa-arrow-right fa-sm"></i></a>
                                     <a href="{{ $button->URL }}" style="color: #B25026; border-bottom: 1px solid; margin-bottom: 2vw;" class=" Spanish lineto-brown-regular" hidden>{{ $button->name_es}} <i class="fas fa-arrow-right fa-sm"></i></a>
                                 @endif
                             @endforeach
                         </div>
-                        <!--END SITE-->
+                        <!--END BUTTONS-->
                     </div>
                     <!-- /col-md-6 -->
                 </div>

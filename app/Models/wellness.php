@@ -20,4 +20,9 @@ class wellness extends Model
     public function property(){
         return $this->belongsToMany(property::class, 'wellness_property');
     }
+
+    public function button()
+    {
+        return $this->belongsToMany(button::class, 'button_wellness');
+    }
 }

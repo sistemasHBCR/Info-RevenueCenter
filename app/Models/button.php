@@ -23,4 +23,9 @@ class button extends Model
     {
         return $this->belongsToMany(revenue_center::class, 'button_revenuecenter');
     }
+
+    public function wellness()
+    {
+        return $this->belongsToMany(wellness::class, 'button_wellness');
+    }
 }

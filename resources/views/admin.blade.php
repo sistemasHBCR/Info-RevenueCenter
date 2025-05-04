@@ -94,6 +94,29 @@
             height: 100%; /* Ajusta según necesites */
             border: none;
         }
+
+        .input_container {
+            border: 1px solid #ced4da;
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        input[type=file]::file-selector-button {
+            background-color: #e9ecef;
+            color: #495057;
+            border: 0px;
+            border-right: 1px solid #ced4da;
+            padding: 10px 15px;
+            margin-right: 20px;
+            transition: .5s;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        input[type=file]::file-selector-button:hover {
+            background-color: #eeeeee;
+            border: 0px;
+            border-right: 1px solid #e5e5e5;
+        }
         
         @media (max-width: 600px) {
             .more-btn {
@@ -385,15 +408,19 @@
                                         </nav>
                                         <div class="tab-content" id="nav-tabContent">
                                             <div class="tab-pane fade lineto-brown-regular show active" id="nav-rc-{{ $rc->id }}" role="tabpanel" aria-labelledby="nav-rc-tab-{{ $rc->id }}">
-                                                <div>
-                                                    <span class="BrownLL-Medium">{{ $rc->name }}</span>
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="inputGroup-sizing-default-{{ $rc->id }}">Nombre</span>
+                                                <div style="margin-top: 5%; max-width: 900px">
+                                                    <span class="BrownLL-Medium">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroup-sizing-default-{{ $rc->id }}">Nombre</span>
+                                                            </div>
+                                                            <input id="input-name-rc-{{ $rc->id }}" type="text" class="form-control rc-input-name" aria-label="Default" aria-describedby="inputGroup-sizing-default" rc_id="{{ $rc->id }}">
                                                         </div>
-                                                        <input type="text" class="form-control rc-input-name" aria-label="Default" aria-describedby="inputGroup-sizing-default" rc_id="{{ $rc->id }}">
-                                                    </div>
-                                                    <div class="img-fluid homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}');"></div>
+                                                        <div class="img-fluid homes-img" style="background-image: url('{{ env('BASE_URL') . 'assets/images/1HOMES/revenuecenters/' . $rc->image }}');"></div>
+                                                        <div class="input_container">
+                                                            <input type="file" id="input-file-rc-{{ $rc->id }}">
+                                                        </div>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade lineto-brown-regular" id="nav-site-{{ $rc->id }}" role="tabpanel" aria-labelledby="nav-site-tab-{{ $rc->id }}">
@@ -437,6 +464,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ env('BASE_URL') . 'assets/js/module-rc-basics.js' }}"></script>
     <script src="{{ env('BASE_URL') . 'assets/js/module-rc-admin.js' }}"></script>
+    <script>
+        var url_get_rc = "{{ route('get_rc') }}";
+    </script>
 </body>
 
 </html>

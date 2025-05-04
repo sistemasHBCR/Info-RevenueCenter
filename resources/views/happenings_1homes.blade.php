@@ -110,6 +110,7 @@
         /* Horario dentro del texto resaltado */
         .date-container .happH {
             white-space: nowrap;
+            font-size: 12px;
         }
 
         /* Swiper happening */
@@ -271,8 +272,18 @@
                     <li class="menu-item menu-item-has-children">
                         <a href="" class="BrownLL-Medium">DO</a>
                         <ul class="sub-menu">
-                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium rc-select">HAPPENINGS</a></li>
-                            <li class="menu-item" style="display: none"><a href="#activities-section" class="BrownLL-Medium rc-select">ACTIVITIES</a></li>
+                            <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium rc-select">Happenings</a></li>
+                            <li class="menu-item" style="display: none"><a href="#activities-section" class="BrownLL-Medium rc-select">Activities</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-wellness') }}#container_well_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
 					<li class="menu-item menu-item-has-children">
@@ -333,6 +344,16 @@
                         <ul class="sub-menu">
                             <li class="menu-item"><a href="#happenings-section" class="BrownLL-Medium" style="font-size: 15px;">HAPPENINGS</a></li>
                             <li class="menu-item" style="display: none"><a href="#activities-section" class="BrownLL-Medium" style="font-size: 15px;">ACTIVITIES</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="{{ url('1homes-wellness') }}" class="BrownLL-Medium" style="font-size: 15px;">WELLNESS</a>
+                        <ul class="sub-menu">
+                            @foreach ($property->wellness as $wellness)
+                                <li class="menu-item">
+                                    <a href="{{ url('1homes-wellness') }}#container_{{ $wellness->id }}{{ $wellness->name }}" class="BrownLL-Medium" style="font-size: 15px;">{{ $wellness->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="menu-item"><a href="">|</a></li>
@@ -402,7 +423,28 @@
                                             <span class="lineto-brown-bold white" style="width: 80%; margin:auto; font-size: 20px"><strong>{{ $happening->name }}</strong></span>
                                             <span class="lineto-brown-bold white English" style="width: 80%; margin:auto; font-size: 18px">{{ $happenings[$i]['schedule_spe_day'] != null ? $happenings[$i]['dayName'] . ', ' . $happenings[$i]['month'] . ' ' . $happenings[$i]['dayNum'] : $happenings[$i]['dayRange'] }}</span>
                                             <span class="lineto-brown-bold white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['schedule_spe_day'] != null ? $happenings[$i]['dayName_es'] . ', ' . $happenings[$i]['month_es'] . ' ' . $happenings[$i]['dayNum'] : $happenings[$i]['dayRange_es'] }}</span>
-                                            <span class="lineto-brown-bold white" style="width: 80%; margin:auto">{{ $happenings[$i]['hStart'] . ' - ' . $happenings[$i]['hEnd']}}</span>
+                                            @php
+                                            $rangueH_ing = "";
+                                            $rangueH_esp = "";
+                                            switch (true) {
+                                                case $happenings[$i]['hStart'] == $happenings[$i]['hEnd'] && $happenings[$i]['hStart'] != '12:00 am' && $happenings[$i]['hEnd'] != '12:00 am':
+                                                    $rangueH_ing = $happenings[$i]['hStart'];
+                                                    $rangueH_esp = $happenings[$i]['hStart'];
+                                                    break;
+                                                
+                                                case $happenings[$i]['hStart'] == '12:00 am' && $happenings[$i]['hEnd'] == '12:00 am':
+                                                    $rangueH_ing = 'All Day';
+                                                    $rangueH_esp = 'Todo el dia';
+                                                    break;
+                                                
+                                                default:
+                                                    $rangueH_ing = $happenings[$i]['hStart'] . ' to ' . $happenings[$i]['hEnd'];
+                                                    $rangueH_esp = $happenings[$i]['hStart'] . ' a ' . $happenings[$i]['hEnd'];
+                                                    break;
+                                            }
+                                            @endphp
+                                            <span class="lineto-brown-bold white English" style="width: 80%; margin:auto">{{ $rangueH_ing }}{{ $happening->location != null ? ', in ' . $happening->location : '' }}</span>
+                                            <span class="lineto-brown-bold white Spanish" style="width: 80%; margin:auto" hidden>{{ $rangueH_esp }}{{ $happening->location != null ? ', en ' . $happening->location : '' }}</span>
                                             <span class="lineto-brown-regular white English" style="width: 80%; margin:auto">{{ $happenings[$i]['description'] }}</span>
                                             <span class="lineto-brown-regular white Spanish" style="width: 80%; margin:auto" hidden>{{ $happenings[$i]['description_es'] }}</span>
                                         </div>
@@ -416,13 +458,25 @@
                                                     <span class="lineto-brown-bold"><strong>{{ $happenings[$i]['dayNum']}}</strong></span>
                                                     <span class="lineto-brown-regular English">{{ $happenings[$i]['month']}}</span>
                                                     <span class="lineto-brown-regular Spanish" hidden>{{ $happenings[$i]['month_es']}}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
-                                                @else
+                                                @elseif($happenings[$i]['schedule_day_start'] == 1 && $happenings[$i]['schedule_day_end'] == 7 || $happenings[$i]['schedule_day_start'] == $happenings[$i]['schedule_day_end'])
                                                     <span class="English lineto-brown-bold"><strong>{{ $happenings[$i]['dayRange']}}</strong></span>
                                                     <span class="Spanish lineto-brown-bold" hidden><strong>{{ $happenings[$i]['dayRange_es']}}</strong></span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hStart'] }}</span>
-                                                    <span class="lineto-brown-regular happH" style="font-size: 12px">{{ $happenings[$i]['hEnd'] }}</span>
+                                                @else
+                                                    <span class="lineto-brown-bold English"><strong>{{ $happenings[$i]['dayStart']}}</strong></span>
+                                                    <span class="lineto-brown-bold Spanish" hidden><strong>{{ $happenings[$i]['dayStart_es']}}</strong></span>
+                                                    <span class="lineto-brown-bold English"><strong>to</strong></span>
+                                                    <span class="lineto-brown-bold Spanish" hidden><strong>a</strong></span>
+                                                    <span class="lineto-brown-bold English"><strong>{{ $happenings[$i]['dayEnd']}}</strong></span>
+                                                    <span class="lineto-brown-bold Spanish" hidden><strong>{{ $happenings[$i]['dayEnd_es']}}</strong></span>
+                                                @endif
+                                                @if($happenings[$i]['hStart'] == $happenings[$i]['hEnd'] && $happenings[$i]['hStart'] != '12:00 am' && $happenings[$i]['hEnd'] != '12:00 am')
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hStart'] }}</span>
+                                                @elseif($happenings[$i]['hStart'] == '12:00 am' && $happenings[$i]['hEnd'] == '12:00 am')
+                                                    <span class="lineto-brown-regular happH English">All Day</span>
+                                                    <span class="lineto-brown-regular happH Spanish" hidden>Todo el dia</span>
+                                                @else
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hStart'] }}</span>
+                                                    <span class="lineto-brown-regular happH">{{ $happenings[$i]['hEnd'] }}</span>
                                                 @endif
                                             </div>
                                         </div>

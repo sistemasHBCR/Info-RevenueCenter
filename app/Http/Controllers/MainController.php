@@ -19,13 +19,18 @@ class MainController extends Controller
 {
     //------------------------------ 1HOMES ------------------------------
     public function homes(Request $request){
-        $sites = site::get()->toArray();
+        $sites = site::where('active', 1)->get()->toArray();
         $buttons = button::get();
-        $property = property::where('id', 1)->with('wellness')->get()->first();
+        $property = property::where('id', 1)->with(['wellness' => function ($query) {
+            $query->where('active', 1);
+        }])->get()->first();
         $revenue_centers = revenue_center::with([
             'button' => function ($query) {
                 $query->where('active', 1);
-            }])->get();
+            },
+            'site' => function ($query) {
+                $query->where('active', 1);
+            },])->get();
         $languages = languages::get();
 
         foreach($sites as $i => $site){
@@ -80,11 +85,17 @@ class MainController extends Controller
     public function administrate(Request $request){
         $sites = site::get()->toArray();
         $buttons = button::get();
-        $property = property::where('id', 1)->with('wellness')->get()->first();
+        $property = property::where('id', 1)->with(['wellness' => function ($query) {
+            $query->where('active', 1);
+        }])->get()->first();
         $revenue_centers = revenue_center::where('active', 1)->with([
             'button' => function ($query) {
                 $query->where('active', 1);
+            },
+            'site' => function ($query) {
+                $query->where('active', 1);
             }])->get();
+        $all_revenue_centers = revenue_center::with('site', 'button')->get();
         $languages = languages::get();
 
         foreach($sites as $i => $site){
@@ -133,7 +144,7 @@ class MainController extends Controller
             $sites[$i] = $site;
         }
 
-        return view('admin', compact('sites', 'buttons', 'property', 'revenue_centers', 'languages'));
+        return view('admin', compact('sites', 'buttons', 'property', 'revenue_centers', 'all_revenue_centers', 'languages'));
 
     }
 
@@ -144,7 +155,9 @@ class MainController extends Controller
                 $query->orderBy('schedule_spe_day', 'ASC');
                 $query->where('active', 1);
             },
-            'wellness',
+            'wellness' => function ($query) {
+                $query->where('active', 1);
+            },
             'activity',
             'more'
         ])
@@ -163,12 +176,20 @@ class MainController extends Controller
         $month = null;
         $month_es = null;
         
-        $days_ing = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-        $days_esp = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
-        $days_com_ing = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $days_com_esp = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+        //--- Listado de los dias acortados ---//
+        $days_ing = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];   //Ingles
+        $days_esp = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];      // Español
+        
+        //--- Listado de los dias completos ---//
+        $days_com_ing = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];     //Ingles
+        $days_com_esp = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];         // Español
+
         $dayRange = null;
         $dayRange_es = null;
+        $dayStart = null;
+        $dayStart_es = null;
+        $dayEnd = null;
+        $dayEnd_es = null;
 
         foreach($happenings as $i => $happening) {
             //----- Horario del Happening (Inicio - Fin) -----//
@@ -185,32 +206,53 @@ class MainController extends Controller
                 $month = (Carbon::createFromFormat('Y-m-d', $happening['schedule_spe_day']))->translatedFormat('F');
                 $month_es = ucfirst((Carbon::createFromFormat('Y-m-d', $happening['schedule_spe_day']))->locale('es')->translatedFormat('F'));
             }
-            if($happening['schedule_day_start'] == 1 && $happening['schedule_day_end'] == 7){
+            //--- Si no tiene un dia especifico y ademas abre todos los dias ---//
+            if($happening['schedule_day_start'] == $happening['schedule_day_end']){
+                $dayRange = 'Every ' . $days_com_ing[$happening['schedule_day_start'] - 1];
+                $dayRange_es = 'Todos los ' . $days_com_esp[$happening['schedule_day_start'] - 1];
+            }
+            //--- Si no tiene un dia especifico y ademas abre todos los dias ---//
+            elseif($happening['schedule_day_start'] == 1 && $happening['schedule_day_end'] == 7){
                 $dayRange = 'Open Daily';
                 $dayRange_es = 'Todos los dias';
             }
             else{
-                $dayRange = $days_ing[$happening['schedule_day_start']] . ' to ' . $days_ing[$happening['schedule_day_end']];
-                $dayRange_es = $days_esp[$happening['schedule_day_start']] . ' a ' . $days_esp[$happening['schedule_day_end']];
+                $dayStart = $days_ing[$happening['schedule_day_start'] - 1];
+                $dayStart_es = $days_esp[$happening['schedule_day_start'] - 1];
+                $dayEnd = $days_ing[$happening['schedule_day_end'] - 1];
+                $dayEnd_es = $days_esp[$happening['schedule_day_end'] - 1];
+                $dayRange = $days_ing[$happening['schedule_day_start'] - 1] . ' to ' . $days_ing[$happening['schedule_day_end'] - 1];
+                $dayRange_es = $days_esp[$happening['schedule_day_start'] - 1] . ' a ' . $days_esp[$happening['schedule_day_end'] - 1];
             }
     
             //----- Array con los datos completos del Happening -----//
-            $time = array('dayName' => $dayName, 'dayName_es' => $dayName_es, 'dayNum' => $day, 'dayAbbr' => $dayAbbr, 'dayAbbr_es' => $dayAbbr_es, 'month' => $month, 'month_es' => $month_es, 'hStart' => $horarioStart, 'hEnd' => $horarioEnd, 'dayRange' =>$dayRange, 'dayRange_es' => $dayRange_es);
+            $time = array('dayName' => $dayName, 'dayName_es' => $dayName_es, 'dayNum' => $day, 'dayAbbr' => $dayAbbr, 'dayAbbr_es' => $dayAbbr_es, 'dayStart' => $dayStart, 'dayStart_es' => $dayStart_es, 'dayEnd' => $dayEnd, 'dayEnd_es' => $dayEnd_es, 'month' => $month, 'month_es' => $month_es, 'hStart' => $horarioStart, 'hEnd' => $horarioEnd, 'dayRange' =>$dayRange, 'dayRange_es' => $dayRange_es);
     
             //----- Combinación del array original junto al array de tiempo -----//
             $happening = array_merge($happening, $time);
 
             $happenings[$i] = $happening;
         }
-        //dd($happenings);
+        
         return view('happenings_1homes', compact('property', 'revenue_centers', 'languages', 'happenings'));
     }
 
     public function homes_wellness(Request $request){
-        $property = property::where('id', 1)->with('wellness')->get()->first();
+        $property = property::where('id', 1)
+        ->with([
+            'revenuecenter' => function ($query) {
+                $query->where('active', 1);
+            },
+            'wellness' => function ($query) {
+                $query->where('active', 1);
+                $query->with('button');
+            }
+        ])
+        ->get()->first();
+        
         $revenue_centers = revenue_center::get();
         $languages = languages::get();
-
+        
         return view('wellness_1homes', compact('property', 'revenue_centers', 'languages'));
     }
 
@@ -241,12 +283,12 @@ class MainController extends Controller
         return view('spa', compact('sites', 'buttons', 'properties', 'revenue_centers', 'languages'));
     }
 
-    public function get_sites(Request $request){
-        $sites = site::where('rc_id', $request->rc_id)->get();
-
+    public function get_rc(Request $request){
+        $revenue_centers = revenue_center::with('site', 'button')->get();
+        
         return response()->json([
             'message' => 'Datos mostrados',
-            'sites' => $sites
+            'revenue_centers' => $revenue_centers
         ]);
     }
 
